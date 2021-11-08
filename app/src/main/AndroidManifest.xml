@@ -10,6 +10,12 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PHVA">
         <activity
+            android:name=".ListDocumentsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DocumentActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

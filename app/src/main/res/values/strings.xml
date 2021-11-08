@@ -1,3 +1,8 @@
 <resources>
     <string name="app_name">PHVA</string>
+    <string name="Type">Type</string>
+    <string name="Description">Description</string>
+    <string name="Url">URL</string>
+    <string name="Status">Status</string>
+    <string name="usuario">Usuario</string>
 </resources>
