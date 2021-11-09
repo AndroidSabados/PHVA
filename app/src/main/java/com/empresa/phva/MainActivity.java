@@ -22,12 +22,17 @@ public class MainActivity extends AppCompatActivity {
 
         Button btnDocument = findViewById(R.id.btnDocument);
         EditText etUser = findViewById(R.id.etUser);
-        user = etUser.getText().toString();
+
+
         btnDocument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                showDocument(user);
+                user = etUser.getText().toString();
+                if(user.length()>0) {
+                    showDocument(user);
+                }else{
+                    Toast.makeText(getBaseContext(), "no es lenght>0", Toast.LENGTH_SHORT).show();
+                }
             }
         });
 

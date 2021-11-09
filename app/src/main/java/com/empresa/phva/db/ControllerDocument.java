@@ -46,7 +46,7 @@ public class ControllerDocument extends DbHelper{
     }
 
     public ArrayList<Document> getListDocuments (){
-        ArrayList<Document> listDocuments = null;
+        ArrayList<Document> listDocuments = new ArrayList<>();
         DbHelper dbHelper = new DbHelper(context);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Cursor cursorDocument = db.rawQuery(SQL_READ_USERDOCUMENTS, null);

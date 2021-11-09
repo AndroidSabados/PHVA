@@ -1,11 +1,13 @@
 package com.empresa.phva;
 
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -21,6 +23,7 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
     // variable for our array list and context
     private ArrayList<Document> documentArrayList;
     private Context context;
+    private View view;
 
     // constructor
     public DocumentRVAdapter(ArrayList<Document> documentArrayList, Context context) {
@@ -33,12 +36,12 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         // on below line we are inflating our layout
         // file for our recycler view items.
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_document_item, parent, false);
+        view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_document_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         // on below line we are setting data
         // to our views of recycler view item.
         Document modal = documentArrayList.get(position);
@@ -46,6 +49,14 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         holder.tvDocumentUrl.setText(modal.getUrl());
         holder.tvDocumentDescription.setText(modal.getDescription());
         holder.tvDocumentStatus.setText(modal.getStatus());
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Mensaje: "+position, Toast.LENGTH_SHORT).show();
+            }
+        });
+
     }
 
     @Override

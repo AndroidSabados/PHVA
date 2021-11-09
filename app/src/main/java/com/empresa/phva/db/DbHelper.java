@@ -22,7 +22,7 @@ public class DbHelper extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db){
-        Log.e("FFFFFFFFFF", "onCreate: "+SQL_CREATE_USERDOCUMENTS);
+        //Log.e("FFFFFFFFFF", "onCreate: "+SQL_CREATE_USERDOCUMENTS);
         db.execSQL(SQL_CREATE_USERDOCUMENTS);
     }
 
@@ -31,4 +31,6 @@ public class DbHelper extends SQLiteOpenHelper {
         db.execSQL(SQL_DELETE_USERDOCUMENTS);
         onCreate(db);
     }
+
+
 }
