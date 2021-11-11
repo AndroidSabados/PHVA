@@ -6,13 +6,16 @@
     android:layout_height="wrap_content"
     android:layout_margin="5dp"
     android:elevation="8dp"
-    app:cardCornerRadius="4dp">
+    app:cardCornerRadius="4dp"
+    >
 
     <LinearLayout
+        android:id="@+id/lyPpal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_margin="3dp"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        >
 
         <!--text view for our course name-->
         <TextView
