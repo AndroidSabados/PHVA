@@ -59,7 +59,6 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         Log.e("ErrorFG", "onBindViewHolder: " + holder.tvDocumentType.getText().toString() );
 
         if (holder.tvDocumentType.getText().toString().equals("Tipo1")  ){
-            Toast.makeText(context, "OJO: "+holder.tvDocumentType.getText().toString(), Toast.LENGTH_SHORT).show();
             holder.lyPpal.setBackgroundColor(Color.GREEN);
         }else{
             holder.lyPpal.setBackgroundColor(Color.RED);
