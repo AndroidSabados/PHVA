@@ -63,12 +63,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void showListDocuments(String user) {
-        Log.d("Aca", "xxxxxxxxxxxxxxx"+user);
         Toast.makeText(this, "Aca OK: "+user, Toast.LENGTH_SHORT).show();
 
-        String userId = "texto ok" + user;
         intent = new Intent(this, ListDocumentsActivity.class);
-        intent.putExtra("userId", userId);
+        intent.putExtra("userId", user);
         startActivity(intent);
     }
 
