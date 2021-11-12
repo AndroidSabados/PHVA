@@ -3,8 +3,13 @@ package com.empresa.phva;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageCapture;
+import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.Preview;
 import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.camera.view.PreviewView;
 import androidx.core.content.ContextCompat;
+import androidx.lifecycle.LifecycleOwner;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -25,11 +30,14 @@ import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
+
+import java.io.File;
+import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener{
 
     private ImageView mImageView;
     private Button mTextButton;
@@ -41,6 +49,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     Button btnCamara;
     TextView textView;
 
+    PreviewView previewView;
+    private ImageCapture imageCapture;
     private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
 
 
@@ -54,7 +64,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
      //   mSuperposicionGrafica = findViewById(R.id.graphic_overlay);
         btnCamara = findViewById(R.id.btn_camera);
         textView = findViewById(R.id.textView);
-
+        previewView = findViewById(R.id.previewView);
 
         btnCamara.setOnClickListener(this);
         mTextButton.setOnClickListener(this);
@@ -96,28 +106,72 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     private void startCameraX(ProcessCameraProvider cameraProvider){
         cameraProvider.unbindAll();
+        // Camera Selector use Case
         CameraSelector cameraSelector = new CameraSelector.Builder()
                 .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+                .build();
+        // Preview usecase
+        Preview preview =  new Preview.Builder().build();
+        preview.setSurfaceProvider(previewView.getSurfaceProvider());
+
+        // Image capture use case
+        imageCapture = new ImageCapture.Builder()
+                .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
+                .build();
+
+        cameraProvider.bindToLifecycle(this , cameraSelector, preview, imageCapture);
     }
 
     @Override
     public void onClick(View view){
         switch (view.getId()){
             case R.id.btn_camera:
+                capturePhoto();
                 break;
             case R.id.button_text:
                 break;
         }
     }
 
+    private void capturePhoto() {
+        File photoDir = new  File("/mnt/sdcard/Pictures/CameraXPhotos");
 
+        if(!photoDir.exists()){
+            photoDir.mkdir();
+        }
+
+        Date date= new Date();
+        String timestamp = String.valueOf(date.getTime());
+        String phothoFilePath = photoDir.getAbsolutePath() + "/" + timestamp + ".jpg";
+
+        File photoFile = new File(phothoFilePath);
+
+        imageCapture.takePicture(
+                new ImageCapture.OutputFileOptions.Builder(photoFile).build(),
+                getExecutor(),
+                new ImageCapture.OnImageSavedCallback() {
+                    @Override
+                    public void onImageSaved(@NonNull ImageCapture.OutputFileResults outputFileResults) {
+                        Toast.makeText(MainActivity.this, "Photo has been saved successfully", Toast.LENGTH_SHORT).show();
+                    }
+
+                    @Override
+                    public void onError(@NonNull ImageCaptureException exception) {
+                        Toast.makeText(MainActivity.this, "Error saving phot: " + exception.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }
+        );
+    }
+
+/*
     private void camara() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getPackageManager())!=null){
             startActivityForResult(intent, 1);
         }
     }
-
+*/
+/*
     protected void onActivityResult(int requestCode, int resultCode, Intent data){
         super.onActivityResult(requestCode, resultCode, data);
         if (requestCode==1 && resultCode==RESULT_OK){
@@ -127,7 +181,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             onItemSelected(imgBitmap);
         }
     }
-
+*/
+    /*
     private void runTextRecognition(){
         InputImage image=InputImage.fromBitmap(mSelectedImage, 0);
         TextRecognizer recognizer= TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
@@ -147,30 +202,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             }
         });
     }
-
-
+*/
+/*
     private void processTextRecognitionResult(Text texts){
         List<Text.TextBlock> blocks = texts.getTextBlocks();
         textView.setText(texts.getText());
     }
-
+*/
+    /*
     private void  showToast(String message){
         Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
+    */
+     /*
     private Integer getmImageMaxWidth(){
         if (mImageMaxWidth==null){
             mImageMaxWidth=mImageView.getWidth();
         }
         return mImageMaxWidth;
     }
-
+*/
+    /*
     private Integer getmImageMaxHeight(){
         if (mImageMaxHeight==null){
             mImageMaxHeight=mImageView.getWidth();
         }
         return mImageMaxHeight;
     }
-
+*/
+    /*
     private Pair<Integer, Integer> getTargetedWidthHeight(){
         int targetWidth;
         int targetHeight;
@@ -180,6 +240,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         targetHeight=maxHeightForPortraidMode;
         return new Pair<>(targetWidth, targetHeight);
     }
+    */
+    /*
     public void onItemSelected(Bitmap imgBitmap){
         mSuperposicionGrafica.clear();
         mSelectedImage = imgBitmap;
@@ -196,7 +258,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
             mSelectedImage = resizedBitmap;
         }
     }
-
+*/
+    /*
     @Override
     public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
 
@@ -204,6 +267,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     @Override
     public void onNothingSelected(AdapterView<?> parent){ }
-
+*/
 
 }
