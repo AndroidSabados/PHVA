@@ -1,41 +1,32 @@
-package fundacion.view.sg_sst;
+package com.empresa.phva;
 
-import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.Toast;
+import android.widget.ArrayAdapter;
+import android.widget.Spinner;
+
 
 public class Registro extends AppCompatActivity {
 
+    Spinner spinnerRoles;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        Button rol = findViewById(R.id.rol);
+        spinnerRoles = (Spinner) findViewById(R.id.idSpinnerRoles);
 
-        String[] colors = {"red", "green", "blue", "black"};
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.select_roles, android.R.layout.simple_spinner_item);
+        spinnerRoles.setAdapter(adapter);
 
-        /*rol.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                AlertDialog.Builder builder = new AlertDialog.Builder(this);
-                builder.setTitle("Pick a color");
-                builder.setItems(colors, new DialogInterface.OnClickListener() {
-                    @Override
-                    public void onClick(DialogInterface dialog, int which) {
-                        // the user clicked on colors[which]
-                    }
-                });
-                builder.show();
-            }
-        });*/
+
+
+        }
+    public void modulos (View view){
+        Intent modulos = new Intent(this, AccesoModulos.class);
+        startActivity(modulos);
     }
-
 }
