@@ -1,3 +1,21 @@
 <resources>
     <string name="app_name">PHVA</string>
+    <string name="registro_NombreUsuario">Nombre de Usuario</string>
+    <string name="registro_nombre">Nombre</string>
+    <string name="registro_apellido">Apellido</string>
+    <string name="registro_cédula">Cédula</string>
+    <string name="registro_teléfono">Teléfono</string>
+    <string name="registro_celular">Celular</string>
+    <string name="registro_dirección">Dirección</string>
+    <string name="registro_contraseña">Contraseña</string>
+    <string name="registro_rol">Rol</string>
+    <string name="registro_finalizar">Finalizar</string>
+    <string name="terminos_condiciones">Acepto los términos y condiciones</string>
+    <string name="Admin">Administrador</string>
+    <string name="buscar">Buscar</string>
+    <string name="blistado">Listado de alertas</string>
+    <string name="empleado">Un desarrollo de un proceso lógico y por etapas, basado en la mejora continua, que incluye la política
+    la organización, la planificación, la palicación, la evaluación, la auditoría y las acciones de mejora con el objetivo
+    de anticipar, reconocer y evaluar</string>
+
 </resources>
