@@ -2,6 +2,10 @@ package com.empresa.phva;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.camera.core.CameraSelector;
+import androidx.camera.lifecycle.ProcessCameraProvider;
+import androidx.core.content.ContextCompat;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -15,14 +19,17 @@ import android.widget.TextView;
 import android.widget.Toast;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.common.util.concurrent.ListenableFuture;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 import java.util.List;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executor;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, AdapterView.OnItemSelectedListener {
 
     private ImageView mImageView;
     private Button mTextButton;
@@ -34,17 +41,38 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     Button btnCamara;
     TextView textView;
 
+    private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
         mTextButton = findViewById(R.id.button_text);
-        mImageView = findViewById(R.id.image_view);
-        mSuperposicionGrafica = findViewById(R.id.graphic_overlay);
+      //  mImageView = findViewById(R.id.image_view);
+     //   mSuperposicionGrafica = findViewById(R.id.graphic_overlay);
         btnCamara = findViewById(R.id.btn_camera);
         textView = findViewById(R.id.textView);
 
+
+        btnCamara.setOnClickListener(this);
+        mTextButton.setOnClickListener(this);
+
+
+        cameraProviderFuture = ProcessCameraProvider.getInstance(this);
+        cameraProviderFuture.addListener(() ->{
+            try {
+                ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
+                startCameraX(cameraProvider);
+            } catch (ExecutionException e){
+                e.printStackTrace();
+            } catch (InterruptedException e){
+                e.printStackTrace();
+            }
+        }, getExecutor());
+
+        /*
         btnCamara.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -58,7 +86,28 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 runTextRecognition();
             }
         });
+        */
 
+    }
+
+    private Executor getExecutor(){
+        return ContextCompat.getMainExecutor(this);
+    }
+
+    private void startCameraX(ProcessCameraProvider cameraProvider){
+        cameraProvider.unbindAll();
+        CameraSelector cameraSelector = new CameraSelector.Builder()
+                .requireLensFacing(CameraSelector.LENS_FACING_BACK)
+    }
+
+    @Override
+    public void onClick(View view){
+        switch (view.getId()){
+            case R.id.btn_camera:
+                break;
+            case R.id.button_text:
+                break;
+        }
     }
 
 
