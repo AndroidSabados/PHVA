@@ -33,6 +33,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private SuperposicionGrafica mSuperposicionGrafica;
     private Integer mImageMaxWidth;
     private Integer mImageMaxHeight;
+    private String docCarnet = "";
+    private String docCedula = "";
     private static final int RESULTS_TO_SHOW = 10;
     Button btnCamara;
     TextView textView, textCarnet, textCedula;
@@ -51,7 +53,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         textView = findViewById(R.id.textView);
         cardCarnet = findViewById(R.id.card_carnet);
         cardCedula = findViewById(R.id.card_cedula);
-
         textCarnet = findViewById(R.id.txt_carnet);
         textCedula = findViewById(R.id.txt_cedula);
         viewCarnet = findViewById(R.id.view_carnet);
@@ -73,12 +74,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-        mTextButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                runTextRecognition();
-            }
-        });
 
     }
 
@@ -100,41 +95,49 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 viewCarnet.setVisibility(View.INVISIBLE);
                 textCarnet.setVisibility(View.INVISIBLE);
                 mImageView.setImageBitmap(imgBitmap);
-            }
-
-            if(imageSelect==false){
+            }else{
                 viewCedula.setVisibility(View.INVISIBLE);
                 textCedula.setVisibility(View.INVISIBLE);
                 mImageView2.setImageBitmap(imgBitmap);
             }
             onItemSelected(imgBitmap);
+            runTextRecognition();
         }
     }
 
     private void runTextRecognition(){
         InputImage image=InputImage.fromBitmap(mSelectedImage, 0);
         TextRecognizer recognizer= TextRecognition.getClient(TextRecognizerOptions.DEFAULT_OPTIONS);
-        mTextButton.setEnabled(false);
         recognizer.process(image).addOnSuccessListener(new OnSuccessListener<Text>() {
             @Override
             public void onSuccess(@NonNull Text text) {
-                mTextButton.setEnabled(true);
+                processTextRecognitionResult(text);
+            }
+/*            @Override
+            public void onSuccess(@NonNull Text text) {
                 processTextRecognitionResult(text);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
-                mTextButton.setEnabled(true);
                 e.printStackTrace();
                 //metodo de retoma de foto hasta que sea exitoso
-            }
+            }*/
         });
     }
 
 
     private void processTextRecognitionResult(Text texts){
         List<Text.TextBlock> blocks = texts.getTextBlocks();
-        textView.setText(texts.getText());
+        if (imageSelect){
+            docCarnet = texts.getText();
+
+        }else{
+            docCedula = texts.getText();
+
+        }
+        textView.setText(docCarnet + "\n" + docCedula);
+
     }
 
     private void  showToast(String message){
@@ -174,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             Bitmap resizedBitmap = Bitmap.createScaledBitmap(mSelectedImage,
                     (int)(mSelectedImage.getWidth()/ scaleFactor),
                     (int)(mSelectedImage.getHeight()/ scaleFactor),true);
-            mImageView.setImageBitmap(resizedBitmap);
+            //mImageView.setImageBitmap(resizedBitmap);
             mSelectedImage = resizedBitmap;
         }
     }
