@@ -10,9 +10,15 @@
     <ImageView
         android:id="@+id/image_view"
         android:layout_width="match_parent"
-        android:layout_height="400dp"
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="0dp"
+        android:layout_marginEnd="0dp"
         android:contentDescription="Select image for next recognition"
-        android:scaleType="fitCenter"
+        android:scaleType="centerCrop"
         app:layout_constraintBottom_toTopOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
@@ -20,17 +26,20 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.417" />
 
-    <com.empresa.phva.SuperposicionGrafica
-        android:id="@+id/graphic_overlay"
+    <!--        android:src="@color/color_secundary"-->
+
+    <ImageView
+        android:id="@+id/image_view2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
+        android:layout_height="200dp"
+        android:layout_below="@+id/image_view"
         android:layout_alignParentStart="true"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintHorizontal_bias="0.526"
-        app:layout_constraintLeft_toLeftOf="@+id/image_view"
-        app:layout_constraintRight_toRightOf="@+id/image_view"
-        app:layout_constraintTop_toTopOf="@+id/image_view"
-        app:layout_constraintVertical_bias="0.68" />
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="2dp"
+        android:layout_marginEnd="0dp"
+        android:contentDescription="Select image for next recognition"
+        android:scaleType="fitCenter" />
 
     <Button
         android:id="@+id/btn_camera"
@@ -56,17 +65,21 @@
 
     <TextView
         android:id="@+id/textView"
-        android:gravity="bottom"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/texto_de_prueba"
-        android:layout_below="@+id/image_view"
-        android:layout_margin="10dp"
+        android:layout_above="@+id/btn_camera"
+        android:layout_below="@+id/image_view2"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="10dp"
+        android:layout_marginTop="7dp"
+        android:layout_marginEnd="9dp"
+        android:layout_marginBottom="13dp"
+        android:gravity="bottom"
         android:maxLines="5"
+        android:text="@string/texto_de_prueba"
         android:textSize="20sp"
-        android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/btn_camera"
-        tools:layout_editor_absoluteX="0dp" />
+        android:textStyle="bold" />
 
 
 </RelativeLayout>

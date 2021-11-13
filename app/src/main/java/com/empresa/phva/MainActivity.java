@@ -41,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         mTextButton = findViewById(R.id.button_text);
         mImageView = findViewById(R.id.image_view);
-        mSuperposicionGrafica = findViewById(R.id.graphic_overlay);
         btnCamara = findViewById(R.id.btn_camera);
         textView = findViewById(R.id.textView);
 
@@ -132,7 +131,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return new Pair<>(targetWidth, targetHeight);
     }
     public void onItemSelected(Bitmap imgBitmap){
-        mSuperposicionGrafica.clear();
         mSelectedImage = imgBitmap;
         if (mSelectedImage!= null){
             Pair<Integer, Integer> targetedSize = getTargetedWidthHeight();
