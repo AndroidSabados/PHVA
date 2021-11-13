@@ -6,6 +6,7 @@ import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -18,31 +19,26 @@ public class DocumentActivity extends AppCompatActivity {
 
     public String userId;
 
-    private EditText etType, etDescription, etUrl, etStatus;
-    private String strType, strDescription, strUrl, strStatus;
+    private EditText etDescription, etJustificacion, etStatus;
+    private String strType, strDescription, strJustificacion, strSeveridad;
 
+    private Spinner  spinnerType, spinnerSeveridad;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
 
-        TextView tvUserId = findViewById(R.id.tvUserId);
+        spinnerType = findViewById(R.id.idSpinnerTipoNovedades);
+        etDescription = findViewById(R.id.editTextDescripcion);
+        etJustificacion = findViewById(R.id.editTextJustificacion);
+        spinnerSeveridad = findViewById(R.id.idSpinnerSeveridad);
 
-        etType = findViewById(R.id.etType);
-        etDescription = findViewById(R.id.etDescription);
-        etUrl = findViewById(R.id.etUrl);
-        etStatus = findViewById(R.id.etStatus);
 
-        Button btnCreate = findViewById(R.id.btnCreate);
+        Button btnCreate = findViewById(R.id.btnCrearNovedad);
 
         btnCreate.setOnClickListener(view -> validator());
 
-
-
-        userId = getIntent().getStringExtra("userId");
-
-        tvUserId.setText(userId);
 
     }
 
@@ -50,8 +46,8 @@ public class DocumentActivity extends AppCompatActivity {
         getData();
         if (strType.length()<=3) Toast.makeText(this, "The type is required", Toast.LENGTH_SHORT).show();
         else if (strDescription.length()<=3) Toast.makeText(this, "The description is required", Toast.LENGTH_SHORT).show();
-        else if (strUrl.length()<=3) Toast.makeText(this, "The Url is required", Toast.LENGTH_SHORT).show();
-        else if (strStatus.length()<=3) Toast.makeText(this, "The Status is required", Toast.LENGTH_SHORT).show();
+        else if (strJustificacion.length()<=3) Toast.makeText(this, "The Url is required", Toast.LENGTH_SHORT).show();
+        else if (strSeveridad.length()<=3) Toast.makeText(this, "The Status is required", Toast.LENGTH_SHORT).show();
         else insertData();
     }
 
@@ -69,23 +65,26 @@ public class DocumentActivity extends AppCompatActivity {
     }
 
     private void getData(){
-        strType = etType.getText().toString();
+        strType = spinnerType.getSelectedItem().toString();
         strDescription = etDescription.getText().toString();
-        strUrl = etUrl.getText().toString();
-        strStatus = etStatus.getText().toString();
+        strJustificacion = etJustificacion.getText().toString();
+        strSeveridad = spinnerSeveridad.getSelectedItem().toString();
+
     }
 
 
     private void clearDocumentScreen() {
-        etType.setText("");
+        spinnerType.setSelection(0);
         etDescription.setText("");
-        etUrl.setText("");
-        etStatus.setText("");
+        etJustificacion.setText("");
+        spinnerSeveridad.setSelection(0);
     }
 
     private void insertData() {
 
-        Document document = new Document(strType, strUrl, strDescription, strStatus);
+        //Document document = new Document(strType, strDescription, strJustificacion, strSeveridad);
+
+        Document document = new Document(strType, strDescription, strJustificacion, strSeveridad);
 
         ControllerDocument controller = new ControllerDocument(this);
 

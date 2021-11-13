@@ -8,8 +8,6 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.view.View;
 
-public class MainActivity extends AppCompatActivity {
-
 
 
 import android.text.Editable;
@@ -21,7 +19,10 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
+
     public String user;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -29,24 +30,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-
-        }
-    public void pRegistro (View view){
-        Intent registrarse = new Intent(this, Registro.class);
-        startActivity(registrarse);
-    }
-
-    public void pListadoAlertas (View view){
-        Intent listado = new Intent(this, ListadoAlertas.class);
-        startActivity(listado);
-
-
-}}
-
         Button btnDocument = findViewById(R.id.btnDocument);
         EditText etUser = findViewById(R.id.etUser);
-
-
         btnDocument.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -71,9 +56,23 @@ public class MainActivity extends AppCompatActivity {
 
 
 
+        }
+
+    public void pRegistro (View view){
+        Intent registrarse = new Intent(this, Registro.class);
+        startActivity(registrarse);
     }
 
+    public void pListadoAlertas (View view){
+        Intent listado = new Intent(this, ListadoAlertas.class);
+        startActivity(listado);
+
+    }
+
+
+
     public Intent intent;
+
 
     public void showDocument(String user) {
         Log.d("Aca", "xxxxxxxxxxxxxxx"+user);
@@ -94,4 +93,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
+
+
+
 }
+

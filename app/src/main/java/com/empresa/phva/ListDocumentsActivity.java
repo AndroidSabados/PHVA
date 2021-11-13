@@ -2,7 +2,9 @@ package com.empresa.phva;
 
 
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -49,4 +51,13 @@ public class ListDocumentsActivity extends AppCompatActivity {
         // setting our adapter to recycler view.
         documentRV.setAdapter(documentRVAdapter);
     }
+
+
+    public void pCreateNovedades (View view) {
+        Intent createNovedades = new Intent(this, DocumentActivity.class);
+        startActivity(createNovedades);
+    }
+
+
+
 }

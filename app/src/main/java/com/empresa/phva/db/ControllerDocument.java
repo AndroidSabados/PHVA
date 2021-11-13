@@ -31,8 +31,8 @@ public class ControllerDocument extends DbHelper{
             ContentValues values = new ContentValues();
             values.put(COLUMN_TYPE, document.getType());
             values.put(COLUMN_DESCRIPTION, document.getDescription());
-            values.put(COLUMN_URL, document.getUrl());
-            values.put(COLUMN_STATUS, document.getStatus());
+            values.put(COLUMN_URL, document.getJustification());
+            values.put(COLUMN_STATUS, document.getSeverity());
 
             result = db.insert(TABLE_NAME, null, values);
 
@@ -54,9 +54,9 @@ public class ControllerDocument extends DbHelper{
             do {
                 Document document = new Document();
                 document.setType(cursorDocument.getString(1));
-                document.setUrl(cursorDocument.getString(2));
+                document.setJustification(cursorDocument.getString(2));
                 document.setDescription(cursorDocument.getString(3));
-                document.setStatus(cursorDocument.getString(4));
+                document.setSeverity(cursorDocument.getString(4));
 
                 listDocuments.add(document);
             }while (cursorDocument.moveToNext());

@@ -5,21 +5,24 @@ import androidx.annotation.NonNull;
 public class Document {
     private int id;
     private String type;
-    private String url;
     private String description;
-    private String status;
+    private String justification;
+    private String severity;
     private String date;
 
     public Document() {
     }
 
-
-    public Document(String type, String url, String description, String status) {
-        setType(type);
-        setUrl(url);
-        setDescription(description);
-        setStatus(status);
+    public Document(String type, String description, String justification, String severity) {
+        //this.id = id;
+        this.type = type;
+        this.description = description;
+        this.justification = justification;
+        this.severity = severity;
+        //this.date = date;
     }
+
+
 
     public int getId() {
         return id;
@@ -37,14 +40,6 @@ public class Document {
         this.type = type;
     }
 
-    public String getUrl() {
-        return url;
-    }
-
-    public void setUrl(String url) {
-        this.url = url;
-    }
-
     public String getDescription() {
         return description;
     }
@@ -53,12 +48,20 @@ public class Document {
         this.description = description;
     }
 
-    public String getStatus() {
-        return status;
+    public String getJustification() {
+        return justification;
     }
 
-    public void setStatus(String status) {
-        this.status = status;
+    public void setJustification(String justification) {
+        this.justification = justification;
+    }
+
+    public String getSeverity() {
+        return severity;
+    }
+
+    public void setSeverity(String severity) {
+        this.severity = severity;
     }
 
     public String getDate() {
@@ -75,9 +78,9 @@ public class Document {
         return "Document{" +
                 "id=" + id +
                 ", type='" + type + '\'' +
-                ", url='" + url + '\'' +
-                ", description='" + description + '\'' +
-                ", status='" + status + '\'' +
+                ", descriptio='" + description + '\'' +
+                ", justification='" + justification + '\'' +
+                ", severity='" + severity + '\'' +
                 ", date='" + date + '\'' +
                 '}';
     }

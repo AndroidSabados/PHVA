@@ -52,9 +52,9 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         // to our views of recycler view item.
         Document modal = documentArrayList.get(position);
         holder.tvDocumentType.setText(modal.getType());
-        holder.tvDocumentUrl.setText(modal.getUrl());
+        holder.tvDocumentUrl.setText(modal.getJustification());
         holder.tvDocumentDescription.setText(modal.getDescription());
-        holder.tvDocumentStatus.setText(modal.getStatus());
+        holder.tvDocumentStatus.setText(modal.getSeverity());
 
         Log.e("ErrorFG", "onBindViewHolder: " + holder.tvDocumentType.getText().toString() );
 
