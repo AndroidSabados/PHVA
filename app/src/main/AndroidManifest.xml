@@ -8,7 +8,22 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/Theme.PHVA">
+        android:theme="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <activity
+            android:name=".Documentos"
+            android:exported="true" />
+        <activity
+            android:name=".OCR"
+            android:exported="true" />
+        <activity
+            android:name=".AccesoModulos"
+            android:exported="true" />
+        <activity
+            android:name=".ListadoAlertas"
+            android:exported="true" />
+        <activity
+            android:name=".Registro"
+            android:exported="true" />
         <activity
             android:name=".ListDocumentsActivity"
             android:exported="true" />
