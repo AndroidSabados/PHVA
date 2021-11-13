@@ -25,6 +25,12 @@
             android:name=".Registro"
             android:exported="true" />
         <activity
+            android:name=".ListDocumentsActivity"
+            android:exported="true" />
+        <activity
+            android:name=".DocumentActivity"
+            android:exported="true" />
+        <activity
             android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

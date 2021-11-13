@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DocumentActivity"
+    android:orientation="vertical"
+    android:gravity="center"
+    >
+
+    <TextView
+        android:id="@+id/tvUserId"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/usuario">
+    </TextView>
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Type">
+    </TextView>
+
+    <EditText
+        android:id="@+id/etType"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Description">
+    </TextView>
+
+    <EditText
+        android:id="@+id/etDescription"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Description"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Url">
+    </TextView>
+
+    <EditText
+        android:id="@+id/etUrl"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="URL"></EditText>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/Status">
+    </TextView>
+
+    <EditText
+        android:id="@+id/etStatus"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Status"></EditText>
+
+    <Button
+        android:id="@+id/btnCreate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Create">
+    </Button>
+
+</LinearLayout>
