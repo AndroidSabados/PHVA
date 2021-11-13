@@ -3,9 +3,8 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
-        <entry key="..\:/Users/drios/Documents/GitHub/PHVA/app/src/main/res/layout/activity_main.xml" value="0.26902173913043476" />
         <entry key="app/src/main/res/layout/activity_lector_ocr.xml" value="0.1" />
-        <entry key="app/src/main/res/layout/activity_main.xml" value="0.2630208333333333" />
+        <entry key="app/src/main/res/layout/activity_main.xml" value="0.25" />
       </map>
     </option>
   </component>

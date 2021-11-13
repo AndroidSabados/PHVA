@@ -2,6 +2,8 @@ package com.empresa.phva;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.cardview.widget.CardView;
+
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.os.Bundle;
@@ -25,6 +27,7 @@ import java.util.List;
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
     private ImageView mImageView;
+    private ImageView mImageView2;
     private Button mTextButton;
     private Bitmap mSelectedImage;
     private SuperposicionGrafica mSuperposicionGrafica;
@@ -33,7 +36,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private static final int RESULTS_TO_SHOW = 10;
     Button btnCamara;
     TextView textView;
-
+    CardView cardCarnet;
+    CardView cardCedula;
+    boolean imageSelect= true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -41,12 +46,25 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         setContentView(R.layout.activity_main);
         mTextButton = findViewById(R.id.button_text);
         mImageView = findViewById(R.id.image_view);
+        mImageView2 = findViewById(R.id.image_view2);
         btnCamara = findViewById(R.id.btn_camera);
         textView = findViewById(R.id.textView);
 
-        btnCamara.setOnClickListener(new View.OnClickListener() {
+        cardCarnet = findViewById(R.id.card_carnet);
+        cardCedula = findViewById(R.id.card_cedula);
+
+        cardCarnet.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                imageSelect = true;
+                camara();
+            }
+        });
+
+        cardCedula.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                imageSelect = false;
                 camara();
             }
         });
@@ -73,7 +91,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (requestCode==1 && resultCode==RESULT_OK){
             Bundle extras = data.getExtras();
             Bitmap imgBitmap = (Bitmap)  extras.get("data");
-            mImageView.setImageBitmap(imgBitmap);
+            if(imageSelect){
+                mImageView.setImageBitmap(imgBitmap);
+            }else{
+                mImageView2.setImageBitmap(imgBitmap);
+            }
             onItemSelected(imgBitmap);
         }
     }
