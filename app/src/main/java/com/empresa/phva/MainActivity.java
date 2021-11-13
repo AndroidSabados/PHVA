@@ -1,20 +1,29 @@
 package com.empresa.phva;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.camera.core.CameraSelector;
+import androidx.camera.core.ImageAnalysis;
 import androidx.camera.core.ImageCapture;
 import androidx.camera.core.ImageCaptureException;
+import androidx.camera.core.ImageProxy;
 import androidx.camera.core.Preview;
+import androidx.camera.core.VideoCapture;
 import androidx.camera.lifecycle.ProcessCameraProvider;
 import androidx.camera.view.PreviewView;
+import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.lifecycle.LifecycleOwner;
 
+import android.Manifest;
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.util.Log;
 import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
@@ -37,21 +46,24 @@ import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Executor;
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener{
+public class MainActivity extends AppCompatActivity implements ImageAnalysis.Analyzer, View.OnClickListener{
 
-    private ImageView mImageView;
-    private Button mTextButton;
-    private Bitmap mSelectedImage;
-    private SuperposicionGrafica mSuperposicionGrafica;
-    private Integer mImageMaxWidth;
-    private Integer mImageMaxHeight;
-    private static final int RESULTS_TO_SHOW = 10;
-    Button btnCamara;
-    TextView textView;
 
+
+    // private Bitmap mSelectedImage;
+    // private SuperposicionGrafica mSuperposicionGrafica;
+    // private Integer mImageMaxWidth;
+    // private Integer mImageMaxHeight;
+    // private static final int RESULTS_TO_SHOW = 10;
+    // private ImageView mImageView;
+    private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
+
+    private TextView textView;
     PreviewView previewView;
     private ImageCapture imageCapture;
-    private ListenableFuture<ProcessCameraProvider> cameraProviderFuture;
+    private VideoCapture videoCapture;
+    private Button bRecord;
+    private Button bCapture;
 
 
     @Override
@@ -59,25 +71,24 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        mTextButton = findViewById(R.id.button_text);
-      //  mImageView = findViewById(R.id.image_view);
-     //   mSuperposicionGrafica = findViewById(R.id.graphic_overlay);
-        btnCamara = findViewById(R.id.btn_camera);
-        textView = findViewById(R.id.textView);
+        //  mImageView = findViewById(R.id.image_view);
+        //  mSuperposicionGrafica = findViewById(R.id.graphic_overlay);
+
         previewView = findViewById(R.id.previewView);
+        bCapture = findViewById(R.id.bCapture);
+        bRecord = findViewById(R.id.bRecord);
+        bRecord.setText("start recording"); // Set the initial text of the button
+        textView = findViewById(R.id.textView);
 
-        btnCamara.setOnClickListener(this);
-        mTextButton.setOnClickListener(this);
-
+        bCapture.setOnClickListener(this);
+        bRecord.setOnClickListener(this);
 
         cameraProviderFuture = ProcessCameraProvider.getInstance(this);
         cameraProviderFuture.addListener(() ->{
             try {
                 ProcessCameraProvider cameraProvider = cameraProviderFuture.get();
                 startCameraX(cameraProvider);
-            } catch (ExecutionException e){
-                e.printStackTrace();
-            } catch (InterruptedException e){
+            } catch (ExecutionException | InterruptedException e) {
                 e.printStackTrace();
             }
         }, getExecutor());
@@ -104,6 +115,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         return ContextCompat.getMainExecutor(this);
     }
 
+    @SuppressLint("RestrictedApi")
     private void startCameraX(ProcessCameraProvider cameraProvider){
         cameraProvider.unbindAll();
         // Camera Selector use Case
@@ -119,9 +131,30 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 .setCaptureMode(ImageCapture.CAPTURE_MODE_MINIMIZE_LATENCY)
                 .build();
 
-        cameraProvider.bindToLifecycle(this , cameraSelector, preview, imageCapture);
+        // Video capture use case
+        videoCapture = new VideoCapture.Builder()
+                .setVideoFrameRate(30)
+                .build();
+
+        // Image analysis use case
+        ImageAnalysis imageAnalysis = new ImageAnalysis.Builder()
+                .setBackpressureStrategy(ImageAnalysis.STRATEGY_KEEP_ONLY_LATEST)
+                .build();
+
+        imageAnalysis.setAnalyzer(getExecutor(), this);
+
+        //bind to lifecycle:
+        cameraProvider.bindToLifecycle((LifecycleOwner) this, cameraSelector, preview, imageCapture, videoCapture);
     }
 
+    @Override
+    public void analyze(@NonNull ImageProxy image) {
+        // image processing here for the current frame
+        Log.d("TAG", "analyze: got the frame at: " + image.getImageInfo().getTimestamp());
+        image.close();
+    }
+
+    @SuppressLint("RestrictedApi")
     @Override
     public void onClick(View view){
         switch (view.getId()){
@@ -129,9 +162,64 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
                 capturePhoto();
                 break;
             case R.id.button_text:
+                if(bRecord.getText()== "start recording"){
+                    bRecord.setText("stop recording");
+                    recordVideo();
+                }else {
+                    bRecord.setText("start recording");
+                    videoCapture.stopRecording();
+                }
                 break;
         }
     }
+
+
+    @SuppressLint("RestrictedApi")
+    private void recordVideo() {
+        if (videoCapture != null) {
+            File movieDir = new File("/mnt/sdcard/Movies/CameraXMovies");
+
+            if(!movieDir.exists())
+                movieDir.mkdir();
+
+            Date date = new Date();
+            String timestamp = String.valueOf(date.getTime());
+            String vidFilePath = movieDir.getAbsolutePath() + "/" + timestamp + ".mp4";
+            File vidFile = new File(vidFilePath);
+
+            try {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO) != PackageManager.PERMISSION_GRANTED) {
+                    // TODO: Consider calling
+                    //    ActivityCompat#requestPermissions
+                    // here to request the missing permissions, and then overriding
+                    //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                    //                                          int[] grantResults)
+                    // to handle the case where the user grants the permission. See the documentation
+                    // for ActivityCompat#requestPermissions for more details.
+                    return;
+                }
+                videoCapture.startRecording(
+                        new VideoCapture.OutputFileOptions.Builder(vidFile).build(),
+                        getExecutor(),
+                        new VideoCapture.OnVideoSavedCallback() {
+                            @Override
+                            public void onVideoSaved(@NonNull VideoCapture.OutputFileResults outputFileResults) {
+                                Toast.makeText(MainActivity.this, "Video has been saved successfully.", Toast.LENGTH_SHORT).show();
+                            }
+
+                            @Override
+                            public void onError(int videoCaptureError, @NonNull String message, @Nullable Throwable cause) {
+                                Toast.makeText(MainActivity.this, "Error saving video: " + message, Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                );
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+        }
+    }
+
 
     private void capturePhoto() {
         File photoDir = new  File("/mnt/sdcard/Pictures/CameraXPhotos");
@@ -143,7 +231,6 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         Date date= new Date();
         String timestamp = String.valueOf(date.getTime());
         String phothoFilePath = photoDir.getAbsolutePath() + "/" + timestamp + ".jpg";
-
         File photoFile = new File(phothoFilePath);
 
         imageCapture.takePicture(
