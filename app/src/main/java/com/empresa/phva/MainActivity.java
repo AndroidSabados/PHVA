@@ -124,6 +124,8 @@ public class MainActivity extends AppCompatActivity implements ImageAnalysis.Ana
                 .build();
         // Preview usecase
         Preview preview =  new Preview.Builder().build();
+
+        //SE LE ASIGNA UN CONTENEDOR A LA VISTA PREVIA
         preview.setSurfaceProvider(previewView.getSurfaceProvider());
 
         // Image capture use case
