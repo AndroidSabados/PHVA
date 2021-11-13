@@ -160,10 +160,10 @@ public class MainActivity extends AppCompatActivity implements ImageAnalysis.Ana
     @Override
     public void onClick(View view){
         switch (view.getId()){
-            case R.id.btn_camera:
+            case R.id.bCapture:
                 capturePhoto();
                 break;
-            case R.id.button_text:
+            case R.id.bRecord:
                 if(bRecord.getText()== "start recording"){
                     bRecord.setText("stop recording");
                     recordVideo();
