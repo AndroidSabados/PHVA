@@ -42,6 +42,7 @@
                 android:src="@drawable/carnet" />
 
             <View
+                android:id="@+id/view_carnet"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:visibility="visible"
@@ -49,6 +50,7 @@
                 android:background="@color/black" />
 
             <TextView
+                android:id="@+id/txt_carnet"
                 android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -97,21 +99,22 @@
                 android:src="@drawable/cedula" />
 
             <View
+                android:id="@+id/view_cedula"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:alpha="0.5"
                 android:background="@color/black" />
 
             <TextView
-                android:layout_marginTop="20dp"
+                android:id="@+id/txt_cedula"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
                 android:text="TOMAR FOTO DE LA CEDULA"
                 android:textColor="@color/white"
                 android:textSize="25sp"
-                android:gravity="center"
-                android:textStyle="bold"
-                />
+                android:textStyle="bold" />
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
@@ -141,14 +144,13 @@
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_above="@+id/btn_camera"
-        android:layout_below="@+id/image_view2"
-        android:layout_alignParentStart="true"
+        android:layout_below="@+id/card_cedula"
+        android:layout_alignStart="@+id/card_cedula"
         android:layout_alignParentEnd="true"
-        android:layout_marginStart="10dp"
-        android:layout_marginTop="7dp"
-        android:layout_marginEnd="9dp"
-        android:layout_marginBottom="13dp"
+        android:layout_marginStart="-19dp"
+        android:layout_marginTop="21dp"
+        android:layout_marginEnd="0dp"
+        android:layout_marginBottom="642dp"
         android:gravity="bottom"
         android:maxLines="5"
         android:text="@string/texto_de_prueba"

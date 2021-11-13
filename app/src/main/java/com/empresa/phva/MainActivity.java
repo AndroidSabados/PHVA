@@ -35,10 +35,11 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Integer mImageMaxHeight;
     private static final int RESULTS_TO_SHOW = 10;
     Button btnCamara;
-    TextView textView;
+    TextView textView, textCarnet, textCedula;
+    View viewCarnet, viewCedula;
     CardView cardCarnet;
     CardView cardCedula;
-    boolean imageSelect= true;
+    boolean imageSelect= Boolean.parseBoolean(null);
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,11 +48,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         mTextButton = findViewById(R.id.button_text);
         mImageView = findViewById(R.id.image_view);
         mImageView2 = findViewById(R.id.image_view2);
-        btnCamara = findViewById(R.id.btn_camera);
         textView = findViewById(R.id.textView);
-
         cardCarnet = findViewById(R.id.card_carnet);
         cardCedula = findViewById(R.id.card_cedula);
+
+        textCarnet = findViewById(R.id.txt_carnet);
+        textCedula = findViewById(R.id.txt_cedula);
+        viewCarnet = findViewById(R.id.view_carnet);
+        viewCedula = findViewById(R.id.view_cedula);
 
         cardCarnet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,9 +95,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (requestCode==1 && resultCode==RESULT_OK){
             Bundle extras = data.getExtras();
             Bitmap imgBitmap = (Bitmap)  extras.get("data");
-            if(imageSelect){
+
+            if(imageSelect==true){
+                viewCarnet.setVisibility(View.INVISIBLE);
+                textCarnet.setVisibility(View.INVISIBLE);
                 mImageView.setImageBitmap(imgBitmap);
-            }else{
+            }
+
+            if(imageSelect==false){
+                viewCedula.setVisibility(View.INVISIBLE);
+                textCedula.setVisibility(View.INVISIBLE);
                 mImageView2.setImageBitmap(imgBitmap);
             }
             onItemSelected(imgBitmap);
