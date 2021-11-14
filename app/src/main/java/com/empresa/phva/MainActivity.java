@@ -139,21 +139,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
 
 
-
         if (!docCarnet.equals("")) {
             comparacionDatos(docCarnet, docCedula);
         }
 
         if (!docCarnet.equals("") && !docCedula.equals("")) {
-         //   String imprecion = comparacionDatos(docCarnet, docCedula)[0] + "\n" + comparacionDatos(docCarnet, docCedula)[1] ;
-        //    textView.setText(imprecion);
-          //  textView.setText(docCarnet + "\n" + docCedula);
-            /*
-            if (){
-                textView.setTextColor(R.color.color_primary);
-                textView.setTextSize(25);
-                textView.setText("Error al Leer el documento \n Por Favor Tomar la foto Nuevamente.");
-            }*/
+            comparacionDatos(docCarnet, docCedula);
         }
 
 
@@ -163,120 +154,91 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String[] datosCarnetVector = datosCarnet.split("\n");
         String[] datosCedulaVector = datosCedula.split("\n");
 
-        //String[] resultado = limpiarTextoCarnet(datosCarnetVector);
-        limpiarTextoCarnet(datosCarnetVector);
+        String[] miVacuna = {"M", "i", "V", "a", "c", "u", "n", "a"};
+        String[] covid19 = {"C", "o", "v", "i", "d", "-", "1", "9"};
+
+        int[] resultado1 = validar(datosCarnetVector, miVacuna, "MiVacuna");
+        int[] resultado2 = validar(datosCarnetVector, covid19, "Covid-19");
+        /*
+        int m = 0;
+        int i = 0;
+        int v = 0;
+        int a = 0;
+        int c = 0;
+        int u = 0;
+        int n = 0;*/
+
+        String imprecion = datosCarnetVector[resultado1[1]] +"\n" +datosCarnetVector[resultado2[1]];
+        textView.setText(imprecion);
+      /*  if (resultado1[0] == 1 && resultado2[0] ==1) {
+            String imprecion = datosCarnetVector[resultado1[1]] +"\n" +datosCarnetVector[resultado2[1]];
+            textView.setText(imprecion);
+        }else{
+            textView.setTextSize(15);
+            textView.setText("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
+        }*/
     }
 
-    public void limpiarTextoCarnet(String[] datosCarnetVector) {
 
+    public int[] validar(String[] datosCarnetVector, String[] datoComparar, String textoComparar) {
         double porcentajeValido = 0.0;
-        double[] VectorCorecto = new double[2];
+        double[] porcentajesDatos = new double[datosCarnetVector.length];
 
+        for (int k = 0; k < datosCarnetVector.length; k++) {
+            String[] parts = datosCarnetVector[k].split("");
+            porcentajeValido = 0;
 
-        for (int datos= 0; datos < datosCarnetVector.length; datos++) {
-            String[] parts = datosCarnetVector[datos].split("");
-            String[] miVacuna = {"M", "i", "V", "a", "c", "u", "n", "a"};
-            int m = 0;
-            int i = 0;
-            int v = 0;
-            int a = 0;
-            int c = 0;
-            int u = 0;
-            int n = 0;
-
-            porcentajeValido = 0.0;
-
-            if (datosCarnetVector[datos].equals("MiVacuna")){
-                showToast(""+datosCarnetVector[datos]);
+            if (datosCarnetVector[k].equals(textoComparar)) {
+                porcentajeValido = 100.0;
                 break;
-            }else{
-                for (int j = 0; j < parts.length; j++) {
-
-                    if ((parts.length / 8) * (100) >= 80.0 || (parts.length / 8) * (100) <= 115.0) {
-
-                        if (parts[j].equals("M")) {
-                            m++;
-                        }
-
-                        if (parts[j].equals("i")) {
-                            i++;
-                        }
-
-                        if (parts[j].equals("V")) {
-                            v++;
-                        }
-
-                        if (parts[j].equals("a")) {
-                            a++;
-                        }
-
-                        if (parts[j].equals("c")) {
-                            c++;
-                        }
-
-                        if (parts[j].equals("u")) {
-                            u++;
-                        }
-
-                        if (parts[j].equals("n")) {
-                            n++;
+            } else {
+                if (datosCarnetVector[k].length() >= datoComparar.length - 1 && datosCarnetVector[k].length() <= datoComparar.length + 1) {
+                    for (int j = 0; j < parts.length; j++) {
+                        try {
+                            if (parts[j].equals(datoComparar[j])) {
+                                porcentajeValido = porcentajeValido + ((100 * 1.00) / datoComparar.length);
+                            }
+                        } catch (Exception e) {
+                            showToast("El Error se encuentra en la posicion" + j + " " + datosCarnetVector[k]);
                         }
                     }
-
-                    if (i == 1) {
-                        porcentajeValido = porcentajeValido + (100 * 1) / 8;
-                    }
-
-                    if (v == 1) {
-                        porcentajeValido = porcentajeValido + (100 * 1) / 8;
-                    }
-
-                    if (c == 1) {
-                        porcentajeValido = porcentajeValido + (100 * 1) / 8;
-                    }
-
-                    if (u == 1) {
-                        porcentajeValido = porcentajeValido + (100 * 1) / 8;
-                    }
-
-                    if (n == 1) {
-                        porcentajeValido = porcentajeValido + (100 * 1) / 8;
-                    }
-
-                    if (m == 1) {
-                        porcentajeValido = porcentajeValido + (100 * 1) / 8;
-                    }
-
-                    if (a == 2) {
-                        porcentajeValido = porcentajeValido + (100 * 2) / 8;
-                    } else if (a == 1) {
-                        porcentajeValido = porcentajeValido + (100 * 1) / 8;
-                    }
-
-                    if (porcentajeValido >= 80){
-                        VectorCorecto[0] = porcentajeValido;
-                        VectorCorecto[1] = datos;
-                    }
-
+                } else {
+                    porcentajeValido = 0.0;
                 }
             }
-
-
+            porcentajesDatos[k] = porcentajeValido;
         }
-        showToast("Procentaje: "+ VectorCorecto[0]);
-        showToast("Valor: " + datosCarnetVector[(int) VectorCorecto[1]]);
-        showToast("Imprecion Usuario: MiVacuna");
+        int posNumMayor = porcentajeMayor(porcentajesDatos);
+        int[] resultado = new int[2];
 
-        //MiVacuna
-        //covid-19
-        //165494984984
-       // String[] datosFinales = new String[2];
-       // datosFinales[0] = VectorCorecto[0]+"";
-       // datosFinales[1] = VectorCorecto[1]+"";
+        showToast(datosCarnetVector[posNumMayor] + "|| Posicion: " + posNumMayor + " || porcentaje: " + porcentajesDatos[posNumMayor]);
+
+        if (porcentajesDatos[posNumMayor] >= 80) {
+            resultado[0] = 1;
+            resultado[1] = posNumMayor;
+            return resultado;
+        }else{
+            resultado[0] = 0;
+            resultado[1] = posNumMayor;
+            return resultado;
+        }
     }
 
+    private int porcentajeMayor(double[] vectorCorecto) {
+        double numMayor = 0;
+        int posNumMayor = 0;
+        for (int i = 0; i < vectorCorecto.length; i++) {
+            if (numMayor <= vectorCorecto[i]) {
+                numMayor = vectorCorecto[i];
+                posNumMayor = i;
+            }
+        }
+        return posNumMayor;
+    }
+
+
     private void showToast(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
     }
 
     private Integer getmImageMaxWidth() {

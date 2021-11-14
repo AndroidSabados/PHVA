@@ -132,7 +132,6 @@
         android:layout_marginEnd="25dp"
         android:layout_marginBottom="25dp"
         android:gravity="bottom"
-        android:maxLines="17"
         android:text="@string/texto_de_prueba"
         android:textSize="20sp"
         android:textStyle="bold" />
