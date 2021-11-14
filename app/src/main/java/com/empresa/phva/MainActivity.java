@@ -28,15 +28,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     private ImageView mImageView;
     private ImageView mImageView2;
-    private Button mTextButton;
     private Bitmap mSelectedImage;
-    private SuperposicionGrafica mSuperposicionGrafica;
     private Integer mImageMaxWidth;
     private Integer mImageMaxHeight;
     private String docCarnet = "";
     private String docCedula = "";
     private static final int RESULTS_TO_SHOW = 10;
-    Button btnCamara;
     TextView textView, textCarnet, textCedula;
     View viewCarnet, viewCedula;
     CardView cardCarnet;
@@ -47,7 +44,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        mTextButton = findViewById(R.id.button_text);
         mImageView = findViewById(R.id.image_view);
         mImageView2 = findViewById(R.id.image_view2);
         textView = findViewById(R.id.textView);
@@ -136,8 +132,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             docCedula = texts.getText();
 
         }
+        if(!docCarnet.equals("") && !docCedula.equals("")){
+            comparacionDatos(docCarnet,docCedula);
+        }
         textView.setText(docCarnet + "\n" + docCedula);
 
+    }
+
+    public int  comparacionDatos(String datosCarnet, String datosCedeula){
+        String [] datosCedulaVector = datosCarnet.split("\n");
+        for(String datos: datosCedulaVector){
+            showToast(datos);
+        }
+        return 0;
     }
 
     private void  showToast(String message){
