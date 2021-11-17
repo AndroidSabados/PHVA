@@ -1,11 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center_horizontal"
     tools:context=".MainActivity">
 
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/ly_validacion_cedula"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:hint="Cedula"
+        app:endIconMode="custom"
+        app:startIconDrawable="@drawable/tarjetaid"
+        app:startIconTint="@color/color_primary"
+        app:endIconDrawable="@drawable/cheque"
+        app:endIconTint="@color/color_green"
+        app:counterEnabled="true"
+
+        app:counterMaxLength="10">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/input_validacion_cedula"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="number"
+            android:maxLength="10"
+        />
+
+    </com.google.android.material.textfield.TextInputLayout>
 
     <androidx.cardview.widget.CardView
         android:id="@+id/card_carnet"
@@ -15,13 +42,7 @@
         android:background="@color/color_primary"
         android:elevation="10dp"
         android:padding="20dp"
-        app:cardCornerRadius="25dp"
-        app:layout_constraintBottom_toTopOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.417">
+        app:cardCornerRadius="25dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -51,16 +72,16 @@
 
             <TextView
                 android:id="@+id/txt_carnet"
-                android:layout_marginTop="20dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:gravity="center"
                 android:text="TOMAR FOTO DEL CARNET"
                 android:textColor="@color/white"
                 android:textSize="25sp"
-                android:gravity="center"
                 android:textStyle="bold"
-                android:visibility="visible"
-                />
+                android:visibility="visible" />
+
 
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
@@ -69,17 +90,11 @@
         android:id="@+id/card_cedula"
         android:layout_width="match_parent"
         android:layout_height="200dp"
-        android:layout_margin="10dp"
         android:background="@color/color_primary"
         android:elevation="10dp"
+        android:layout_margin="10dp"
         android:padding="20dp"
-        app:cardCornerRadius="25dp"
-        android:layout_below="@+id/card_carnet"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="0dp"
-        android:layout_marginTop="2dp"
-        android:layout_marginEnd="0dp">
+        app:cardCornerRadius="25dp">
 
         <RelativeLayout
             android:layout_width="match_parent"
@@ -119,22 +134,15 @@
         </RelativeLayout>
     </androidx.cardview.widget.CardView>
 
-
     <TextView
         android:id="@+id/textView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/card_cedula"
-        android:layout_alignStart="@+id/card_cedula"
-        android:layout_alignParentEnd="true"
-        android:layout_marginStart="25dp"
-        android:layout_marginTop="25dp"
-        android:layout_marginEnd="25dp"
-        android:layout_marginBottom="25dp"
         android:gravity="bottom"
         android:text="@string/texto_de_prueba"
         android:textSize="20sp"
-        android:textStyle="bold" />
+        android:textStyle="bold"
+        android:layout_margin="10dp"/>
 
 
-</RelativeLayout>
+</LinearLayout>

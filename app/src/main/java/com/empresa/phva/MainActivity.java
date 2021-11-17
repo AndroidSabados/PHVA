@@ -1,5 +1,8 @@
 package com.empresa.phva;
 
+import static android.graphics.Color.GREEN;
+import static com.empresa.phva.R.color.*;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
@@ -7,8 +10,11 @@ import androidx.cardview.widget.CardView;
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.provider.MediaStore;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Pair;
 import android.view.View;
 import android.widget.AdapterView;
@@ -19,6 +25,8 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.mlkit.vision.common.InputImage;
 import com.google.mlkit.vision.text.Text;
 import com.google.mlkit.vision.text.TextRecognition;
@@ -36,12 +44,15 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Integer mImageMaxHeight;
     private String docCarnet = "";
     private String docCedula = "";
+    private TextInputEditText inputValidacionCedula;
+    private TextInputLayout lyValidacionCedula;
     private static final int RESULTS_TO_SHOW = 10;
     TextView textView, textCarnet, textCedula;
     View viewCarnet, viewCedula;
     CardView cardCarnet;
     CardView cardCedula;
     boolean imageSelect = Boolean.parseBoolean(null);
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,6 +69,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         textCedula = findViewById(R.id.txt_cedula);
         viewCarnet = findViewById(R.id.view_carnet);
         viewCedula = findViewById(R.id.view_cedula);
+        inputValidacionCedula = findViewById(R.id.input_validacion_cedula);
+        lyValidacionCedula = findViewById(R.id.ly_validacion_cedula);
 
         cardCarnet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -76,8 +89,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
 
 
-    }
+        inputValidacionCedula.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+                //System.out.println(s.toString() + " " + start + " " + count + " " + after);
+            }
 
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                //System.out.println(s.toString() + " " + start + " " + count);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+                if (inputValidacionCedula.length() >= 6) {
+                    lyValidacionCedula.setError(null);
+                }else{
+                    lyValidacionCedula.setError("Ingrese por favor la cedula completa, esta debe tener mas de 6 dígitos");
+                }
+            }
+        });
+
+
+    }
 
     private void camara() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -168,15 +202,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int u = 0;
         int n = 0;*/
 
-        String imprecion = datosCarnetVector[resultado1[1]] +"\n" +datosCarnetVector[resultado2[1]];
-        textView.setText(imprecion);
-      /*  if (resultado1[0] == 1 && resultado2[0] ==1) {
-            String imprecion = datosCarnetVector[resultado1[1]] +"\n" +datosCarnetVector[resultado2[1]];
+       // String imprecion = datosCarnetVector[resultado1[1]] +"\n" +datosCarnetVector[resultado2[1]];
+      //  textView.setText(imprecion);
+
+      if (resultado1[0] == 1) {
+            String imprecion = datosCarnetVector[resultado1[1]];
             textView.setText(imprecion);
+          if ( resultado2[0] ==1){
+              imprecion = datosCarnetVector[resultado1[1]] +"\n" +datosCarnetVector[resultado2[1]];
+              textView.setText(imprecion);
+          }
         }else{
             textView.setTextSize(15);
             textView.setText("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
-        }*/
+        }
     }
 
 
@@ -190,7 +229,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             if (datosCarnetVector[k].equals(textoComparar)) {
                 porcentajeValido = 100.0;
-                break;
+                showToast("porcentaje del 100 prueba ya :) " + porcentajeValido);
+               // break;
             } else {
                 if (datosCarnetVector[k].length() >= datoComparar.length - 1 && datosCarnetVector[k].length() <= datoComparar.length + 1) {
                     for (int j = 0; j < parts.length; j++) {
@@ -203,10 +243,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         }
                     }
                 } else {
-                    porcentajeValido = 0.0;
+                    porcentajeValido = 0.0;//bien :)  si
                 }
             }
-            porcentajesDatos[k] = porcentajeValido;
+            if (porcentajeValido==100){
+                porcentajesDatos[k] = porcentajeValido;
+                break;
+            }else{
+                porcentajesDatos[k] = porcentajeValido;
+            }
+
         }
         int posNumMayor = porcentajeMayor(porcentajesDatos);
         int[] resultado = new int[2];
@@ -223,7 +269,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             return resultado;
         }
     }
-
+//En cuntra en el vector cual de todas la posiciones tiene un porcentaje mallo para luego retornar su posicion y saver qeu tento el que tiene el mallor porcentaje  es decir lo que buscamos MIVacuna
     private int porcentajeMayor(double[] vectorCorecto) {
         double numMayor = 0;
         int posNumMayor = 0;
