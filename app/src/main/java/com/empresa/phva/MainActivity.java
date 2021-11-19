@@ -44,6 +44,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private Integer mImageMaxHeight;
     private String docCarnet = "";
     private String docCedula = "";
+    private String cedulavalue;
     private TextInputEditText inputValidacionCedula;
     private TextInputLayout lyValidacionCedula;
     private static final int RESULTS_TO_SHOW = 10;
@@ -109,9 +110,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             }
         });
-
-
     }
+
+
 
     private void camara() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -185,14 +186,26 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     public void comparacionDatos(String datosCarnet, String datosCedula) {
-        String[] datosCarnetVector = datosCarnet.split("\n");
-        String[] datosCedulaVector = datosCedula.split("\n");
 
         String[] miVacuna = {"M", "i", "V", "a", "c", "u", "n", "a"};
         String[] covid19 = {"C", "o", "v", "i", "d", "-", "1", "9"};
 
-        int[] resultado1 = validar(datosCarnetVector, miVacuna, "MiVacuna");
-        int[] resultado2 = validar(datosCarnetVector, covid19, "Covid-19");
+        cedulavalue = inputValidacionCedula.getText().toString();
+        //showToast("La cedula es: " + cedulavalue);
+        datosCarnet = datosCarnet.replaceAll("qwertyuiopasdfghjklñ<zxcvbnm.", "0");
+        datosCarnet = datosCarnet.replace(" ", "");
+        //showToast("El carnet es: " + datosCarnet);
+        datosCedula = datosCedula.replaceAll("qwertyuiopasdfghjklñ<zxcvbnm.", "");
+        //showToast("Los datos foto cedula son: " + datosCedula);
+
+        String[] datosCarnetVector = datosCarnet.split("\n");
+        String[] datosCedulaVector = datosCedula.split("\n");
+        String[] cedulaVector = cedulavalue.split("");
+
+
+        int[] resultadoMivacuna = validar(datosCarnetVector, miVacuna, "MiVacuna");
+        int[] resultadoCovid19 = validar(datosCarnetVector, covid19, "Covid-19");
+        int[] resultadoCedula = validarCedula(datosCarnetVector, cedulaVector, cedulavalue);
         /*
         int m = 0;
         int i = 0;
@@ -202,23 +215,50 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int u = 0;
         int n = 0;*/
 
-       // String imprecion = datosCarnetVector[resultado1[1]] +"\n" +datosCarnetVector[resultado2[1]];
-      //  textView.setText(imprecion);
+            String imprecion;
+            Boolean validacion = true;
 
-      if (resultado1[0] == 1) {
-            String imprecion = datosCarnetVector[resultado1[1]];
-            textView.setText(imprecion);
-          if ( resultado2[0] ==1){
-              imprecion = datosCarnetVector[resultado1[1]] +"\n" +datosCarnetVector[resultado2[1]];
-              textView.setText(imprecion);
-          }
-        }else{
-            textView.setTextSize(15);
-            textView.setText("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
-        }
+            if (resultadoMivacuna[0] == 1) {
+                imprecion = datosCarnetVector[resultadoMivacuna[1]];;
+                textView.setText(imprecion);
+                validacion = false;
+
+            }
+
+            if ( resultadoCovid19[0] ==1){
+                imprecion = textView.getText() + "\n" + datosCarnetVector[resultadoCovid19[1]];;
+                textView.setText(imprecion);
+                validacion = false;
+            }
+
+            if(resultadoCedula[0] == 1){
+
+                imprecion = textView.getText() + "\n" + datosCarnetVector[resultadoCedula[1]];;
+                textView.setText(imprecion);
+                validacion = false;
+            }
+
+            if(validacion){
+                textView.setTextSize(15);
+                textView.setText("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
+            }
     }
 
+//
+//    public void ConvertirNumCedula(String [] num)
+//
+//
+//    }
+  /*  public void ConvertirNumCarnet(){
+        int [] numero = new int[num.length];
+        try {
+            for
 
+        }catch (NumberFormatException e){
+
+        }
+    }
+*/
     public int[] validar(String[] datosCarnetVector, String[] datoComparar, String textoComparar) {
         double porcentajeValido = 0.0;
         double[] porcentajesDatos = new double[datosCarnetVector.length];
@@ -239,7 +279,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 porcentajeValido = porcentajeValido + ((100 * 1.00) / datoComparar.length);
                             }
                         } catch (Exception e) {
-                            showToast("El Error se encuentra en la posicion" + j + " " + datosCarnetVector[k]);
+                           // showToast("El Error se encuentra en la posicion" + j + " " + datosCarnetVector[k]);
                         }
                     }
                 } else {
@@ -259,7 +299,67 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         showToast(datosCarnetVector[posNumMayor] + "|| Posicion: " + posNumMayor + " || porcentaje: " + porcentajesDatos[posNumMayor]);
 
-        if (porcentajesDatos[posNumMayor] >= 80) {
+        if (porcentajesDatos[posNumMayor] >= 60) {
+            resultado[0] = 1;
+            resultado[1] = posNumMayor;
+            return resultado;
+        }else{
+            resultado[0] = 0;
+            resultado[1] = posNumMayor;
+            return resultado;
+        }
+    }
+
+    public int[] validarCedula(String[] datosCarnetVector, String[] datoComparar, String textoComparar) {
+        double porcentajeValido = 0.0;
+        double[] porcentajesDatos = new double[datosCarnetVector.length];
+
+        for (int k = 0; k < datosCarnetVector.length; k++) {
+            String[] parts = datosCarnetVector[k].split("");
+            porcentajeValido = 0;
+
+            if (datosCarnetVector[k].equals(textoComparar)) {
+                porcentajeValido = 100.0;
+                showToast("porcentaje del 100 prueba ya :) " + porcentajeValido);
+                // break;
+            } else {
+                if (datosCarnetVector[k].length() >= datoComparar.length - 1 && datosCarnetVector[k].length() <= datoComparar.length + 1) {
+                    for (int j = 0; j < parts.length; j++) {
+                        try {
+                            if (parts[j].equals(datoComparar[j])) {
+                                porcentajeValido = porcentajeValido + ((100 * 1.0) / datoComparar.length);
+                            }
+
+                        } catch (Exception e) {
+                           // showToast("El Error se encuentra en la posicion" + j + " " + datosCarnetVector[k]);
+                        }
+                    }
+                } else {
+                    porcentajeValido = 0.0;//bien :)  si
+                }
+            }
+            if (porcentajeValido==100){
+                porcentajesDatos[k] = porcentajeValido;
+                break;
+            }else{
+                porcentajesDatos[k] = porcentajeValido;
+            }
+
+            //1128385296
+            //6f128
+            //f12832526
+            //f/28385296
+            //1128 35 8296
+            //mla1128385296
+
+
+            showToast(datosCarnetVector[k] + "|| Posicion: " + k + " || porcentaje: " + porcentajesDatos[k]);
+        }
+        int posNumMayor = porcentajeMayor(porcentajesDatos);
+        int[] resultado = new int[2];
+
+
+        if (porcentajesDatos[posNumMayor] >= 60) {
             resultado[0] = 1;
             resultado[1] = posNumMayor;
             return resultado;
@@ -284,7 +384,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
     private void showToast(String message) {
-        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_SHORT).show();
+        Toast.makeText(getApplicationContext(), message, Toast.LENGTH_LONG).show();
     }
 
     private Integer getmImageMaxWidth() {

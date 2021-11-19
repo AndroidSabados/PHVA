@@ -139,7 +139,6 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="bottom"
-        android:text="@string/texto_de_prueba"
         android:textSize="20sp"
         android:textStyle="bold"
         android:layout_margin="10dp"/>
