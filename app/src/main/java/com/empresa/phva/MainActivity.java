@@ -192,10 +192,10 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         cedulavalue = inputValidacionCedula.getText().toString();
         //showToast("La cedula es: " + cedulavalue);
-        datosCarnet = datosCarnet.replaceAll("qwertyuiopasdfghjklñ<zxcvbnm.", "0");
+       // showToast(("Cadena: " + cadena.replaceAll("[^a-b]", "")));
         datosCarnet = datosCarnet.replace(" ", "");
         //showToast("El carnet es: " + datosCarnet);
-        datosCedula = datosCedula.replaceAll("qwertyuiopasdfghjklñ<zxcvbnm.", "");
+        datosCedula = datosCedula.replace(".", "");
         //showToast("Los datos foto cedula son: " + datosCedula);
 
         String[] datosCarnetVector = datosCarnet.split("\n");
@@ -205,7 +205,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         int[] resultadoMivacuna = validar(datosCarnetVector, miVacuna, "MiVacuna");
         int[] resultadoCovid19 = validar(datosCarnetVector, covid19, "Covid-19");
-        int[] resultadoCedula = validarCedula(datosCarnetVector, cedulaVector, cedulavalue);
+        int[] resultadoCedula = validarCedulaCarnet(datosCarnetVector, cedulaVector, cedulavalue);
         /*
         int m = 0;
         int i = 0;
@@ -249,16 +249,29 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 //
 //
 //    }
-  /*  public void ConvertirNumCarnet(){
+
+
+    public String[] ConvertirNumCarnet(String[] num){
+
         int [] numero = new int[num.length];
-        try {
-            for
 
-        }catch (NumberFormatException e){
-
+        for(int i =0; i < num.length; i++){
+            numero[i]=-1;
+            try {
+                numero[i] =  Integer.parseInt (num[i]);
+              //  showToast("cedula: "+numero[i]);
+            }catch (NumberFormatException e){
+                  num[i] = num[i].replaceAll("[^0-1-2-3-4-5-6-7-8-9-]", "0");
+                  numero[i] = Integer.parseInt(num[i]);
+                 // showToast("El número: "+num[i]+" en la posicion :"+i+" se remplazo por "+numero[i]);
+            }
         }
+        String [] datosCedula = new String[num.length];
+        for(int i =0; i < num.length; i++){
+            datosCedula[i]= String.valueOf(numero[i]);
+        }
+        return datosCedula;
     }
-*/
     public int[] validar(String[] datosCarnetVector, String[] datoComparar, String textoComparar) {
         double porcentajeValido = 0.0;
         double[] porcentajesDatos = new double[datosCarnetVector.length];
@@ -299,7 +312,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         showToast(datosCarnetVector[posNumMayor] + "|| Posicion: " + posNumMayor + " || porcentaje: " + porcentajesDatos[posNumMayor]);
 
-        if (porcentajesDatos[posNumMayor] >= 60) {
+        if (porcentajesDatos[posNumMayor] >= 80) {
             resultado[0] = 1;
             resultado[1] = posNumMayor;
             return resultado;
@@ -310,23 +323,24 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
     }
 
-    public int[] validarCedula(String[] datosCarnetVector, String[] datoComparar, String textoComparar) {
+    public int[] validarCedulaCarnet(String[] datosCarnetVector, String[] datoComparar, String textoComparar) {
         double porcentajeValido = 0.0;
         double[] porcentajesDatos = new double[datosCarnetVector.length];
+
 
         for (int k = 0; k < datosCarnetVector.length; k++) {
             String[] parts = datosCarnetVector[k].split("");
             porcentajeValido = 0;
-
+            String[] datosCarnet =  ConvertirNumCarnet(parts);
             if (datosCarnetVector[k].equals(textoComparar)) {
                 porcentajeValido = 100.0;
                 showToast("porcentaje del 100 prueba ya :) " + porcentajeValido);
                 // break;
             } else {
                 if (datosCarnetVector[k].length() >= datoComparar.length - 1 && datosCarnetVector[k].length() <= datoComparar.length + 1) {
-                    for (int j = 0; j < parts.length; j++) {
+                    for (int j = 0; j < datosCarnet.length; j++) {
                         try {
-                            if (parts[j].equals(datoComparar[j])) {
+                            if (datosCarnet[j].equals(datoComparar[j])) {
                                 porcentajeValido = porcentajeValido + ((100 * 1.0) / datoComparar.length);
                             }
 
@@ -359,7 +373,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int[] resultado = new int[2];
 
 
-        if (porcentajesDatos[posNumMayor] >= 60) {
+        if (porcentajesDatos[posNumMayor] >= 80) {
             resultado[0] = 1;
             resultado[1] = posNumMayor;
             return resultado;
