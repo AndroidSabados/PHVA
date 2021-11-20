@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         int[] resultadoMivacuna = validar(datosCarnetVector, miVacuna, "MiVacuna");
         int[] resultadoCovid19 = validar(datosCarnetVector, covid19, "Covid-19");
-        int[] resultadoCedula = validarCedulaCarnet(datosCarnetVector, cedulaVector, cedulavalue);
+      //  int[] resultadoCedula = validarCedulaCarnet(datosCarnetVector, cedulaVector, cedulavalue);
         /*
         int m = 0;
         int i = 0;
@@ -241,12 +241,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 validacion = false;
             }
 
-            if(resultadoCedula[0] == 1){
+         /*   if(resultadoCedula[0] == 1){
 
                 imprecion = textView.getText() + "\n" + datosCarnetVector[resultadoCedula[1]];;
                 textView.setText(imprecion);
                 validacion = false;
-            }
+            }*/
 
             if(validacion){
                 textView.setTextSize(15);
