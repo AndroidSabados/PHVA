@@ -201,12 +201,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String[] covid19 = {"C", "o", "v", "i", "d", "-", "1", "9"};
 
         cedulavalue = inputValidacionCedula.getText().toString();
-        //showToast("La cedula es: " + cedulavalue);
-       // showToast(("Cadena: " + cadena.replaceAll("[^a-b]", "")));
         datosCarnet = datosCarnet.replace(" ", "");
-        //showToast("El carnet es: " + datosCarnet);
         datosCedula = datosCedula.replace(".", "");
-        //showToast("Los datos foto cedula son: " + datosCedula);
 
         String[] datosCarnetVector = datosCarnet.split("\n");
         String[] datosCedulaVector = datosCedula.split("\n");
@@ -215,15 +211,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         int[] resultadoMivacuna = validar(datosCarnetVector, miVacuna, "MiVacuna");
         int[] resultadoCovid19 = validar(datosCarnetVector, covid19, "Covid-19");
-      //  int[] resultadoCedula = validarCedulaCarnet(datosCarnetVector, cedulaVector, cedulavalue);
-        /*
-        int m = 0;
-        int i = 0;
-        int v = 0;
-        int a = 0;
-        int c = 0;
-        int u = 0;
-        int n = 0;*/
+        int[] resultadoCedula = validarCedulaCarnet(datosCarnetVector, cedulaVector, cedulavalue);
 
             String imprecion;
             Boolean validacion = true;
@@ -241,24 +229,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 validacion = false;
             }
 
-         /*   if(resultadoCedula[0] == 1){
-
-                imprecion = textView.getText() + "\n" + datosCarnetVector[resultadoCedula[1]];;
+            if(resultadoCedula[0] == 1){
+                imprecion = textView.getText() + "\n" + cedulavalue;
                 textView.setText(imprecion);
                 validacion = false;
-            }*/
+            }else {
+                imprecion = textView.getText() + "\n" + "Cedula no valida, por favor tomar la foto nuevamente";
+                textView.setText(imprecion);
+            }
 
             if(validacion){
                 textView.setTextSize(15);
                 textView.setText("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
             }
     }
-
-//
-//    public void ConvertirNumCedula(String [] num)
-//
-//
-//    }
 
 
     public String[] ConvertirNumCarnet(String[] num){
@@ -269,9 +253,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             numero[i]=-1;
             try {
                 numero[i] =  Integer.parseInt (num[i]);
-              //  showToast("cedula: "+numero[i]);
             }catch (NumberFormatException e){
-                  num[i] = num[i].replaceAll("[^0-1-2-3-4-5-6-7-8-9-]", "0");
+                  num[i] = num[i].replaceAll("[^0-1-2-3-4-5-6-7-8-9]", "0");
                   numero[i] = Integer.parseInt(num[i]);
                  // showToast("El número: "+num[i]+" en la posicion :"+i+" se remplazo por "+numero[i]);
             }
@@ -292,8 +275,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
             if (datosCarnetVector[k].equals(textoComparar)) {
                 porcentajeValido = 100.0;
-                showToast("porcentaje del 100 prueba ya :) " + porcentajeValido);
-               // break;
             } else {
                 if (datosCarnetVector[k].length() >= datoComparar.length - 1 && datosCarnetVector[k].length() <= datoComparar.length + 1) {
                     for (int j = 0; j < parts.length; j++) {
@@ -320,8 +301,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int posNumMayor = porcentajeMayor(porcentajesDatos);
         int[] resultado = new int[2];
 
-        showToast(datosCarnetVector[posNumMayor] + "|| Posicion: " + posNumMayor + " || porcentaje: " + porcentajesDatos[posNumMayor]);
-
         if (porcentajesDatos[posNumMayor] >= 80) {
             resultado[0] = 1;
             resultado[1] = posNumMayor;
@@ -341,11 +320,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         for (int k = 0; k < datosCarnetVector.length; k++) {
             String[] parts = datosCarnetVector[k].split("");
             porcentajeValido = 0;
-            String[] datosCarnet =  ConvertirNumCarnet(parts);
+            String[] datosCarnet = ConvertirNumCarnet(parts);
             if (datosCarnetVector[k].equals(textoComparar)) {
                 porcentajeValido = 100.0;
-                showToast("porcentaje del 100 prueba ya :) " + porcentajeValido);
-                // break;
             } else {
                 if (datosCarnetVector[k].length() >= datoComparar.length - 1 && datosCarnetVector[k].length() <= datoComparar.length + 1) {
                     for (int j = 0; j < datosCarnet.length; j++) {
@@ -355,13 +332,13 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             }
 
                         } catch (Exception e) {
-                           // showToast("El Error se encuentra en la posicion" + j + " " + datosCarnetVector[k]);
+                            showToast("El Error se encuentra en la posicion" + j + " " + datosCarnetVector[k]);
                         }
                     }
                 } else {
-                    porcentajeValido = 0.0;//bien :)  si
-                }
+                porcentajeValido = 0.0;//bien :)  si
             }
+        }
             if (porcentajeValido==100){
                 porcentajesDatos[k] = porcentajeValido;
                 break;
@@ -369,21 +346,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 porcentajesDatos[k] = porcentajeValido;
             }
 
-            //1128385296
-            //6f128
-            //f12832526
-            //f/28385296
-            //1128 35 8296
-            //mla1128385296
-
-
-            showToast(datosCarnetVector[k] + "|| Posicion: " + k + " || porcentaje: " + porcentajesDatos[k]);
+            showToast(datosCarnetVector[k]+" Porcentaje: "+ porcentajeValido);
         }
         int posNumMayor = porcentajeMayor(porcentajesDatos);
         int[] resultado = new int[2];
 
 
-        if (porcentajesDatos[posNumMayor] >= 80) {
+
+        if (porcentajesDatos[posNumMayor] >= 70) {
             resultado[0] = 1;
             resultado[1] = posNumMayor;
             return resultado;
