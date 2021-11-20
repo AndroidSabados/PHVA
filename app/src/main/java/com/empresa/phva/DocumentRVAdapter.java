@@ -1,13 +1,18 @@
 package com.empresa.phva;
 
 
+import static androidx.core.content.ContextCompat.startActivity;
+
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,9 +57,14 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         // to our views of recycler view item.
         Document modal = documentArrayList.get(position);
         holder.tvDocumentType.setText(modal.getTipoDoc());
-        holder.tvDocumentUrl.setText(modal.getUrl());
+        //holder.tvDocumentUrl.setText(modal.getUrl());
         holder.tvDocumentDescription.setText(modal.getDescription());
         holder.tvDocumentStatus.setText(modal.getEstado());
+
+
+
+
+
 
         Log.e("ErrorFG", "onBindViewHolder: " + holder.tvDocumentType.getText().toString() );
 
@@ -65,12 +75,26 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         }
 
 
+        holder.btnURL.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(context, "Presiono boton: "+position+" y la url es: "+ holder.tvDocumentUrl, Toast.LENGTH_SHORT).show();
+
+                    Intent intent = new Intent(context, WebViewDocumentoActivity.class);
+                    intent.putExtra("url", "urlprobando");
+                    context.startActivity(intent);
+
+
+
+
+            }
+        });
 
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Mensaje: "+position, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Mensaje posicion: "+position, Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -85,8 +109,10 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
     public class ViewHolder extends RecyclerView.ViewHolder {
 
         // creating variables for our text views.
-        private TextView tvDocumentType, tvDocumentUrl, tvDocumentDescription, tvDocumentStatus;
-        private LinearLayout lyPpal;
+        public TextView tvDocumentType, tvDocumentUrl, tvDocumentDescription, tvDocumentStatus;
+        public LinearLayout lyPpal;
+        public Button btnURL;
+
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -96,10 +122,18 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
             tvDocumentDescription = itemView.findViewById(R.id.tvDocumentDescription);
             tvDocumentStatus = itemView.findViewById(R.id.tvDocumentStatus);
 
+            btnURL = itemView.findViewById(R.id.btnURL);
+
+
             lyPpal = itemView.findViewById(R.id.lyPpal);
 
 
         }
+
+
+
+
+
     }
 }
 

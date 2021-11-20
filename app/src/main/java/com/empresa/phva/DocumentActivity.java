@@ -207,6 +207,7 @@ public class DocumentActivity extends AppCompatActivity {
 
 
     public void showListDocuments(String user) {
+        Log.e("Log", "Aca llega a showListDocuments");
         Toast.makeText(this, "Aca OK: "+user, Toast.LENGTH_SHORT).show();
 
         Intent intent = new Intent(this, ListDocumentsActivity.class);

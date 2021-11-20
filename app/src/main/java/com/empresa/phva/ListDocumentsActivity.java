@@ -4,7 +4,12 @@ package com.empresa.phva;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
+import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -25,11 +30,24 @@ public class ListDocumentsActivity extends AppCompatActivity {
     private DbHelper dbHandler;
     private DocumentRVAdapter documentRVAdapter;
     private RecyclerView documentRV;
+    private Button btnUrl;
+    private TextView tvUrl;
+    public String prueba;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_list_documents);
+
+        prueba = "probando";
+        tvUrl = (TextView) findViewById(R.id.tvURL);
+        btnUrl = (Button) findViewById(R.id.btnURL);
+
+        Log.e("LOG", "logueo de boton");
+
+        /*btnUrl.setOnClickListener(v -> {
+            showWebViewDocument(prueba);
+        });*/
 
         // initializing our all variables.
         documentArrayList = new ArrayList<>();
@@ -50,7 +68,15 @@ public class ListDocumentsActivity extends AppCompatActivity {
 
         // setting our adapter to recycler view.
         documentRV.setAdapter(documentRVAdapter);
+
+
+
     }
+
+
+
+
+
 
 
     public void pCreateNovedades (View view) {
