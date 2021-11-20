@@ -4,25 +4,39 @@ import androidx.annotation.NonNull;
 
 public class Document {
     private int id;
-    private String type;
+    private String tipoDoc;
     private String description;
-    private String justification;
-    private String severity;
+    private String url;
+    private String estado;
     private String date;
 
     public Document() {
     }
 
-    public Document(String type, String description, String justification, String severity) {
+    public Document(String tipoDoc, String description, String url, String estado) {
         //this.id = id;
-        this.type = type;
+        this.tipoDoc = tipoDoc;
         this.description = description;
-        this.justification = justification;
-        this.severity = severity;
+        this.url = url;
+        this.estado = estado;
         //this.date = date;
     }
 
+    public String getTipoDoc() {
+        return tipoDoc;
+    }
 
+    public void setTipoDoc(String tipoDoc) {
+        this.tipoDoc = tipoDoc;
+    }
+
+    public String getEstado() {
+        return estado;
+    }
+
+    public void setEstado(String estado) {
+        this.estado = estado;
+    }
 
     public int getId() {
         return id;
@@ -32,13 +46,7 @@ public class Document {
         this.id = id;
     }
 
-    public String getType() {
-        return type;
-    }
 
-    public void setType(String type) {
-        this.type = type;
-    }
 
     public String getDescription() {
         return description;
@@ -48,21 +56,14 @@ public class Document {
         this.description = description;
     }
 
-    public String getJustification() {
-        return justification;
+    public String getUrl() {
+        return url;
     }
 
-    public void setJustification(String justification) {
-        this.justification = justification;
+    public void setUrl(String url) {
+        this.url = url;
     }
 
-    public String getSeverity() {
-        return severity;
-    }
-
-    public void setSeverity(String severity) {
-        this.severity = severity;
-    }
 
     public String getDate() {
         return date;
@@ -77,10 +78,10 @@ public class Document {
     public String toString() {
         return "Document{" +
                 "id=" + id +
-                ", type='" + type + '\'' +
-                ", descriptio='" + description + '\'' +
-                ", justification='" + justification + '\'' +
-                ", severity='" + severity + '\'' +
+                ", tipoDoc='" + tipoDoc + '\'' +
+                ", description='" + description + '\'' +
+                ", url='" + url + '\'' +
+                ", estado='" + estado + '\'' +
                 ", date='" + date + '\'' +
                 '}';
     }

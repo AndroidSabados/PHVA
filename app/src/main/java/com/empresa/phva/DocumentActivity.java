@@ -2,8 +2,14 @@ package com.empresa.phva;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
+import android.util.Log;
+import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -19,37 +25,50 @@ public class DocumentActivity extends AppCompatActivity {
 
     public String userId;
 
-    private EditText etDescription, etJustificacion, etStatus;
-    private String strType, strDescription, strJustificacion, strSeveridad;
+    private EditText etDescription, etURL, etTipoDoc, etEstado;
+    private String strTipoDoc, strDescription, strURL, strEstado;
 
-    private Spinner  spinnerType, spinnerSeveridad;
+    private Button btnTipoDoc, btnEstado, btnCreate;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_document);
 
-        spinnerType = findViewById(R.id.idSpinnerTipoNovedades);
+        btnTipoDoc = (Button) findViewById(R.id.btnTipodoc);
+        etTipoDoc = (EditText) findViewById(R.id.etTipodoc);
         etDescription = findViewById(R.id.editTextDescripcion);
-        etJustificacion = findViewById(R.id.editTextJustificacion);
-        spinnerSeveridad = findViewById(R.id.idSpinnerSeveridad);
+        etURL = findViewById(R.id.editTextURL);
+        etEstado = findViewById(R.id.etEstado);
+        btnEstado = findViewById(R.id.btnEstado);
+        btnCreate = findViewById(R.id.btnCrearNovedad);
+
+        Log.e("LOG", "oncreate OK");
 
 
-        Button btnCreate = findViewById(R.id.btnCrearNovedad);
+
+
+        btnTipoDoc.setOnClickListener(view -> selectTipoDoc());
+        btnEstado.setOnClickListener(view -> selectEstado());
+
 
         btnCreate.setOnClickListener(view -> validator());
+
+
 
 
     }
 
     private void validator() {
+        Log.e("LOG", "Validator OK");
         getData();
-        if (strType.length()<=3) Toast.makeText(this, "The type is required", Toast.LENGTH_SHORT).show();
-        else if (strDescription.length()<=3) Toast.makeText(this, "The description is required", Toast.LENGTH_SHORT).show();
-        else if (strJustificacion.length()<=3) Toast.makeText(this, "The Url is required", Toast.LENGTH_SHORT).show();
-        else if (strSeveridad.length()<=3) Toast.makeText(this, "The Status is required", Toast.LENGTH_SHORT).show();
-        else insertData();
+        insertData();
+        showListDocuments("usuario de prueba");
+
     }
+
+
 
     @Override
     public void onBackPressed(){
@@ -65,27 +84,26 @@ public class DocumentActivity extends AppCompatActivity {
     }
 
     private void getData(){
-        strType = spinnerType.getSelectedItem().toString();
+        strTipoDoc = etTipoDoc.getText().toString();
         strDescription = etDescription.getText().toString();
-        strJustificacion = etJustificacion.getText().toString();
-        strSeveridad = spinnerSeveridad.getSelectedItem().toString();
-
+        strURL = etURL.getText().toString();
+        strEstado = etEstado.getText().toString();
     }
 
 
     private void clearDocumentScreen() {
-        spinnerType.setSelection(0);
         etDescription.setText("");
-        etJustificacion.setText("");
-        spinnerSeveridad.setSelection(0);
+        etURL.setText("");
+
     }
 
     private void insertData() {
 
-        //Document document = new Document(strType, strDescription, strJustificacion, strSeveridad);
+        //Document document = new Document(strType, strDescription, strUrl, strSeveridad);
 
-        Document document = new Document(strType, strDescription, strJustificacion, strSeveridad);
+        Log.e("LOG", "en insertData URL: "+strURL);
 
+        Document document = new Document(strTipoDoc, strDescription, strURL, strEstado);
         ControllerDocument controller = new ControllerDocument(this);
 
         long db = controller.insertDocument(document);
@@ -101,7 +119,100 @@ public class DocumentActivity extends AppCompatActivity {
 
 
 
+    private void selectTipoDoc() {
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(DocumentActivity.this);
+        alertDialog.setTitle("Seleccione el tipo de documento: ");
+        String[] items = {"Reglamentos", "Procedimientos", "Instructivos", "Formatos", "Registros", "Programas", "Planes", "Guías", "Manuales", "Políticas", "Lineamientos" };
+        boolean[] checkedItems = {false, false, false, false, false, false, false, false, false, false, false};
+        alertDialog.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                SharedPreferences preferences = getSharedPreferences("which", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
 
+                //Log.e("LOG", "length : " + items.length.toString());
+
+                for (int i=0; i < items.length; i++ ) {
+
+                    Log.e("LOG", "booleano : " + checkedItems[i]);
+                    Log.e("LOG", "nombre Item: " + items[i]);
+
+                    if (checkedItems[i]==true){
+                        etTipoDoc.setText(items[i]);
+                        dialog.dismiss();
+                    }
+
+                }
+
+
+            }
+
+            private void closeDialog() {
+                AlertDialog alert = alertDialog.create();
+                alert.setCanceledOnTouchOutside(true);
+                alert.hide();
+            }
+        });
+
+
+
+
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(true);
+        alert.show();
+
+
+
+    }
+
+
+
+
+    private void selectEstado() {
+        Log.e("Log", "Entro a selectEstado");
+        AlertDialog.Builder alertDialog = new AlertDialog.Builder(DocumentActivity.this);
+        alertDialog.setTitle("Seleccione el estado de documento: ");
+        String[] items = {"votacion", "en revision", "falta por votar", "aprobado", "publicado", "en proceso", "propuesta", "agendacion", "agendado" };
+        boolean[] checkedItems = {false, false, false, false, false, false,false, false, false };
+        alertDialog.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
+            @Override
+            public void onClick(DialogInterface dialog, int which, boolean isChecked) {
+                SharedPreferences preferences = getSharedPreferences("which", MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+
+                for (int i=0; i < items.length; i++ ) {
+
+                    Log.e("LOG", "booleano : " + checkedItems[i]);
+                    Log.e("LOG", "nombre Item: " + items[i]);
+
+                    if (checkedItems[i]==true){
+                        etEstado.setText(items[i]);
+                        dialog.dismiss();
+                    }
+
+                }
+
+
+
+
+
+            }
+        });
+        AlertDialog alert = alertDialog.create();
+        alert.setCanceledOnTouchOutside(false);
+        alert.show();
+    }
+
+
+
+
+    public void showListDocuments(String user) {
+        Toast.makeText(this, "Aca OK: "+user, Toast.LENGTH_SHORT).show();
+
+        Intent intent = new Intent(this, ListDocumentsActivity.class);
+        intent.putExtra("userId", user);
+        startActivity(intent);
+    }
 
 
 }

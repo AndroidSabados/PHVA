@@ -54,16 +54,30 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-            <Spinner
-                android:id="@+id/idSpinnerTipoNovedades"
+
+            <Button
+                android:id="@+id/btnTipodoc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Tipo Documento"></Button>
+
+
+            <EditText
+                android:id="@+id/etTipodoc"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:background="@drawable/new_style"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="16dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginTop="8dp"></Spinner>
+                android:background="@drawable/new_style"
+                android:clickable="true"
+                android:enabled="false"
+                android:hint="Seleccione Tipo de Documento"
+                android:contextClickable="true"
+                android:focusable="false"
+                android:linksClickable="true"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"></EditText>
 
 
 
@@ -92,7 +106,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/editTextNombreUsuario" />
 
             <EditText
-                android:id="@+id/editTextJustificacion"
+                android:id="@+id/editTextURL"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
 
@@ -108,16 +122,21 @@
                 android:layout_weight="9"
                 android:background="@drawable/new_style"
                 android:ems="10"
-                android:hint="@string/Justification"
+                android:hint="URL"
 
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextNombreUsuario" />
 
+            <Button
+                android:id="@+id/btnEstado"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Select Estado Documento"></Button>
 
-            <Spinner
-                android:id="@+id/idSpinnerSeveridad"
+            <EditText
+                android:id="@+id/etEstado"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:background="@drawable/new_style"
@@ -125,7 +144,11 @@
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="16dp"
                 android:layout_marginEnd="16dp"
-                android:layout_marginTop="8dp"></Spinner>
+                android:layout_marginTop="8dp"
+                android:hint="Seleccione el Estado del Documento"
+                android:clickable="true"
+                android:enabled="false"
+                ></EditText>
 
 
 

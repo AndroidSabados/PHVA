@@ -212,6 +212,12 @@
                 android:layout_marginTop="8dp"></CheckBox>
 
             <Button
+                android:id="@+id/btnSelectRole"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="seleccionar rol"></Button>
+
+            <Button
                 android:id="@+id/finalizar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

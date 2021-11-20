@@ -30,28 +30,11 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
 
-        Button btnDocument = findViewById(R.id.btnDocument);
-        EditText etUser = findViewById(R.id.etUser);
-        btnDocument.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                user = etUser.getText().toString();
-                if(user.length()>0) {
-                    showDocument(user);
-                }else{
-                    Toast.makeText(getBaseContext(), "no es lenght>0", Toast.LENGTH_SHORT).show();
-                }
-            }
-        });
 
-        Button btnListDocuments = findViewById(R.id.btnListDocuments);
-        btnListDocuments.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
 
-                showListDocuments(user);
-            }
-        });
+
+
+
 
 
 
@@ -84,13 +67,7 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
-    public void showListDocuments(String user) {
-        Toast.makeText(this, "Aca OK: "+user, Toast.LENGTH_SHORT).show();
 
-        intent = new Intent(this, ListDocumentsActivity.class);
-        intent.putExtra("userId", user);
-        startActivity(intent);
-    }
 
 
 

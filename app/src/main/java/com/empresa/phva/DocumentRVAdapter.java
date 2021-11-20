@@ -51,10 +51,10 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         // on below line we are setting data
         // to our views of recycler view item.
         Document modal = documentArrayList.get(position);
-        holder.tvDocumentType.setText(modal.getType());
-        holder.tvDocumentUrl.setText(modal.getJustification());
+        holder.tvDocumentType.setText(modal.getTipoDoc());
+        holder.tvDocumentUrl.setText(modal.getUrl());
         holder.tvDocumentDescription.setText(modal.getDescription());
-        holder.tvDocumentStatus.setText(modal.getSeverity());
+        holder.tvDocumentStatus.setText(modal.getEstado());
 
         Log.e("ErrorFG", "onBindViewHolder: " + holder.tvDocumentType.getText().toString() );
 
