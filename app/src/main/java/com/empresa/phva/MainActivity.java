@@ -4,13 +4,19 @@ import static android.graphics.Color.GREEN;
 import static com.empresa.phva.R.color.*;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.content.ContentProvider;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.text.Editable;
@@ -55,6 +61,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     boolean imageSelect = Boolean.parseBoolean(null);
 
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -72,6 +79,9 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         viewCedula = findViewById(R.id.view_cedula);
         inputValidacionCedula = findViewById(R.id.input_validacion_cedula);
         lyValidacionCedula = findViewById(R.id.ly_validacion_cedula);
+
+
+        verificarPermisosCamara();
 
         cardCarnet.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -449,6 +459,18 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
+    int REQUEST_CODE = 200;
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    public void  verificarPermisosCamara(){
+        int permisosCamara = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
+        int permisosAlmacenamientoEditar = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
+        int permisosAlmacenamientoLeer = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
+        if( permisosCamara == PackageManager.PERMISSION_GRANTED && permisosAlmacenamientoEditar == PackageManager.PERMISSION_GRANTED && permisosAlmacenamientoLeer == PackageManager.PERMISSION_GRANTED  ){
+            showToast("Permiso de la camara otorgado");
+        }else{
+            requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE);
+        }
+    }
 
 }
