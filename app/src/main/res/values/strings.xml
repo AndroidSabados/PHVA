@@ -12,7 +12,10 @@
     <string name="registro_finalizar">Finalizar</string>
     <string name="terminos_condiciones">Acepto los términos y condiciones</string>
     <string name="Admin">Administrador</string>
+    <string name="modulo">Modulos</string>
+    <string name="documentos">Documentos</string>
     <string name="buscar">Buscar</string>
+    <string name="ocr">Ocr</string>
     <string name="blistado">Listado de alertas</string>
     <string name="empleado">Un desarrollo de un proceso lógico y por etapas, basado en la mejora continua, que incluye la política
     la organización, la planificación, la palicación, la evaluación, la auditoría y las acciones de mejora con el objetivo
