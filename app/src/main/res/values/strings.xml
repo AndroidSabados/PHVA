@@ -28,5 +28,10 @@
     <string name="Url">URL</string>
     <string name="Status">Status</string>
     <string name="usuario">Usuario</string>
+    <string name="registro_Descripcion">Descripcion</string>
+    <string name="Justification">Justificacion</string>
+    <string name="severidad">Severidad</string>
+    <string name="novedad_crear">Crear Novedad</string>
+    <string name="addNovedades">add</string>
 
 </resources>

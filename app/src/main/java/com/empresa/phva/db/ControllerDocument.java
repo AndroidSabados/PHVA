@@ -29,10 +29,10 @@ public class ControllerDocument extends DbHelper{
             SQLiteDatabase db = dbHelper.getWritableDatabase();
 
             ContentValues values = new ContentValues();
-            values.put(COLUMN_TYPE, document.getType());
+            values.put(COLUMN_TYPE, document.getTipoDoc());
             values.put(COLUMN_DESCRIPTION, document.getDescription());
             values.put(COLUMN_URL, document.getUrl());
-            values.put(COLUMN_STATUS, document.getStatus());
+            values.put(COLUMN_STATUS, document.getEstado());
 
             result = db.insert(TABLE_NAME, null, values);
 
@@ -53,10 +53,10 @@ public class ControllerDocument extends DbHelper{
         if (cursorDocument != null && cursorDocument.moveToFirst()){
             do {
                 Document document = new Document();
-                document.setType(cursorDocument.getString(1));
+                document.setTipoDoc(cursorDocument.getString(1));
                 document.setUrl(cursorDocument.getString(2));
                 document.setDescription(cursorDocument.getString(3));
-                document.setStatus(cursorDocument.getString(4));
+                document.setEstado(cursorDocument.getString(4));
 
                 listDocuments.add(document);
             }while (cursorDocument.moveToNext());
