@@ -19,13 +19,15 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/iphone_12_pro_max__1" />
+        app:srcCompat="@drawable/encabezado3" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Registro de Novedades"
+        android:text="@string/rNovedades"
+        android:layout_gravity="center_horizontal"
+        android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
@@ -50,34 +52,43 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="65dp"
                 android:text="Novedades"
+                android:textSize="20dp"
+                android:layout_gravity="center_horizontal"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
+                app:layout_constraintTop_toBottomOf="@+id/textView"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                />
 
 
             <Button
                 android:id="@+id/btnTipodoc"
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Tipo Documento"></Button>
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:layout_marginTop="8dp"
+                android:background="@drawable/new_style"
+                android:hint="Seleccione tipo de Documento"></Button>
 
 
             <EditText
                 android:id="@+id/etTipodoc"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-                android:layout_marginStart="16dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="16dp"
                 android:background="@drawable/new_style"
                 android:clickable="true"
                 android:enabled="false"
-                android:hint="Seleccione Tipo de Documento"
+                android:hint="@string/hintTipoDoc"
                 android:contextClickable="true"
                 android:focusable="false"
                 android:linksClickable="true"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"></EditText>
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"></EditText>
 
 
 
@@ -85,24 +96,22 @@
                 android:id="@+id/editTextDescripcion"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-
                 android:inputType="textMultiLine"
                 android:lines="8"
                 android:minLines="6"
                 android:gravity="top|start"
                 android:maxLines="10"
-
-                android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="24dp"
                 android:layout_weight="9"
                 android:background="@drawable/new_style"
                 android:ems="10"
                 android:hint="@string/Description"
-
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+
                 app:layout_constraintTop_toBottomOf="@+id/editTextNombreUsuario" />
 
             <EditText
@@ -131,21 +140,26 @@
 
             <Button
                 android:id="@+id/btnEstado"
-                android:layout_width="wrap_content"
+
+                android:background="@drawable/new_style"
+                android:layout_marginTop="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Select Estado Documento"></Button>
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
+                android:hint="Seleccione estado del Documento"></Button>
 
             <EditText
                 android:id="@+id/etEstado"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:background="@drawable/new_style"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="24dp"
+                android:layout_marginEnd="24dp"
                 android:layout_marginTop="8dp"
-                android:hint="Seleccione el Estado del Documento"
+                android:hint="Estado del Documento"
                 android:clickable="true"
                 android:enabled="false"
                 ></EditText>
@@ -161,11 +175,11 @@
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
-
                 android:background="@drawable/new_button"
                 android:onClick="modulos"
                 android:text="@string/novedad_crear"
                 android:textSize="15dp"
+                android:textColor="@color/white"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
