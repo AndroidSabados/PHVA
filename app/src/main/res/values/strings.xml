@@ -13,9 +13,11 @@
     <string name="registro_finalizar">Finalizar</string>
     <string name="terminos_condiciones">Acepto los términos y condiciones</string>
     <string name="Admin">Administrador</string>
-    <string name="modulo">Modulos</string>
+    <string name="modulo">Acceso Módulos</string>
     <string name="documentos">Documentos</string>
     <string name="buscar">Buscar</string>
+    <string name="crearAlerta">Crear Alerta</string>
+
     <string name="ocr">Ocr</string>
     <string name="blistado">Listado de alertas</string>
     <string name="empleado">Un desarrollo de un proceso lógico y por etapas, basado en la mejora continua, que incluye la política
@@ -23,15 +25,17 @@
     de anticipar, reconocer y evaluar</string>
 
 
-    <string name="Type">Type</string>
-    <string name="Description">Description</string>
+    <string name="Type">Tipo</string>
+    <string name="Description">Descripción</string>
     <string name="Url">URL</string>
-    <string name="Status">Status</string>
+    <string name="Status">SEstado</string>
     <string name="usuario">Usuario</string>
     <string name="registro_Descripcion">Descripcion</string>
     <string name="Justification">Justificacion</string>
     <string name="severidad">Severidad</string>
     <string name="novedad_crear">Crear Novedad</string>
-    <string name="addNovedades">add</string>
+    <string name="addNovedades">Agregar</string>
+    <string name="rNovedades">Registro de novedades</string>
+    <string name="hintTipoDoc">Tipo de Documento</string>
 
 </resources>
