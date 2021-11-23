@@ -56,6 +56,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private String docCarnet = "";
     private String docCedula = "";
     private String cedulavalue;
+    private TextView viewPorcentajeCarnet;
+    private TextView viewPorcentajeCedula;
     private TextInputEditText inputValidacionCedula;
     private TextInputLayout lyValidacionCedula;
     private static final int RESULTS_TO_SHOW = 10;
@@ -75,13 +77,14 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         mImageView = findViewById(R.id.image_view);
         mImageView2 = findViewById(R.id.image_view2);
-        textView = findViewById(R.id.textView);
         cardCarnet = findViewById(R.id.card_carnet);
         cardCedula = findViewById(R.id.card_cedula);
         textCarnet = findViewById(R.id.txt_carnet);
         textCedula = findViewById(R.id.txt_cedula);
         viewCarnet = findViewById(R.id.view_carnet);
         viewCedula = findViewById(R.id.view_cedula);
+        viewPorcentajeCarnet = findViewById(R.id.text_porcentaje_carnet);
+        viewPorcentajeCedula = findViewById(R.id.text_porcentaje_cedula);
         inputValidacionCedula = findViewById(R.id.input_validacion_cedula);
         lyValidacionCedula = findViewById(R.id.ly_validacion_cedula);
 
@@ -100,7 +103,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     } else {
                         lyValidacionCedula.setError("ingrese por favor primero la cedula");
                     }
-                    showToast("ingrese por favor primero la cedula");
                 }
             }
         });
@@ -117,7 +119,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                     } else {
                         lyValidacionCedula.setError("ingrese por favor primero la cedula");
                     }
-                    showToast("ingrese por favor primero la cedula");
                 }
             }
         });
@@ -230,65 +231,76 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String[] cedulaVector = cedulavalue.split("");
 
 
-        int[] resultadoMivacuna = validar(datosCarnetVector, miVacuna, "MiVacuna");
-        int[] resultadoCovid19 = validar(datosCarnetVector, covid19, "Covid-19");
-        int[] resultadoCedulaCarnet = validarCedulaCarnet(datosCarnetVector, cedulaVector, cedulavalue);
+        double[] resultadoMivacuna = validar(datosCarnetVector, miVacuna, "MiVacuna");
+        double[] resultadoCovid19 = validar(datosCarnetVector, covid19, "Covid-19");
+        double[] resultadoCedulaCarnet = validarCedulaCarnet(datosCarnetVector, cedulaVector, cedulavalue);
 
-        int[] resultadoCedula = validar(datosCedulaVector, cedulaVector, cedulavalue);
+        double[] resultadoCedula = validar(datosCedulaVector, cedulaVector, cedulavalue);
 
-        String imprecion;
+
         Boolean validacion = true;
+        double []  porcentajesCarnet= new double[3];
 
-        if (resultadoMivacuna[0] == 1) {
-            imprecion = datosCarnetVector[resultadoMivacuna[1]];
-            ;
-            textView.setText(imprecion);
+        if (resultadoMivacuna[0] == 1.0) {
+            porcentajesCarnet[0]= resultadoMivacuna[2];
             validacion = false;
         }
 
         if (resultadoCovid19[0] == 1) {
-            imprecion = textView.getText() + "\n" + datosCarnetVector[resultadoCovid19[1]];
-            ;
-            textView.setText(imprecion);
+            porcentajesCarnet[1]= resultadoCovid19[2];
             validacion = false;
         }
+
+
         String cedulaCarnetComparacion="";
         String cedulaComparacion="";
 
         if (resultadoCedulaCarnet[0] == 1) {
-            imprecion = textView.getText() + "\nCedula Carnet: " + cedulavalue;
-            cedulaCarnetComparacion= cedulavalue;
-            textView.setText(imprecion);
+            porcentajesCarnet[2] =resultadoCedulaCarnet[2];
             validacion = false;
         } else {
-            imprecion = textView.getText() + "\n" + "Cedula no valida, por favor tomar la foto nuevamente";
-            textView.setText(imprecion);
+            showToast("Cedula no valida, por favor tomar la foto nuevamente");
         }
 
+
+        double totalPorcentajeCarnet = (porcentajesCarnet[0]+porcentajesCarnet[2])/2;
+
+        if(resultadoMivacuna[0] == 1 && resultadoCedulaCarnet[0] == 1){
+
+            viewPorcentajeCarnet.setText(totalPorcentajeCarnet+"%");
+            viewPorcentajeCarnet.setBackgroundResource(color_green);
+            validacion = false;
+        }else{
+            viewPorcentajeCarnet.setText(totalPorcentajeCarnet+"%");
+            viewPorcentajeCarnet.setBackgroundResource(color_red);
+            validacion = true;
+        }
+
+
         if (resultadoCedula[0] == 1) {
-            imprecion = textView.getText() + "\nCedula: " + datosCedulaVector[resultadoCedula[1]];
-            cedulaComparacion =  datosCedulaVector[resultadoCedula[1]];
-            textView.setText(imprecion);
+            viewPorcentajeCedula.setText(resultadoCedula[2]+"%");
+            viewPorcentajeCedula.setBackgroundResource(color_green);
             validacion = false;
         } else {
-            imprecion = textView.getText() + "\n" + "Cedula no valida, por favor tomar la foto nuevamente";
-            textView.setText(imprecion);
+            viewPorcentajeCedula.setText(resultadoCedula[2]+"%");
+            viewPorcentajeCedula.setBackgroundResource(color_red);
         }
+
 
         double[] validacioncedulasvector = compararCedula(cedulaCarnetComparacion,cedulaComparacion, cedulavalue);
 
         if(validacioncedulasvector[0]==1){
-            imprecion = textView.getText() + "\n" + "validacion corecta, con un porcentaje de: "+validacioncedulasvector[1]+"%";
-            textView.setText(imprecion);
+            showToast("validacion corecta, con un porcentaje de: "+validacioncedulasvector[1]+"%"); ;
         }else{
-            imprecion = textView.getText() + "\n" + "validacion Incorecta, con un porcentaje de: "+validacioncedulasvector[1]+"%";
-            textView.setText(imprecion);
+           showToast("validacion Incorecta, con un porcentaje de: "+validacioncedulasvector[1]+"%");
+
         }
 
         if (validacion) {
-            textView.setTextSize(15);
-            textView.setText("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
+            showToast("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
         }
+
+
     }
 
 
@@ -303,7 +315,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             } catch (NumberFormatException e) {
                 num[i] = num[i].replaceAll("[^0-1-2-3-4-5-6-7-8-9]", "0");
                 numero[i] = Integer.parseInt(num[i]);
-                // showToast("El número: "+num[i]+" en la posicion :"+i+" se remplazo por "+numero[i]);
             }
         }
         String[] datosCedula = new String[num.length];
@@ -313,7 +324,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         return datosCedula;
     }
 
-    public int[] validar(String[] datosCarnetVector, String[] datoComparar, String textoComparar) {
+    public double[] validar(String[] datosCarnetVector, String[] datoComparar, String textoComparar) {
         double porcentajeValido = 0.0;
         double[] porcentajesDatos = new double[datosCarnetVector.length];
 
@@ -331,7 +342,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 porcentajeValido = porcentajeValido + ((100 * 1.00) / datoComparar.length);
                             }
                         } catch (Exception e) {
-                            // showToast("El Error se encuentra en la posicion" + j + " " + datosCarnetVector[k]);
                         }
                     }
                 } else {
@@ -347,20 +357,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         }
         int posNumMayor = porcentajeMayor(porcentajesDatos);
-        int[] resultado = new int[2];
+        double[] resultado = new double[3];
 
         if (porcentajesDatos[posNumMayor] >= 80) {
             resultado[0] = 1;
             resultado[1] = posNumMayor;
+            resultado[2] = porcentajesDatos[posNumMayor];
             return resultado;
         } else {
             resultado[0] = 0;
             resultado[1] = posNumMayor;
+            resultado[2] = porcentajesDatos[posNumMayor];
             return resultado;
         }
     }
 
-    public int[] validarCedulaCarnet(String[] datosCarnetVector, String[] datoComparar, String textoComparar) {
+    public double[] validarCedulaCarnet(String[] datosCarnetVector, String[] datoComparar, String textoComparar) {
         double porcentajeValido = 0.0;
         double[] porcentajesDatos = new double[datosCarnetVector.length];
 
@@ -380,7 +392,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             }
 
                         } catch (Exception e) {
-                            showToast("El Error se encuentra en la posicion" + j + " " + datosCarnetVector[k]);
                         }
                     }
                 } else {
@@ -394,19 +405,21 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 porcentajesDatos[k] = porcentajeValido;
             }
 
-            showToast(datosCarnetVector[k] + " Porcentaje: " + porcentajeValido);
+          //  showToast(datosCarnetVector[k] + " Porcentaje: " + porcentajeValido);
         }
         int posNumMayor = porcentajeMayor(porcentajesDatos);
-        int[] resultado = new int[2];
+        double[] resultado = new double[3];
 
 
         if (porcentajesDatos[posNumMayor] >= 60) {
             resultado[0] = 1;
             resultado[1] = posNumMayor;
+            resultado[2] = porcentajesDatos[posNumMayor];
             return resultado;
         } else {
             resultado[0] = 0;
             resultado[1] = posNumMayor;
+            resultado[2] = porcentajesDatos[posNumMayor];
             return resultado;
         }
     }
@@ -431,7 +444,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                             }
 
                         } catch (Exception e) {
-                            showToast("El Error se encuentra en la posicion" + j + " " + cedulaCarnetdividida[j]);
+                           // showToast("El Error se encuentra en la posicion" + j + " " + cedulaCarnetdividida[j]);
                         }
                     }
                 } else {
@@ -530,7 +543,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         int permisosAlmacenamientoLeer = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
 
         if (permisosCamara == PackageManager.PERMISSION_GRANTED && permisosAlmacenamientoEditar == PackageManager.PERMISSION_GRANTED && permisosAlmacenamientoLeer == PackageManager.PERMISSION_GRANTED) {
-            showToast("Permiso de la camara otorgado");
+           // showToast("Permiso de la camara otorgado");
         } else {
             requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE);
         }
