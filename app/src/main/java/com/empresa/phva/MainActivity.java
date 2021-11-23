@@ -87,7 +87,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
                 imageSelect = true;
-                camara();
+                if (!inputValidacionCedula.getText().toString().equals("")) {
+                    camara();
+                } else {
+                    if (inputValidacionCedula.length() >= 6) {
+                        lyValidacionCedula.setError(null);
+                    } else {
+                        lyValidacionCedula.setError("ingrese por favor primero la cedula");
+                    }
+                    showToast("ingrese por favor primero la cedula");
+                }
             }
         });
 
@@ -95,7 +104,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onClick(View view) {
                 imageSelect = false;
-                camara();
+                if (!inputValidacionCedula.getText().toString().equals("")) {
+                    camara();
+                } else {
+                    if (inputValidacionCedula.length() >= 6) {
+                        lyValidacionCedula.setError(null);
+                    } else {
+                        lyValidacionCedula.setError("ingrese por favor primero la cedula");
+                    }
+                    showToast("ingrese por favor primero la cedula");
+                }
             }
         });
 
@@ -115,13 +133,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             public void afterTextChanged(Editable editable) {
                 if (inputValidacionCedula.length() >= 6) {
                     lyValidacionCedula.setError(null);
-                }else{
+                } else {
                     lyValidacionCedula.setError("Ingrese por favor la cedula completa, esta debe tener mas de 6 dígitos");
                 }
             }
         });
     }
-
 
 
     private void camara() {
@@ -173,25 +190,19 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
 
-    @SuppressLint("ResourceAsColor")
     private void processTextRecognitionResult(Text texts) {
         List<Text.TextBlock> blocks = texts.getTextBlocks();
         if (imageSelect) {
             docCarnet = texts.getText();
-
         } else {
             docCedula = texts.getText();
         }
 
-
-        if (!docCarnet.equals("")) {
-            comparacionDatos(docCarnet, docCedula);
-        }
-
         if (!docCarnet.equals("") && !docCedula.equals("")) {
             comparacionDatos(docCarnet, docCedula);
+        } else {
+            showToast("Por favor tomar las fotos del carnet y cedula para continuar");
         }
-
 
     }
 
@@ -202,7 +213,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         cedulavalue = inputValidacionCedula.getText().toString();
         datosCarnet = datosCarnet.replace(" ", "");
-        datosCedula = datosCedula.replace(".", "");
+
+        datosCedula = datosCedula.replaceAll("[^0-1-2-3-4-5-6-7-8-9]", "");
 
         String[] datosCarnetVector = datosCarnet.split("\n");
         String[] datosCedulaVector = datosCedula.split("\n");
@@ -211,60 +223,87 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         int[] resultadoMivacuna = validar(datosCarnetVector, miVacuna, "MiVacuna");
         int[] resultadoCovid19 = validar(datosCarnetVector, covid19, "Covid-19");
-        int[] resultadoCedula = validarCedulaCarnet(datosCarnetVector, cedulaVector, cedulavalue);
+        int[] resultadoCedulaCarnet = validarCedulaCarnet(datosCarnetVector, cedulaVector, cedulavalue);
 
-            String imprecion;
-            Boolean validacion = true;
+        int[] resultadoCedula = validar(datosCedulaVector, cedulaVector, cedulavalue);
 
-            if (resultadoMivacuna[0] == 1) {
-                imprecion = datosCarnetVector[resultadoMivacuna[1]];;
-                textView.setText(imprecion);
-                validacion = false;
+        String imprecion;
+        Boolean validacion = true;
 
-            }
+        if (resultadoMivacuna[0] == 1) {
+            imprecion = datosCarnetVector[resultadoMivacuna[1]];
+            ;
+            textView.setText(imprecion);
+            validacion = false;
+        }
 
-            if ( resultadoCovid19[0] ==1){
-                imprecion = textView.getText() + "\n" + datosCarnetVector[resultadoCovid19[1]];;
-                textView.setText(imprecion);
-                validacion = false;
-            }
+        if (resultadoCovid19[0] == 1) {
+            imprecion = textView.getText() + "\n" + datosCarnetVector[resultadoCovid19[1]];
+            ;
+            textView.setText(imprecion);
+            validacion = false;
+        }
+        String cedulaCarnetComparacion="";
+        String cedulaComparacion="";
 
-            if(resultadoCedula[0] == 1){
-                imprecion = textView.getText() + "\n" + cedulavalue;
-                textView.setText(imprecion);
-                validacion = false;
-            }else {
-                imprecion = textView.getText() + "\n" + "Cedula no valida, por favor tomar la foto nuevamente";
-                textView.setText(imprecion);
-            }
+        if (resultadoCedulaCarnet[0] == 1) {
+            imprecion = textView.getText() + "\nCedula Carnet: " + cedulavalue;
+            cedulaCarnetComparacion= cedulavalue;
+            textView.setText(imprecion);
+            validacion = false;
+        } else {
+            imprecion = textView.getText() + "\n" + "Cedula no valida, por favor tomar la foto nuevamente";
+            textView.setText(imprecion);
+        }
 
-            if(validacion){
-                textView.setTextSize(15);
-                textView.setText("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
-            }
+        if (resultadoCedula[0] == 1) {
+            imprecion = textView.getText() + "\nCedula: " + datosCedulaVector[resultadoCedula[1]];
+            cedulaComparacion =  datosCedulaVector[resultadoCedula[1]];
+            textView.setText(imprecion);
+            validacion = false;
+        } else {
+            imprecion = textView.getText() + "\n" + "Cedula no valida, por favor tomar la foto nuevamente";
+            textView.setText(imprecion);
+        }
+
+        double[] validacioncedulasvector = compararCedula(cedulaCarnetComparacion,cedulaComparacion, cedulavalue);
+
+        if(validacioncedulasvector[0]==1){
+            imprecion = textView.getText() + "\n" + "validacion corecta, con un porcentaje de: "+validacioncedulasvector[1]+"%";
+            textView.setText(imprecion);
+        }else{
+            imprecion = textView.getText() + "\n" + "validacion Incorecta, con un porcentaje de: "+validacioncedulasvector[1]+"%";
+            textView.setText(imprecion);
+        }
+
+        if (validacion) {
+            textView.setTextSize(15);
+            textView.setText("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
+        }
     }
 
 
-    public String[] ConvertirNumCarnet(String[] num){
+    public String[] ConvertirNumCarnet(String[] num) {
 
-        int [] numero = new int[num.length];
+        int[] numero = new int[num.length];
 
-        for(int i =0; i < num.length; i++){
-            numero[i]=-1;
+        for (int i = 0; i < num.length; i++) {
+            numero[i] = -1;
             try {
-                numero[i] =  Integer.parseInt (num[i]);
-            }catch (NumberFormatException e){
-                  num[i] = num[i].replaceAll("[^0-1-2-3-4-5-6-7-8-9]", "0");
-                  numero[i] = Integer.parseInt(num[i]);
-                 // showToast("El número: "+num[i]+" en la posicion :"+i+" se remplazo por "+numero[i]);
+                numero[i] = Integer.parseInt(num[i]);
+            } catch (NumberFormatException e) {
+                num[i] = num[i].replaceAll("[^0-1-2-3-4-5-6-7-8-9]", "0");
+                numero[i] = Integer.parseInt(num[i]);
+                // showToast("El número: "+num[i]+" en la posicion :"+i+" se remplazo por "+numero[i]);
             }
         }
-        String [] datosCedula = new String[num.length];
-        for(int i =0; i < num.length; i++){
-            datosCedula[i]= String.valueOf(numero[i]);
+        String[] datosCedula = new String[num.length];
+        for (int i = 0; i < num.length; i++) {
+            datosCedula[i] = String.valueOf(numero[i]);
         }
         return datosCedula;
     }
+
     public int[] validar(String[] datosCarnetVector, String[] datoComparar, String textoComparar) {
         double porcentajeValido = 0.0;
         double[] porcentajesDatos = new double[datosCarnetVector.length];
@@ -283,17 +322,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                                 porcentajeValido = porcentajeValido + ((100 * 1.00) / datoComparar.length);
                             }
                         } catch (Exception e) {
-                           // showToast("El Error se encuentra en la posicion" + j + " " + datosCarnetVector[k]);
+                            // showToast("El Error se encuentra en la posicion" + j + " " + datosCarnetVector[k]);
                         }
                     }
                 } else {
                     porcentajeValido = 0.0;//bien :)  si
                 }
             }
-            if (porcentajeValido==100){
+            if (porcentajeValido == 100) {
                 porcentajesDatos[k] = porcentajeValido;
                 break;
-            }else{
+            } else {
                 porcentajesDatos[k] = porcentajeValido;
             }
 
@@ -305,7 +344,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             resultado[0] = 1;
             resultado[1] = posNumMayor;
             return resultado;
-        }else{
+        } else {
             resultado[0] = 0;
             resultado[1] = posNumMayor;
             return resultado;
@@ -336,34 +375,76 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                         }
                     }
                 } else {
-                porcentajeValido = 0.0;//bien :)  si
+                    porcentajeValido = 0.0;//bien :)  si
+                }
             }
-        }
-            if (porcentajeValido==100){
+            if (porcentajeValido == 100) {
                 porcentajesDatos[k] = porcentajeValido;
                 break;
-            }else{
+            } else {
                 porcentajesDatos[k] = porcentajeValido;
             }
 
-            showToast(datosCarnetVector[k]+" Porcentaje: "+ porcentajeValido);
+            showToast(datosCarnetVector[k] + " Porcentaje: " + porcentajeValido);
         }
         int posNumMayor = porcentajeMayor(porcentajesDatos);
         int[] resultado = new int[2];
 
 
-
-        if (porcentajesDatos[posNumMayor] >= 70) {
+        if (porcentajesDatos[posNumMayor] >= 60) {
             resultado[0] = 1;
             resultado[1] = posNumMayor;
             return resultado;
-        }else{
+        } else {
             resultado[0] = 0;
             resultado[1] = posNumMayor;
             return resultado;
         }
     }
-//En cuntra en el vector cual de todas la posiciones tiene un porcentaje mallo para luego retornar su posicion y saver qeu tento el que tiene el mallor porcentaje  es decir lo que buscamos MIVacuna
+
+
+
+    public double[] compararCedula(String datosCarnetVector,String datoscedula, String datoComparar) {
+        double porcentajeValido = 0.0;
+
+            String[] cedulaCarnetdividida = datosCarnetVector.split("");
+            String[] ceduladividida = datoscedula.split("");
+
+            porcentajeValido = 0;
+            if (cedulaCarnetdividida.equals(ceduladividida)) {
+                porcentajeValido = 100.0;
+            } else {
+                if (cedulaCarnetdividida.length >= datoComparar.length() - 1 && ceduladividida.length <= datoComparar.length() + 1) {
+                    for (int j = 0; j < ceduladividida.length; j++) {
+                        try {
+                            if (ceduladividida[j].equals(cedulaCarnetdividida[j])) {
+                                porcentajeValido = porcentajeValido + ((100 * 1.0) / datoComparar.length());
+                            }
+
+                        } catch (Exception e) {
+                            showToast("El Error se encuentra en la posicion" + j + " " + cedulaCarnetdividida[j]);
+                        }
+                    }
+                } else {
+                    porcentajeValido = 0.0;
+                }
+            }
+
+        double [] resultado = new double[2];
+
+        if (porcentajeValido >= 80) {
+
+            resultado[0] = 1;
+            resultado[1] = porcentajeValido;
+            return resultado;
+        } else {
+            resultado[0] = 0;
+            resultado[1] = porcentajeValido;
+            return resultado;
+        }
+    }
+
+    //En cuntra en el vector cual de todas la posiciones tiene un porcentaje mallo para luego retornar su posicion y saver qeu tento el que tiene el mallor porcentaje  es decir lo que buscamos MIVacuna
     private int porcentajeMayor(double[] vectorCorecto) {
         double numMayor = 0;
         int posNumMayor = 0;
@@ -429,17 +510,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     @Override
     public void onNothingSelected(AdapterView<?> parent) {
     }
+
+
     int REQUEST_CODE = 200;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
-    public void  verificarPermisosCamara(){
+    public void verificarPermisosCamara() {
         int permisosCamara = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
         int permisosAlmacenamientoEditar = ContextCompat.checkSelfPermission(this, Manifest.permission.WRITE_EXTERNAL_STORAGE);
         int permisosAlmacenamientoLeer = ContextCompat.checkSelfPermission(this, Manifest.permission.READ_EXTERNAL_STORAGE);
-        if( permisosCamara == PackageManager.PERMISSION_GRANTED && permisosAlmacenamientoEditar == PackageManager.PERMISSION_GRANTED && permisosAlmacenamientoLeer == PackageManager.PERMISSION_GRANTED  ){
+
+        if (permisosCamara == PackageManager.PERMISSION_GRANTED && permisosAlmacenamientoEditar == PackageManager.PERMISSION_GRANTED && permisosAlmacenamientoLeer == PackageManager.PERMISSION_GRANTED) {
             showToast("Permiso de la camara otorgado");
-        }else{
-            requestPermissions(new String[]{Manifest.permission.CAMERA,Manifest.permission.WRITE_EXTERNAL_STORAGE,Manifest.permission.READ_EXTERNAL_STORAGE},REQUEST_CODE);
+        } else {
+            requestPermissions(new String[]{Manifest.permission.CAMERA, Manifest.permission.WRITE_EXTERNAL_STORAGE, Manifest.permission.READ_EXTERNAL_STORAGE}, REQUEST_CODE);
         }
     }
 
