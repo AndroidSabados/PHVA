@@ -3,6 +3,10 @@ package com.empresa.phva;
 import static android.graphics.Color.GREEN;
 import static com.empresa.phva.R.color.*;
 
+import androidx.activity.result.ActivityResult;
+import androidx.activity.result.ActivityResultCallback;
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
@@ -11,6 +15,7 @@ import androidx.core.content.ContextCompat;
 
 import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.ContentProvider;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -140,31 +145,36 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
     }
 
+    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // There are no request codes
+                        Intent data = result.getData();
+                        Bundle extras = data.getExtras();
+                        Bitmap imgBitmap = (Bitmap) extras.get("data");
+
+                        if (imageSelect == true) {
+                            viewCarnet.setVisibility(View.INVISIBLE);
+                            textCarnet.setVisibility(View.INVISIBLE);
+                            mImageView.setImageBitmap(imgBitmap);
+                        } else {
+                            viewCedula.setVisibility(View.INVISIBLE);
+                            textCedula.setVisibility(View.INVISIBLE);
+                            mImageView2.setImageBitmap(imgBitmap);
+                        }
+                        onItemSelected(imgBitmap);
+                        runTextRecognition();
+                    }
+                }
+            });
 
     private void camara() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getPackageManager()) != null) {
-            startActivityForResult(intent, 1);
-        }
-    }
-
-    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 1 && resultCode == RESULT_OK) {
-            Bundle extras = data.getExtras();
-            Bitmap imgBitmap = (Bitmap) extras.get("data");
-
-            if (imageSelect == true) {
-                viewCarnet.setVisibility(View.INVISIBLE);
-                textCarnet.setVisibility(View.INVISIBLE);
-                mImageView.setImageBitmap(imgBitmap);
-            } else {
-                viewCedula.setVisibility(View.INVISIBLE);
-                textCedula.setVisibility(View.INVISIBLE);
-                mImageView2.setImageBitmap(imgBitmap);
-            }
-            onItemSelected(imgBitmap);
-            runTextRecognition();
+            someActivityResultLauncher.launch(intent);
         }
     }
 
@@ -188,7 +198,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }*/
         });
     }
-
 
     private void processTextRecognitionResult(Text texts) {
         List<Text.TextBlock> blocks = texts.getTextBlocks();
