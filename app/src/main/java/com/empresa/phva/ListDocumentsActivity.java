@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.SearchView;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,7 +19,7 @@ import com.empresa.phva.db.Document;
 
 import java.util.ArrayList;
 
-public class ListDocumentsActivity extends AppCompatActivity {
+public class ListDocumentsActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
 
     // creating variables for our array list,
     // dbhandler, adapter and recycler view.
@@ -29,6 +30,7 @@ public class ListDocumentsActivity extends AppCompatActivity {
     private Button btnUrl;
     private TextView tvUrl;
     public String prueba;
+    private SearchView searchView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +40,7 @@ public class ListDocumentsActivity extends AppCompatActivity {
         prueba = "probando";
         tvUrl = (TextView) findViewById(R.id.tvURL);
         btnUrl = (Button) findViewById(R.id.btnURL);
+        searchView=(SearchView)findViewById(R.id.xSearchView);
 
         Log.e("LOG", "logueo de boton");
 
@@ -65,6 +68,8 @@ public class ListDocumentsActivity extends AppCompatActivity {
         // setting our adapter to recycler view.
         documentRV.setAdapter(documentRVAdapter);
 
+        //buuscador del texto
+        searchView.setOnQueryTextListener(this);
 
 
     }
@@ -81,5 +86,14 @@ public class ListDocumentsActivity extends AppCompatActivity {
     }
 
 
+    @Override
+    public boolean onQueryTextSubmit(String s) {
+        return false;
+    }
 
+    @Override
+    public boolean onQueryTextChange(String s) {
+        documentRVAdapter.filtrado(s);
+        return false;
+    }
 }

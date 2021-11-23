@@ -20,12 +20,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.empresa.phva.db.Document;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.stream.Collectors;
 
 
 public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.ViewHolder> {
 
     // variable for our array list and context
-    private ArrayList<Document> documentArrayList;
+    private ArrayList<Document> documentArrayList,busquedaEnLista;
     private Context context;
     private View view;
 
@@ -33,6 +35,8 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
     public DocumentRVAdapter(ArrayList<Document> documentArrayList, Context context) {
         this.documentArrayList = documentArrayList;
         this.context = context;
+        busquedaEnLista=new ArrayList<>();
+        busquedaEnLista.addAll(documentArrayList);
     }
 
     @NonNull
@@ -130,6 +134,30 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
 
 
 
+    }
+
+    public void filtrado (String txtBuscar){
+        int longitud=txtBuscar.length();
+        if (longitud==0){
+            documentArrayList.clear();
+            documentArrayList.addAll(busquedaEnLista);
+        }
+        else {
+            if (android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.N) {
+                List<Document> collection=documentArrayList.stream().filter(i -> i.getTipoDoc().toLowerCase().contains(txtBuscar.toLowerCase())).collect(Collectors.toList());
+                documentArrayList.clear();
+                documentArrayList.addAll(collection);
+            }
+            else {
+                for (Document document:busquedaEnLista){
+                    if (document.getTipoDoc().toLowerCase().contains(txtBuscar.toLowerCase())){
+                        documentArrayList.add(document);
+                    }
+                }
+            }
+
+        }
+        notifyDataSetChanged();
     }
 }
 

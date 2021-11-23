@@ -34,25 +34,6 @@
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
 
-    <EditText
-        android:id="@+id/buscarAlerta"
-        android:layout_width="303dp"
-        android:layout_height="43dp"
-
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="16dp"
-        android:layout_weight="9"
-        android:background="@drawable/new_style"
-        android:ems="10"
-        android:hint="@string/buscar"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3" />
-
-
     <!--    <ListView-->
 <!--        android:id="@+id/listaEstados"-->
 <!--        android:layout_width="408dp"-->
@@ -67,24 +48,36 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
         android:layout_margin="16dp"
-        android:layout_marginStart="352dp"
         android:contentDescription="@string/addNovedades"
+        android:onClick="pCreateNovedades"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.861"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.0"
+        app:layout_constraintVertical_bias="0.893"
         app:srcCompat="?android:drawableLeft"
-        android:onClick="pCreateNovedades"
-        />
+        android:src="@drawable/mas"/>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRVCourses"
-        android:layout_width="411dp"
-        android:layout_height="515dp"
+        android:layout_width="408dp"
+        android:layout_height="576dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/buscarAlerta"
-        app:layout_constraintVertical_bias="0.154" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.925" />
+
+    <SearchView
+        android:id="@+id/xSearchView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.139" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
