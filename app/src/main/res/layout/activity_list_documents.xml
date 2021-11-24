@@ -34,20 +34,10 @@
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-
-    <!--    <ListView-->
-<!--        android:id="@+id/listaEstados"-->
-<!--        android:layout_width="408dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/buscarAlerta"></ListView>-->
-
     <EditText
         android:id="@+id/buscarAlerta"
         android:layout_width="303dp"
         android:layout_height="43dp"
-
         android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:layout_weight="9"
@@ -86,6 +76,22 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buscarAlerta"
         app:layout_constraintVertical_bias="0.154" />
+
+    <SearchView
+        android:id="@+id/xSearchView"
+        android:layout_width="410dp"
+        android:layout_height="36dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.139"
+        android:layout_marginStart="352dp"
+        android:contentDescription="@string/addNovedades"
+        app:layout_constraintTop_toBottomOf="@+id/imageView3"
+        app:srcCompat="?android:drawableLeft"
+        android:onClick="pCreateNovedades" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

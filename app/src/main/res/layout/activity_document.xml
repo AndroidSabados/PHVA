@@ -70,7 +70,7 @@
                 android:layout_marginEnd="24dp"
                 android:layout_marginTop="8dp"
                 android:background="@drawable/new_style"
-                android:hint="Seleccione tipo de Documento"></Button>
+                android:hint="Seleccione tipo de Documento" />
 
 
             <EditText
@@ -88,7 +88,7 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 android:layout_marginStart="24dp"
-                android:layout_marginEnd="24dp"></EditText>
+                android:layout_marginEnd="24dp" />
 
 
 
