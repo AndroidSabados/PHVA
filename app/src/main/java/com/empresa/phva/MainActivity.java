@@ -186,17 +186,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             @Override
             public void onSuccess(@NonNull Text text) {
                 processTextRecognitionResult(text);
-            }
-/*            @Override
-            public void onSuccess(@NonNull Text text) {
-                processTextRecognitionResult(text);
-            }
-        }).addOnFailureListener(new OnFailureListener() {
+            }}).addOnFailureListener(new OnFailureListener() {
             @Override
             public void onFailure(@NonNull Exception e) {
                 e.printStackTrace();
                 //metodo de retoma de foto hasta que sea exitoso
-            }*/
+            }
         });
     }
 
@@ -223,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         cedulavalue = inputValidacionCedula.getText().toString();
         datosCarnet = datosCarnet.replace(" ", "");
-
+        datosCarnet = datosCarnet.replace(".", "");
         datosCedula = datosCedula.replaceAll("[^0-1-2-3-4-5-6-7-8-9]", "");
 
         String[] datosCarnetVector = datosCarnet.split("\n");
@@ -278,6 +273,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         if (resultadoCedula[0] == 1) {
+            showToast("cedula "+ datosCarnetVector[(int) resultadoCedulaCarnet[1]] +" porcentaje: "+ resultadoCedulaCarnet[2]);
             viewPorcentajeCedula.setText(resultadoCedula[2]+"%");
             viewPorcentajeCedula.setBackgroundResource(color_green);
             validacion = false;
@@ -411,7 +407,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         double[] resultado = new double[3];
 
 
-        if (porcentajesDatos[posNumMayor] >= 60) {
+        if (porcentajesDatos[posNumMayor] >= 50) {
             resultado[0] = 1;
             resultado[1] = posNumMayor;
             resultado[2] = porcentajesDatos[posNumMayor];
@@ -423,7 +419,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             return resultado;
         }
     }
-
 
 
     public double[] compararCedula(String datosCarnetVector,String datoscedula, String datoComparar) {
