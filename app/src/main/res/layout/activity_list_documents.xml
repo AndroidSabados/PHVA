@@ -34,8 +34,6 @@
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
 
-<<<<<<< HEAD
-=======
     <EditText
         android:id="@+id/buscarAlerta"
         android:layout_width="303dp"
@@ -55,14 +53,13 @@
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
 
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
     <!--    <ListView-->
-<!--        android:id="@+id/listaEstados"-->
-<!--        android:layout_width="408dp"-->
-<!--        android:layout_height="wrap_content"-->
-<!--        app:layout_constraintBottom_toBottomOf="parent"-->
-<!--        app:layout_constraintStart_toStartOf="parent"-->
-<!--        app:layout_constraintTop_toBottomOf="@+id/buscarAlerta"></ListView>-->
+    <!--        android:id="@+id/listaEstados"-->
+    <!--        android:layout_width="408dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/buscarAlerta"></ListView>-->
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
         android:id="@+id/floating_action_button"
@@ -70,39 +67,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
         android:layout_margin="16dp"
-<<<<<<< HEAD
-        android:background="@color/purple_700"
-        android:contentDescription="@string/addNovedades"
-        android:onClick="pCreateNovedades"
-        android:src="@drawable/mas"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.909"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.451"
-        app:srcCompat="?android:drawableLeft" />
-
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/idRVCourses"
-        android:layout_width="410dp"
-        android:layout_height="585dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.958" />
-
-    <SearchView
-        android:id="@+id/xSearchView"
-        android:layout_width="410dp"
-        android:layout_height="36dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.139" />
-=======
         android:layout_marginStart="352dp"
         android:contentDescription="@string/addNovedades"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -121,7 +85,6 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/buscarAlerta"
         app:layout_constraintVertical_bias="0.154" />
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

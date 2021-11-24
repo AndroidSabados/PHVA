@@ -1,19 +1,16 @@
 package com.empresa.phva;
 
-<<<<<<< HEAD
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 
 import androidx.appcompat.app.AppCompatActivity;
-=======
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.TextView;
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
 public class WebViewDocumentoActivity extends AppCompatActivity {
 
@@ -38,9 +35,5 @@ public class WebViewDocumentoActivity extends AppCompatActivity {
 
 
     }
-
-
-
-
 
 }

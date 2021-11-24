@@ -1,12 +1,10 @@
 package com.empresa.phva;
 
-<<<<<<< HEAD
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
 import androidx.appcompat.app.AppCompatActivity;
-=======
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
@@ -14,7 +12,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
 public class AccesoModulos extends AppCompatActivity {
 
@@ -39,9 +36,5 @@ public class AccesoModulos extends AppCompatActivity {
         Intent novedades = new Intent(this, ListDocumentsActivity.class);
         startActivity(novedades);
     }
-
-
-
-
 
 }

@@ -5,55 +5,6 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
 
-<<<<<<< HEAD
-    android:background="#F1F0EF"
-    tools:context=".AccesoModulos">
-
-
-    <ImageButton
-        android:id="@+id/imageButton5"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/circle_button"
-        android:onClick="pNovedades"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton4"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:srcCompat="@drawable/file" />
-
-
-
-    <ImageButton
-        android:id="@+id/imageButton4"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/circle_button"
-        android:onClick="pDocumentos"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton3"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:srcCompat="@drawable/file" />
-
-    <ImageView
-        android:id="@+id/imageView12"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="-200dp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/encabezado1"
-        tools:visibility="visible" />
-=======
 
     tools:context=".AccesoModulos">
 
@@ -119,7 +70,6 @@
         android:text="Añadir usuarios"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
     <TextView
         android:id="@+id/textView4"
@@ -127,55 +77,6 @@
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginStart="40dp"
-<<<<<<< HEAD
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="40dp"
-        android:text="@string/empleado"
-        android:textSize="15dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView12" />
-
-    <ImageButton
-        android:id="@+id/imageButton"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="40dp"
-        android:background="@drawable/circle_button"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:srcCompat="@drawable/mas" />
-
-    <ImageButton
-        android:id="@+id/imageButton2"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/circle_button"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:srcCompat="@drawable/codigo_qr" />
-
-    <ImageButton
-        android:id="@+id/imageButton3"
-        android:layout_width="45dp"
-        android:layout_height="45dp"
-        android:layout_marginTop="50dp"
-        android:layout_marginEnd="8dp"
-        android:background="@drawable/circle_button"
-        android:onClick="pOCR"
-        android:scaleType="centerInside"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/imageButton2"
-        app:layout_constraintTop_toBottomOf="@+id/textView4"
-        app:srcCompat="@drawable/ocr" />
-=======
         android:layout_marginTop="40dp"
         android:layout_marginEnd="40dp"
         android:text="@string/empleado"
@@ -227,7 +128,6 @@
         android:text="OCR"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

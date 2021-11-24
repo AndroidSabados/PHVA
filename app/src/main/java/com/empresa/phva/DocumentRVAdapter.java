@@ -1,14 +1,10 @@
 package com.empresa.phva;
 
-
-<<<<<<< HEAD
 import android.annotation.SuppressLint;
-=======
 import static androidx.core.content.ContextCompat.startActivity;
 
 import android.annotation.SuppressLint;
 import android.app.Activity;
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,22 +23,14 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.empresa.phva.db.Document;
 
 import java.util.ArrayList;
-<<<<<<< HEAD
 import java.util.List;
 import java.util.stream.Collectors;
-=======
-
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
 
 public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.ViewHolder> {
 
     // variable for our array list and context
-<<<<<<< HEAD
     private ArrayList<Document> documentArrayList,busquedaEnLista;
-=======
-    private ArrayList<Document> documentArrayList;
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
     private Context context;
     private View view;
 
@@ -50,11 +38,8 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
     public DocumentRVAdapter(ArrayList<Document> documentArrayList, Context context) {
         this.documentArrayList = documentArrayList;
         this.context = context;
-<<<<<<< HEAD
         busquedaEnLista=new ArrayList<>();
         busquedaEnLista.addAll(documentArrayList);
-=======
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
     }
 
     @NonNull
@@ -78,10 +63,6 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         //holder.tvDocumentUrl.setText(modal.getUrl());
         holder.tvDocumentDescription.setText(modal.getDescription());
         holder.tvDocumentStatus.setText(modal.getEstado());
-
-
-
-
 
 
         Log.e("ErrorFG", "onBindViewHolder: " + holder.tvDocumentType.getText().toString() );
@@ -153,7 +134,6 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
 
 
     }
-<<<<<<< HEAD
 
     public void filtrado (String txtBuscar){
         int longitud=txtBuscar.length();
@@ -178,7 +158,5 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         }
         notifyDataSetChanged();
     }
-=======
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 }
 

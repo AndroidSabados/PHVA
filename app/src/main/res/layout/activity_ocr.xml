@@ -6,8 +6,6 @@
     android:layout_height="match_parent"
     tools:context=".OCR">
 
-<<<<<<< HEAD
-=======
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="476dp"
@@ -34,5 +32,4 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
->>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 </androidx.constraintlayout.widget.ConstraintLayout>
