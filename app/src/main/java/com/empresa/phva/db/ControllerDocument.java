@@ -1,11 +1,16 @@
 package com.empresa.phva.db;
 
+<<<<<<< HEAD
 import static com.empresa.phva.db.Config.SQL_READ_USERDOCUMENTS;
 import static com.empresa.phva.db.Config.UserDocuments.COLUMN_DESCRIPTION;
 import static com.empresa.phva.db.Config.UserDocuments.COLUMN_STATUS;
 import static com.empresa.phva.db.Config.UserDocuments.COLUMN_TYPE;
 import static com.empresa.phva.db.Config.UserDocuments.COLUMN_URL;
 import static com.empresa.phva.db.Config.UserDocuments.TABLE_NAME;
+=======
+import static com.empresa.phva.db.Config.*;
+import static com.empresa.phva.db.Config.UserDocuments.*;
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
 import android.content.ContentValues;
 import android.content.Context;

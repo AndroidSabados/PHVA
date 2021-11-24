@@ -1,5 +1,10 @@
 package com.empresa.phva;
 
+<<<<<<< HEAD
+=======
+import androidx.appcompat.app.AppCompatActivity;
+
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -10,8 +15,11 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
 
+<<<<<<< HEAD
 import androidx.appcompat.app.AppCompatActivity;
 
+=======
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
 public class Registro extends AppCompatActivity {
 
@@ -27,7 +35,11 @@ public class Registro extends AppCompatActivity {
         btnSelectRole.setOnClickListener(v -> showAlertDialog());
 
 
+<<<<<<< HEAD
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.select_roles, android.R.layout.simple_spinner_item);
+=======
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,R.array.select_roles, android.R.layout.simple_spinner_item);
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
         spinnerRoles.setAdapter(adapter);
 
 

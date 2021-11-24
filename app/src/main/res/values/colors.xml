@@ -8,4 +8,9 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="primary">#002973</color>
+<<<<<<< HEAD
+=======
+    <color name="hint">#00000000</color>
+
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 </resources>

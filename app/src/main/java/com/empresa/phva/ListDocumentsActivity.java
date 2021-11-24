@@ -1,25 +1,43 @@
 package com.empresa.phva;
 
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+<<<<<<< HEAD
 import android.widget.SearchView;
 import android.widget.TextView;
+=======
+import android.widget.ImageButton;
+import android.widget.TextView;
+import android.widget.Toast;
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 import com.empresa.phva.db.ControllerDocument;
 import com.empresa.phva.db.DbHelper;
 import com.empresa.phva.db.Document;
 
 import java.util.ArrayList;
 
+<<<<<<< HEAD
 public class ListDocumentsActivity extends AppCompatActivity implements SearchView.OnQueryTextListener{
+=======
+public class ListDocumentsActivity extends AppCompatActivity {
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
     // creating variables for our array list,
     // dbhandler, adapter and recycler view.
@@ -30,7 +48,10 @@ public class ListDocumentsActivity extends AppCompatActivity implements SearchVi
     private Button btnUrl;
     private TextView tvUrl;
     public String prueba;
+<<<<<<< HEAD
     private SearchView searchView;
+=======
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +61,10 @@ public class ListDocumentsActivity extends AppCompatActivity implements SearchVi
         prueba = "probando";
         tvUrl = (TextView) findViewById(R.id.tvURL);
         btnUrl = (Button) findViewById(R.id.btnURL);
+<<<<<<< HEAD
         searchView=(SearchView)findViewById(R.id.xSearchView);
+=======
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
         Log.e("LOG", "logueo de boton");
 
@@ -68,8 +92,11 @@ public class ListDocumentsActivity extends AppCompatActivity implements SearchVi
         // setting our adapter to recycler view.
         documentRV.setAdapter(documentRVAdapter);
 
+<<<<<<< HEAD
         //buuscador del texto
         searchView.setOnQueryTextListener(this);
+=======
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 
 
     }
@@ -86,6 +113,7 @@ public class ListDocumentsActivity extends AppCompatActivity implements SearchVi
     }
 
 
+<<<<<<< HEAD
     @Override
     public boolean onQueryTextSubmit(String s) {
         return false;
@@ -96,4 +124,7 @@ public class ListDocumentsActivity extends AppCompatActivity implements SearchVi
         documentRVAdapter.filtrado(s);
         return false;
     }
+=======
+
+>>>>>>> 1233e6a9570f33162e38f0bf3a8bff02305e17dd
 }
