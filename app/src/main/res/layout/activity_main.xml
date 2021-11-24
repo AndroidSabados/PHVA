@@ -212,11 +212,26 @@
 
     </LinearLayout>
     <!-- Circular progress indicator -->
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="8"
+        android:gravity="center"
+        android:orientation="horizontal">
+
     <com.google.android.material.progressindicator.CircularProgressIndicator
         android:id="@+id/progress_indicator"
         android:layout_width="wrap_content"
-        android:layout_height="0dp"
-        android:layout_weight="8"
-        android:indeterminate="true" />
+        android:layout_height="wrap_content"
 
+        android:progress="0"
+        android:indeterminate="true"/>
+
+        <ImageView
+            android:id="@+id/img_progres_indicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"/>
+    </LinearLayout>
 </LinearLayout>

@@ -23,6 +23,8 @@ import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -36,6 +38,7 @@ import android.widget.Toast;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -49,6 +52,15 @@ import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
 
+    private static final int RESULTS_TO_SHOW = 10;
+    TextView textView, textCarnet, textCedula;
+    View viewCarnet, viewCedula;
+    CardView cardCarnet;
+    CardView cardCedula;
+    CircularProgressIndicator progressIndicator;
+    boolean imageSelect = Boolean.parseBoolean(null);
+    ImageView imgProgresIndicator;
+    int REQUEST_CODE = 200;
     private ImageView mImageView;
     private ImageView mImageView2;
     private Bitmap mSelectedImage;
@@ -60,15 +72,32 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private TextView viewPorcentajeCarnet;
     private TextView viewPorcentajeCedula;
     private TextInputEditText inputValidacionCedula;
-    private TextInputLayout lyValidacionCedula;
-    private static final int RESULTS_TO_SHOW = 10;
-    TextView textView, textCarnet, textCedula;
-    View viewCarnet, viewCedula;
-    CardView cardCarnet;
-    CardView cardCedula;
-    CircularProgressIndicator progressIndicator;
-    boolean imageSelect = Boolean.parseBoolean(null);
+    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // There are no request codes
+                        Intent data = result.getData();
+                        Bundle extras = data.getExtras();
+                        Bitmap imgBitmap = (Bitmap) extras.get("data");
 
+                        if (imageSelect == true) {
+                            viewCarnet.setVisibility(View.INVISIBLE);
+                            textCarnet.setVisibility(View.INVISIBLE);
+                            mImageView.setImageBitmap(imgBitmap);
+                        } else {
+                            viewCedula.setVisibility(View.INVISIBLE);
+                            textCedula.setVisibility(View.INVISIBLE);
+                            mImageView2.setImageBitmap(imgBitmap);
+                        }
+                        onItemSelected(imgBitmap);
+                        runTextRecognition();
+                    }
+                }
+            });
+    private TextInputLayout lyValidacionCedula;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
@@ -90,6 +119,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         inputValidacionCedula = findViewById(R.id.input_validacion_cedula);
         lyValidacionCedula = findViewById(R.id.ly_validacion_cedula);
         progressIndicator = findViewById(R.id.progress_indicator);
+        progressIndicator.setVisibility(View.INVISIBLE);
+        imgProgresIndicator = findViewById(R.id.img_progres_indicator);
         verificarPermisosCamara();
 
         cardCarnet.setOnClickListener(new View.OnClickListener() {
@@ -147,32 +178,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         });
     }
 
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
-                        Intent data = result.getData();
-                        Bundle extras = data.getExtras();
-                        Bitmap imgBitmap = (Bitmap) extras.get("data");
-
-                        if (imageSelect == true) {
-                            viewCarnet.setVisibility(View.INVISIBLE);
-                            textCarnet.setVisibility(View.INVISIBLE);
-                            mImageView.setImageBitmap(imgBitmap);
-                        } else {
-                            viewCedula.setVisibility(View.INVISIBLE);
-                            textCedula.setVisibility(View.INVISIBLE);
-                            mImageView2.setImageBitmap(imgBitmap);
-                        }
-                        onItemSelected(imgBitmap);
-                        runTextRecognition();
-                    }
-                }
-            });
-
     private void camara() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         if (intent.resolveActivity(getPackageManager()) != null) {
@@ -198,7 +203,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     }
 
     private void processTextRecognitionResult(Text texts) {
-       // List<Text.TextBlock> blocks = texts.getTextBlocks();
+        // List<Text.TextBlock> blocks = texts.getTextBlocks();
         if (imageSelect) {
             docCarnet = texts.getText();
             viewPorcentajeCarnet.setBackgroundResource(color_green);
@@ -210,24 +215,22 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (!docCarnet.equals("") && !docCedula.equals("")) {
             comparacionDatos(docCarnet, docCedula);
         } else {
-            showToast("Por favor tomar las fotos del carnet y cedula para continuar");
-            if(docCarnet.isEmpty()) {
+
+            if (docCarnet.isEmpty()) {
                 viewPorcentajeCarnet.setBackgroundResource(color_red);
+                showToast("Por favor tomar la foto del carnet");
             }
 
             if (docCedula.isEmpty()) {
                 viewPorcentajeCedula.setBackgroundResource(color_red);
+                showToast("Por favor tomar la foto de la cedula");
             }
         }
 
 
-
-
-
-
     }
 
-    public void comparacionDatos(String datosCarnet, String datosCedula){
+    public void comparacionDatos(String datosCarnet, String datosCedula) {
 
         String[] miVacuna = {"M", "i", "V", "a", "c", "u", "n", "a"};
         String[] covid19 = {"C", "o", "v", "i", "d", "-", "1", "9"};
@@ -273,6 +276,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             showToast("Cedula del carnet no valida, por favor tomar la foto nuevamente");
         }
 
+        //Metodo para que nos muestre la barra de progreso por 5 segundos y desaparesca alterminar
+        cargarBarraProgreso();
 
         double totalPorcentajeCarnet = (porcentajesCarnet[0] + porcentajesCarnet[2]) / 2;
 
@@ -289,7 +294,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         if (resultadoCedula[0] == 1) {
-            showToast("cedula " + datosCarnetVector[(int) resultadoCedulaCarnet[1]] + " porcentaje: " + resultadoCedulaCarnet[2]);
+            //showToast("cedula " + datosCarnetVector[(int) resultadoCedulaCarnet[1]] + " porcentaje: " + resultadoCedulaCarnet[2]);
             viewPorcentajeCedula.setText(resultadoCedula[2] + "%");
             viewPorcentajeCedula.setBackgroundResource(color_green);
             validacion = false;
@@ -297,28 +302,36 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             viewPorcentajeCedula.setText(resultadoCedula[2] + "%");
             viewPorcentajeCedula.setBackgroundResource(color_red);
         }
+        double[] validacioncedulasvector = compararCedula(cedulaCarnetComparacion, cedulaComparacion, cedulavalue);
 
-        double[] validacioncedulasvector = compararCedula(cedulaCarnetComparacion,cedulaComparacion, cedulavalue);
-
-        //Este puede generar error por lo que lo adecuado es colocarlo dentro de un try catch
-       // progressIndicator.setProgressCompat(100,true);
-
-//        try {
-//            return Thread.sleep(4000);
-//            //Para deternerlo durante 2 segundos
-//        }catch (InterruptedException e){
-//            e.printStackTrace();
-//            return 0;
-//        }
-//        if(validacioncedulasvector[0]==1){
-//           showToast("validacion corecta, con un porcentaje de: "+validacioncedulasvector[1]+"%"); ;
-//        }else{
-//           showToast("validacion Incorecta, con un porcentaje de: "+validacioncedulasvector[1]+"%");
-//        }
+        if(validacioncedulasvector[0]==1){
+           //se hace visible la imagen del check
+           showToast("validacion correcta, con un porcentaje de: "+validacioncedulasvector[1]+"%");
+            imgProgresIndicator.setImageResource(R.drawable.cheque);
+            imgProgresIndicator.setColorFilter(color_green);
+        }else{
+           showToast("validacion Incorecta, con un porcentaje de: "+validacioncedulasvector[1]+"%");
+           imgProgresIndicator.setImageResource(android.R.drawable.ic_delete);
+           //imgProgresIndicator.setColorFilter(color_red);
+        }
 
         if (validacion) {
             showToast("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
         }
+
+    }
+
+    private void cargarBarraProgreso() {
+        final Handler handler = new Handler();
+        progressIndicator.setVisibility(View.VISIBLE);
+
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressIndicator.setVisibility(View.GONE);
+                imgProgresIndicator.setVisibility(View.VISIBLE);
+            }
+        }, 5000);
     }
 
     public String[] ConvertirNumCarnet(String[] num) {
@@ -449,7 +462,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String[] cedulaCarnetdividida = datosCarnetVector.split("");
         String[] ceduladividida = datoscedula.split("");
 
-        porcentajeValido = 0;
         if (cedulaCarnetdividida.equals(ceduladividida)) {
             porcentajeValido = 100.0;
         } else {
@@ -548,7 +560,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     public void onNothingSelected(AdapterView<?> parent) {
     }
 
-    int REQUEST_CODE = 200;
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void verificarPermisosCamara() {
         int permisosCamara = ContextCompat.checkSelfPermission(this, Manifest.permission.CAMERA);
