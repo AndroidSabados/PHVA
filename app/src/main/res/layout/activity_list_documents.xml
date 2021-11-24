@@ -48,30 +48,31 @@
         android:layout_height="wrap_content"
         android:layout_gravity="top|right"
         android:layout_margin="16dp"
+        android:background="@color/purple_700"
         android:contentDescription="@string/addNovedades"
         android:onClick="pCreateNovedades"
+        android:src="@drawable/mas"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.861"
+        app:layout_constraintHorizontal_bias="0.909"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.893"
-        app:srcCompat="?android:drawableLeft"
-        android:src="@drawable/mas"/>
+        app:layout_constraintVertical_bias="0.451"
+        app:srcCompat="?android:drawableLeft" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/idRVCourses"
-        android:layout_width="408dp"
-        android:layout_height="576dp"
+        android:layout_width="410dp"
+        android:layout_height="585dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.925" />
+        app:layout_constraintVertical_bias="0.958" />
 
     <SearchView
         android:id="@+id/xSearchView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="410dp"
+        android:layout_height="36dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
