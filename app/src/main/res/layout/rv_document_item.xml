@@ -1,22 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/Feature/Design/Camila
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+<<<<<<< HEAD
     android:layout_margin="5dp"
+=======
+    android:layout_marginTop="5dp"
+>>>>>>> origin/Feature/Design/Camila
     android:elevation="8dp"
     app:cardCornerRadius="4dp"
     >
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Feature/Design/Camila
     <LinearLayout
         android:id="@+id/lyPpal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Feature/Design/Camila
         android:layout_margin="3dp"
         android:orientation="vertical"
         >
 
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Feature/Design/Camila
         <!--text view for our course name-->
         <TextView
             android:id="@+id/tvDocumentUrl"
