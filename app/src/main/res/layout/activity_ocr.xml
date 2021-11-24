@@ -6,6 +6,11 @@
     android:layout_height="match_parent"
     tools:context=".OCR">
 
+<<<<<<< HEAD
+=======
+<<<<<<< HEAD
+=======
+>>>>>>> 012886c38f5bc133a728e54c17c06c9604d1586e
     <ImageView
         android:id="@+id/imageView3"
         android:layout_width="476dp"
@@ -32,4 +37,8 @@
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+<<<<<<< HEAD
+=======
+>>>>>>> origin/Feature/Design/Camila
+>>>>>>> 012886c38f5bc133a728e54c17c06c9604d1586e
 </androidx.constraintlayout.widget.ConstraintLayout>

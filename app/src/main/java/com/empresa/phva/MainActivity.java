@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Switch;
 
+
 public class MainActivity extends AppCompatActivity {
 
     Switch swi;
@@ -60,6 +61,7 @@ public class MainActivity extends AppCompatActivity {
             ClaroOscuro();
         }
     }
+}
 
 
 
@@ -73,6 +75,3 @@ public class MainActivity extends AppCompatActivity {
             }
         }
     });*/
-
-
-}

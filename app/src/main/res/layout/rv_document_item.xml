@@ -1,27 +1,64 @@
 <?xml version="1.0" encoding="utf-8"?>
+<<<<<<< HEAD
 
 
+=======
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> origin/Feature/Design/Camila
+>>>>>>> 012886c38f5bc133a728e54c17c06c9604d1586e
 <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
+<<<<<<< HEAD
     android:layout_marginTop="5dp"
+=======
+<<<<<<< HEAD
+    android:layout_margin="5dp"
+=======
+    android:layout_marginTop="5dp"
+>>>>>>> origin/Feature/Design/Camila
+>>>>>>> 012886c38f5bc133a728e54c17c06c9604d1586e
     android:elevation="8dp"
     app:cardCornerRadius="4dp"
     >
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Feature/Design/Camila
+>>>>>>> 012886c38f5bc133a728e54c17c06c9604d1586e
     <LinearLayout
         android:id="@+id/lyPpal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Feature/Design/Camila
+>>>>>>> 012886c38f5bc133a728e54c17c06c9604d1586e
         android:layout_margin="3dp"
         android:orientation="vertical"
         >
 
+<<<<<<< HEAD
 
+=======
+<<<<<<< HEAD
+=======
+
+>>>>>>> origin/Feature/Design/Camila
+>>>>>>> 012886c38f5bc133a728e54c17c06c9604d1586e
         <!--text view for our course name-->
         <TextView
             android:id="@+id/tvDocumentUrl"

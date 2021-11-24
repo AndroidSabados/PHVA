@@ -1,6 +1,5 @@
 <resources>
     <string name="app_name">PHVA</string>
-
     <string name="registro_NombreUsuario">Nombre de Usuario</string>
     <string name="registro_nombre">Nombre</string>
     <string name="registro_apellido">Apellido</string>
@@ -37,6 +36,4 @@
     <string name="addNovedades">Agregar</string>
     <string name="rNovedades">Registro de novedades</string>
     <string name="hintTipoDoc">Tipo de Documento</string>
-
-
 </resources>

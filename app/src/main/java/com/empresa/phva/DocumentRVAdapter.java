@@ -1,10 +1,6 @@
 package com.empresa.phva;
 
 import android.annotation.SuppressLint;
-import static androidx.core.content.ContextCompat.startActivity;
-
-import android.annotation.SuppressLint;
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
@@ -27,9 +23,11 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 
+
 public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.ViewHolder> {
 
     // variable for our array list and context
+
     private ArrayList<Document> documentArrayList,busquedaEnLista;
     private Context context;
     private View view;
@@ -38,8 +36,10 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
     public DocumentRVAdapter(ArrayList<Document> documentArrayList, Context context) {
         this.documentArrayList = documentArrayList;
         this.context = context;
+
         busquedaEnLista=new ArrayList<>();
         busquedaEnLista.addAll(documentArrayList);
+
     }
 
     @NonNull

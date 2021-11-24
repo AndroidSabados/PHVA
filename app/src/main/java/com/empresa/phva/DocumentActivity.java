@@ -10,22 +10,7 @@ import android.util.Log;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import androidx.appcompat.app.AppCompatActivity;
-
 import com.empresa.phva.db.ControllerDocument;
-import android.database.sqlite.SQLiteDatabase;
-import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
-import android.widget.Spinner;
-import android.widget.TextView;
-import android.widget.Toast;
-
-import com.empresa.phva.db.ControllerDocument;
-import com.empresa.phva.db.DbHelper;
 import com.empresa.phva.db.Document;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
@@ -124,9 +109,6 @@ public class DocumentActivity extends AppCompatActivity {
         }
     }
 
-
-
-
     private void selectTipoDoc() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DocumentActivity.this);
         alertDialog.setTitle("Seleccione el tipo de documento: ");
@@ -152,7 +134,6 @@ public class DocumentActivity extends AppCompatActivity {
 
                 }
 
-
             }
 
             private void closeDialog() {
@@ -162,19 +143,11 @@ public class DocumentActivity extends AppCompatActivity {
             }
         });
 
-
-
-
         AlertDialog alert = alertDialog.create();
         alert.setCanceledOnTouchOutside(true);
         alert.show();
 
-
-
     }
-
-
-
 
     private void selectEstado() {
         Log.e("Log", "Entro a selectEstado");
@@ -199,10 +172,6 @@ public class DocumentActivity extends AppCompatActivity {
                     }
 
                 }
-
-
-
-
 
             }
         });

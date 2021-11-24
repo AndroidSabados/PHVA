@@ -1,6 +1,5 @@
 package com.empresa.phva;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
@@ -10,9 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.Spinner;
-import androidx.appcompat.app.AppCompatActivity;
-
 
 public class Registro extends AppCompatActivity {
     Button btnSelectRole;
@@ -27,8 +23,7 @@ public class Registro extends AppCompatActivity {
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.select_roles, android.R.layout.simple_spinner_item);
-
-        }
+    }
 
     public void modulos (View view){
         Intent modulos = new Intent(this, AccesoModulos.class);
