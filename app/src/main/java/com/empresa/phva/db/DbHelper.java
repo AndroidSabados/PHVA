@@ -1,11 +1,22 @@
 package com.empresa.phva.db;
 
+<<<<<<< HEAD
 import static com.empresa.phva.db.Config.SQL_CREATE_USERDOCUMENTS;
 import static com.empresa.phva.db.Config.SQL_DELETE_USERDOCUMENTS;
+=======
+import static com.empresa.phva.db.Config.*;
+>>>>>>> origin/Feature/Design/Camila
 
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+<<<<<<< HEAD
+=======
+import android.util.Log;
+import android.widget.Toast;
+
+import androidx.annotation.Nullable;
+>>>>>>> origin/Feature/Design/Camila
 
 public class DbHelper extends SQLiteOpenHelper {
 
