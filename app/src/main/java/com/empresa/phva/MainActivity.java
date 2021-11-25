@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
@@ -72,39 +73,12 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private TextView viewPorcentajeCarnet;
     private TextView viewPorcentajeCedula;
     private TextInputEditText inputValidacionCedula;
-    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
-            new ActivityResultContracts.StartActivityForResult(),
-            new ActivityResultCallback<ActivityResult>() {
-                @Override
-                public void onActivityResult(ActivityResult result) {
-                    if (result.getResultCode() == Activity.RESULT_OK) {
-                        // There are no request codes
-                        Intent data = result.getData();
-                        Bundle extras = data.getExtras();
-                        Bitmap imgBitmap = (Bitmap) extras.get("data");
-
-                        if (imageSelect == true) {
-                            viewCarnet.setVisibility(View.INVISIBLE);
-                            textCarnet.setVisibility(View.INVISIBLE);
-                            mImageView.setImageBitmap(imgBitmap);
-                        } else {
-                            viewCedula.setVisibility(View.INVISIBLE);
-                            textCedula.setVisibility(View.INVISIBLE);
-                            mImageView2.setImageBitmap(imgBitmap);
-                        }
-                        onItemSelected(imgBitmap);
-                        runTextRecognition();
-                    }
-                }
-            });
-    private TextInputLayout lyValidacionCedula;
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
 
         mImageView = findViewById(R.id.image_view);
         mImageView2 = findViewById(R.id.image_view2);
@@ -155,7 +129,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
 
-
         inputValidacionCedula.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -177,6 +150,33 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             }
         });
     }
+
+    ActivityResultLauncher<Intent> someActivityResultLauncher = registerForActivityResult(
+            new ActivityResultContracts.StartActivityForResult(),
+            new ActivityResultCallback<ActivityResult>() {
+                @Override
+                public void onActivityResult(ActivityResult result) {
+                    if (result.getResultCode() == Activity.RESULT_OK) {
+                        // There are no request codes
+                        Intent data = result.getData();
+                        Bundle extras = data.getExtras();
+                        Bitmap imgBitmap = (Bitmap) extras.get("data");
+
+                        if (imageSelect == true) {
+                            viewCarnet.setVisibility(View.INVISIBLE);
+                            textCarnet.setVisibility(View.INVISIBLE);
+                            mImageView.setImageBitmap(imgBitmap);
+                        } else {
+                            viewCedula.setVisibility(View.INVISIBLE);
+                            textCedula.setVisibility(View.INVISIBLE);
+                            mImageView2.setImageBitmap(imgBitmap);
+                        }
+                        onItemSelected(imgBitmap);
+                        runTextRecognition();
+                    }
+                }
+            });
+    private TextInputLayout lyValidacionCedula;
 
     private void camara() {
         Intent intent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
@@ -215,7 +215,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         if (!docCarnet.equals("") && !docCedula.equals("")) {
             comparacionDatos(docCarnet, docCedula);
         } else {
-
+            cargarBarraProgreso();
             if (docCarnet.isEmpty()) {
                 viewPorcentajeCarnet.setBackgroundResource(color_red);
                 showToast("Por favor tomar la foto del carnet");
@@ -270,6 +270,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         String cedulaComparacion = "";
 
         if (resultadoCedulaCarnet[0] == 1) {
+            cedulaCarnetComparacion =String.valueOf(datosCarnetVector[(int) resultadoCedulaCarnet[1]]);
             porcentajesCarnet[2] = resultadoCedulaCarnet[2];
             validacion = false;
         } else {
@@ -294,7 +295,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
 
         if (resultadoCedula[0] == 1) {
-            //showToast("cedula " + datosCarnetVector[(int) resultadoCedulaCarnet[1]] + " porcentaje: " + resultadoCedulaCarnet[2]);
+            cedulaComparacion =String.valueOf(datosCedulaVector[(int) resultadoCedula[1]]);
             viewPorcentajeCedula.setText(resultadoCedula[2] + "%");
             viewPorcentajeCedula.setBackgroundResource(color_green);
             validacion = false;
@@ -302,17 +303,20 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             viewPorcentajeCedula.setText(resultadoCedula[2] + "%");
             viewPorcentajeCedula.setBackgroundResource(color_red);
         }
-        double[] validacioncedulasvector = compararCedula(cedulaCarnetComparacion, cedulaComparacion, cedulavalue);
+        double[] validacionCedulasvector = compararCedula(cedulaCarnetComparacion, cedulaComparacion, cedulavalue);
 
-        if(validacioncedulasvector[0]==1){
+        if(validacionCedulasvector[0]==1){
            //se hace visible la imagen del check
-           showToast("validacion correcta, con un porcentaje de: "+validacioncedulasvector[1]+"%");
+           showToast("validacion correcta, con un porcentaje de: "+validacionCedulasvector[1]+"%");
             imgProgresIndicator.setImageResource(R.drawable.cheque);
-            imgProgresIndicator.setColorFilter(color_green);
+            imgProgresIndicator.setColorFilter(ContextCompat.getColor(this,
+                    color_green));
         }else{
-           showToast("validacion Incorecta, con un porcentaje de: "+validacioncedulasvector[1]+"%");
+           showToast("validacion Incorecta, con un porcentaje de: "+validacionCedulasvector[1]+"%");
            imgProgresIndicator.setImageResource(android.R.drawable.ic_delete);
-           //imgProgresIndicator.setColorFilter(color_red);
+           imgProgresIndicator.clearColorFilter();
+           imgProgresIndicator.setColorFilter(ContextCompat.getColor(this,
+                    color_red));
         }
 
         if (validacion) {
@@ -324,7 +328,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
     private void cargarBarraProgreso() {
         final Handler handler = new Handler();
         progressIndicator.setVisibility(View.VISIBLE);
-
+        imgProgresIndicator.setVisibility(View.GONE);
         handler.postDelayed(new Runnable() {
             @Override
             public void run() {
@@ -440,7 +444,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             //  showToast(datosCarnetVector[k] + " Porcentaje: " + porcentajeValido);
         }
         int posNumMayor = porcentajeMayor(porcentajesDatos);
-        double[] resultado = new double[3];
+        double[] resultado = new double[4];
 
 
         if (porcentajesDatos[posNumMayor] >= 50) {
@@ -458,17 +462,17 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
     public double[] compararCedula(String datosCarnetVector, String datoscedula, String datoComparar) {
         double porcentajeValido = 0.0;
-
+        datosCarnetVector = datosCarnetVector.replace(".", "");
         String[] cedulaCarnetdividida = datosCarnetVector.split("");
         String[] ceduladividida = datoscedula.split("");
-
-        if (cedulaCarnetdividida.equals(ceduladividida)) {
+        String[] datosCarnet = ConvertirNumCarnet(cedulaCarnetdividida);
+        if (datosCarnetVector.equals(datoscedula)) {
             porcentajeValido = 100.0;
         } else {
-            if (cedulaCarnetdividida.length >= datoComparar.length() - 1 && ceduladividida.length <= datoComparar.length() + 1) {
+            if (datosCarnet.length >= datoComparar.length() - 1 && ceduladividida.length <= datoComparar.length() + 1) {
                 for (int j = 0; j < ceduladividida.length; j++) {
                     try {
-                        if (ceduladividida[j].equals(cedulaCarnetdividida[j])) {
+                        if (ceduladividida[j].equals(datosCarnet[j])) {
                             porcentajeValido = porcentajeValido + ((100 * 1.0) / datoComparar.length());
                         }
 
@@ -483,8 +487,8 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
 
         double[] resultado = new double[2];
 
+        showToast("Porcentaje octenido :" + porcentajeValido);
         if (porcentajeValido >= 80) {
-
             resultado[0] = 1;
             resultado[1] = porcentajeValido;
             return resultado;
