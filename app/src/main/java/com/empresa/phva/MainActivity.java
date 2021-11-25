@@ -1,8 +1,6 @@
 package com.empresa.phva;
 
-import static android.graphics.Color.GREEN;
 import static com.empresa.phva.R.color.*;
-
 import androidx.activity.result.ActivityResult;
 import androidx.activity.result.ActivityResultCallback;
 import androidx.activity.result.ActivityResultLauncher;
@@ -12,34 +10,24 @@ import androidx.annotation.RequiresApi;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.cardview.widget.CardView;
 import androidx.core.content.ContextCompat;
-
 import android.Manifest;
-import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.content.ContentProvider;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
-import android.graphics.Color;
-import android.graphics.PorterDuff;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
-import android.os.SystemClock;
 import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Pair;
 import android.view.View;
-import android.widget.AdapterView;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.android.material.progressindicator.CircularProgressIndicator;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
@@ -49,9 +37,8 @@ import com.google.mlkit.vision.text.TextRecognition;
 import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
-import java.util.List;
 
-public class MainActivity extends AppCompatActivity implements AdapterView.OnItemSelectedListener {
+public class MainActivity extends AppCompatActivity {
 
     private static final int RESULTS_TO_SHOW = 10;
     TextView textView, textCarnet, textCedula;
@@ -305,7 +292,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         }
         double[] validacionCedulasvector = compararCedula(cedulaCarnetComparacion, cedulaComparacion, cedulavalue);
 
-        if(validacionCedulasvector[0]==1){
+      /*  if(validacionCedulasvector[0]==1){
            //se hace visible la imagen del check
            showToast("validacion correcta, con un porcentaje de: "+validacionCedulasvector[1]+"%");
             imgProgresIndicator.setImageResource(R.drawable.cheque);
@@ -317,7 +304,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
            imgProgresIndicator.clearColorFilter();
            imgProgresIndicator.setColorFilter(ContextCompat.getColor(this,
                     color_red));
-        }
+        }*/
 
         if (validacion) {
             showToast("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
@@ -465,11 +452,16 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
         datosCarnetVector = datosCarnetVector.replace(".", "");
         String[] cedulaCarnetdividida = datosCarnetVector.split("");
         String[] ceduladividida = datoscedula.split("");
-        String[] datosCarnet = ConvertirNumCarnet(cedulaCarnetdividida);
-        if (datosCarnetVector.equals(datoscedula)) {
+
+        for(int i=0; i< cedulaCarnetdividida.length ; i++ ){
+            showToast("prueba "+ cedulaCarnetdividida[i]);
+        }
+
+        //String[] datosCarnet = ConvertirNumCarnet(cedulaCarnetdividida);
+        if (datoscedula.equals(datoscedula)) {
             porcentajeValido = 100.0;
         } else {
-            if (datosCarnet.length >= datoComparar.length() - 1 && ceduladividida.length <= datoComparar.length() + 1) {
+        /*    if (datosCarnet.length >= datoComparar.length() - 1 && ceduladividida.length <= datoComparar.length() + 1) {
                 for (int j = 0; j < ceduladividida.length; j++) {
                     try {
                         if (ceduladividida[j].equals(datosCarnet[j])) {
@@ -482,7 +474,7 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
                 }
             } else {
                 porcentajeValido = 0.0;
-            }
+            }*/
         }
 
         double[] resultado = new double[2];
@@ -554,14 +546,6 @@ public class MainActivity extends AppCompatActivity implements AdapterView.OnIte
             //mImageView.setImageBitmap(resizedBitmap);
             mSelectedImage = resizedBitmap;
         }
-    }
-
-    @Override
-    public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
-    }
-
-    @Override
-    public void onNothingSelected(AdapterView<?> parent) {
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
