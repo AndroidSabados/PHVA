@@ -280,7 +280,7 @@ public class MainActivity extends AppCompatActivity {
             validacion = true;
         }
 
-
+        imgProgresIndicator.setVisibility(View.VISIBLE);
         if (resultadoCedula[0] == 1) {
             cedulaComparacion =String.valueOf(datosCedulaVector[(int) resultadoCedula[1]]);
             viewPorcentajeCedula.setText(resultadoCedula[2] + "%");
@@ -292,7 +292,7 @@ public class MainActivity extends AppCompatActivity {
         }
         double[] validacionCedulasvector = compararCedula(cedulaCarnetComparacion, cedulaComparacion, cedulavalue);
 
-      /*  if(validacionCedulasvector[0]==1){
+        if(validacionCedulasvector[0]==1){
            //se hace visible la imagen del check
            showToast("validacion correcta, con un porcentaje de: "+validacionCedulasvector[1]+"%");
             imgProgresIndicator.setImageResource(R.drawable.cheque);
@@ -304,7 +304,7 @@ public class MainActivity extends AppCompatActivity {
            imgProgresIndicator.clearColorFilter();
            imgProgresIndicator.setColorFilter(ContextCompat.getColor(this,
                     color_red));
-        }*/
+        }
 
         if (validacion) {
             showToast("Error al Leer el documento del Carnet de Vacunación del Covid-19\n Por Favor Tomar la foto Nuevamente.");
@@ -320,7 +320,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 progressIndicator.setVisibility(View.GONE);
-                imgProgresIndicator.setVisibility(View.VISIBLE);
+
             }
         }, 5000);
     }
@@ -461,6 +461,20 @@ public class MainActivity extends AppCompatActivity {
         if (datoscedula.equals(datoscedula)) {
             porcentajeValido = 100.0;
         } else {
+            if (ceduladividida.length >= datoComparar.length() - 1 && ceduladividida.length <= datoComparar.length() + 1) {
+                for (int j = 0; j < ceduladividida.length; j++) {
+                    try {
+                        if (ceduladividida[j].equals(ceduladividida[j])) {
+                            porcentajeValido = porcentajeValido + ((100 * 1.0) / datoComparar.length());
+                        }
+
+                    } catch (Exception e) {
+                        // showToast("El Error se encuentra en la posicion" + j + " " + cedulaCarnetdividida[j]);
+                    }
+                }
+            } else {
+                porcentajeValido = 0.0;
+            }
         /*    if (datosCarnet.length >= datoComparar.length() - 1 && ceduladividida.length <= datoComparar.length() + 1) {
                 for (int j = 0; j < ceduladividida.length; j++) {
                     try {
