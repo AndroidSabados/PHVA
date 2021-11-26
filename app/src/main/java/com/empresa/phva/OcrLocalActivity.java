@@ -38,7 +38,7 @@ import com.google.mlkit.vision.text.TextRecognizer;
 import com.google.mlkit.vision.text.latin.TextRecognizerOptions;
 
 
-public class MainActivity extends AppCompatActivity {
+public class OcrLocalActivity extends AppCompatActivity {
 
     private static final int RESULTS_TO_SHOW = 10;
     TextView textView, textCarnet, textCedula;
@@ -65,7 +65,7 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_local_ocr);
 
         mImageView = findViewById(R.id.image_view);
         mImageView2 = findViewById(R.id.image_view2);

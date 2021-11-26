@@ -7,7 +7,7 @@
     android:gravity="center_horizontal"
     android:orientation="vertical"
     android:weightSum="100"
-    tools:context=".MainActivity">
+    tools:context=".OcrLocalActivity">
 
 
     <com.google.android.material.textfield.TextInputLayout
