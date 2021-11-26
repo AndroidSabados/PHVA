@@ -199,10 +199,11 @@ public class MainActivity extends AppCompatActivity {
             viewPorcentajeCedula.setBackgroundResource(color_green);
         }
 
+        cargarBarraProgreso();
         if (!docCarnet.equals("") && !docCedula.equals("")) {
             comparacionDatos(docCarnet, docCedula);
         } else {
-            cargarBarraProgreso();
+
             if (docCarnet.isEmpty()) {
                 viewPorcentajeCarnet.setBackgroundResource(color_red);
                 showToast("Por favor tomar la foto del carnet");
@@ -265,12 +266,11 @@ public class MainActivity extends AppCompatActivity {
         }
 
         //Metodo para que nos muestre la barra de progreso por 5 segundos y desaparesca alterminar
-        cargarBarraProgreso();
 
+        cargarBarraProgresoComparacion();
         double totalPorcentajeCarnet = (porcentajesCarnet[0] + porcentajesCarnet[2]) / 2;
 
         if (resultadoMivacuna[0] == 1 || resultadoCedulaCarnet[0] == 1) {
-
             viewPorcentajeCarnet.setText(totalPorcentajeCarnet + "%");
             viewPorcentajeCarnet.setBackgroundResource(color_green);
             validacion = false;
@@ -280,7 +280,6 @@ public class MainActivity extends AppCompatActivity {
             validacion = true;
         }
 
-        imgProgresIndicator.setVisibility(View.VISIBLE);
         if (resultadoCedula[0] == 1) {
             cedulaComparacion =String.valueOf(datosCedulaVector[(int) resultadoCedula[1]]);
             viewPorcentajeCedula.setText(resultadoCedula[2] + "%");
@@ -312,6 +311,19 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
+    private void cargarBarraProgresoComparacion() {
+        final Handler handler = new Handler();
+        progressIndicator.setVisibility(View.VISIBLE);
+        imgProgresIndicator.setVisibility(View.GONE);
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                progressIndicator.setVisibility(View.GONE);
+                imgProgresIndicator.setVisibility(View.VISIBLE);
+            }
+        }, 5000);
+    }
+
     private void cargarBarraProgreso() {
         final Handler handler = new Handler();
         progressIndicator.setVisibility(View.VISIBLE);
@@ -320,9 +332,8 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void run() {
                 progressIndicator.setVisibility(View.GONE);
-
             }
-        }, 5000);
+        }, 2000);
     }
 
     public String[] ConvertirNumCarnet(String[] num) {
@@ -453,12 +464,12 @@ public class MainActivity extends AppCompatActivity {
         String[] cedulaCarnetdividida = datosCarnetVector.split("");
         String[] ceduladividida = datoscedula.split("");
 
-        for(int i=0; i< cedulaCarnetdividida.length ; i++ ){
-            showToast("prueba "+ cedulaCarnetdividida[i]);
-        }
+//        for(int i=0; i< cedulaCarnetdividida.length ; i++ ){
+//            showToast("prueba "+ cedulaCarnetdividida[i]);
+//        }
 
         //String[] datosCarnet = ConvertirNumCarnet(cedulaCarnetdividida);
-        if (datoscedula.equals(datoscedula)) {
+        if (datoscedula.equals(datoComparar)) {
             porcentajeValido = 100.0;
         } else {
             if (ceduladividida.length >= datoComparar.length() - 1 && ceduladividida.length <= datoComparar.length() + 1) {

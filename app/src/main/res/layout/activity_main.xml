@@ -232,9 +232,7 @@
             android:id="@+id/img_progres_indicator"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:visibility="gone"
-            android:src="@drawable/cheque"
-            app:tint="@color/color_green"/>
+            android:visibility="gone"/>
 <!--            android:src="@drawable/cheque"-->
 <!--            android:tintMode="src_in"-->
 <!--            app:tint="@color/color_green" -->
