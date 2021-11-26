@@ -21,7 +21,7 @@ public class AccesoModulos extends AppCompatActivity {
     }
 
     public void pOCR (View view) {
-        Intent ocr = new Intent(this, OCR.class);
+        Intent ocr = new Intent(this, OcrLocalActivity.class);
         startActivity(ocr);
     }
 
