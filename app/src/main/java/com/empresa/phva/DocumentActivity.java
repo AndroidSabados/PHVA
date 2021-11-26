@@ -20,7 +20,8 @@ public class DocumentActivity extends AppCompatActivity {
 
     private EditText etDescription, etURL, etTipoDoc, etEstado;
     private String strTipoDoc, strDescription, strURL, strEstado;
-
+    String[] items;
+    boolean[] checkedItems;
     private Button btnTipoDoc, btnEstado, btnCreate;
 
 
@@ -152,9 +153,31 @@ public class DocumentActivity extends AppCompatActivity {
     private void selectEstado() {
         Log.e("Log", "Entro a selectEstado");
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DocumentActivity.this);
+
+        SharedPreferences preferences=getSharedPreferences("guest",MODE_PRIVATE);
+        String rol=preferences.getString("rol","");
+
+
         alertDialog.setTitle("Seleccione el estado de documento: ");
-        String[] items = {"votacion", "en revision", "falta por votar", "aprobado", "publicado", "en proceso", "propuesta", "agendacion", "agendado" };
-        boolean[] checkedItems = {false, false, false, false, false, false,false, false, false };
+        String[]  itemsS = {"votacion", "en revision", "falta por votar", "aprobado", "publicado", "en proceso", "propuesta", "agendacion", "agendado" };
+        boolean[] checkedItemsS = {false, false, false, false, false, false,false, false, false };
+
+        String[] itemsE = { "en revision", "en proceso" };
+        boolean[] checkedItemsE = {false, false};
+
+        if (rol.equals("8")){
+
+            items=itemsE;
+            checkedItems=checkedItemsE;
+        }
+
+        if (rol.equals("1")){
+
+            items=itemsS;
+            checkedItems=checkedItemsS;
+        }
+
+
         alertDialog.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {

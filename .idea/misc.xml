@@ -5,10 +5,16 @@
       <map>
         <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_acceso_modulos.xml" value="0.36614583333333334" />
         <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_document.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_document_empleado.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_documentos.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_list_documents.xml" value="0.36666666666666664" />
         <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_listado_alertas.xml" value="0.36614583333333334" />
-        <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_main.xml" value="0.25" />
+        <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_main.xml" value="0.33" />
+        <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_novedades.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_ocr.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_registro.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/activity_web_view_documento.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/Santiago/Desktop/AppProyectos/AppSG-SST/PHVA/app/src/main/res/layout/rv_document_item.xml" value="0.36666666666666664" />
       </map>
     </option>
   </component>
