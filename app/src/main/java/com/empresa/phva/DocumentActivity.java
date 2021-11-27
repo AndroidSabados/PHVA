@@ -114,6 +114,10 @@ public class DocumentActivity extends AppCompatActivity {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(DocumentActivity.this);
         alertDialog.setTitle("Seleccione el tipo de documento: ");
         String[] items = {"Reglamentos", "Procedimientos", "Instructivos", "Formatos", "Registros", "Programas", "Planes", "Guías", "Manuales", "Políticas", "Lineamientos" };
+        String[] urlItems = {
+            "http://google.com",
+            "http://github.com"
+        };
         boolean[] checkedItems = {false, false, false, false, false, false, false, false, false, false, false};
         alertDialog.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
             @Override
@@ -130,6 +134,7 @@ public class DocumentActivity extends AppCompatActivity {
 
                     if (checkedItems[i]==true){
                         etTipoDoc.setText(items[i]);
+                        etURL.setText(urlItems[i]);
                         dialog.dismiss();
                     }
 

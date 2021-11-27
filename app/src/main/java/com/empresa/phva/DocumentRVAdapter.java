@@ -60,7 +60,7 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         // to our views of recycler view item.
         Document modal = documentArrayList.get(position);
         holder.tvDocumentType.setText(modal.getTipoDoc());
-        //holder.tvDocumentUrl.setText(modal.getUrl());
+        holder.tvDocumentUrl.setText(modal.getUrl());
         holder.tvDocumentDescription.setText(modal.getDescription());
         holder.tvDocumentStatus.setText(modal.getEstado());
 
@@ -77,10 +77,10 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         holder.btnURL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Presiono boton: "+position+" y la url es: "+ holder.tvDocumentUrl, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Presiono boton: "+position+" y la url es: "+ holder.tvDocumentUrl.getText(), Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(context, WebViewDocumentoActivity.class);
-                    intent.putExtra("url", "urlprobando");
+                    intent.putExtra("url", holder.tvDocumentUrl.getText());
                     context.startActivity(intent);
 
 
