@@ -50,6 +50,9 @@ public class AccesoModulos extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             Toast.makeText(this, "El valor scaneado es:" + result.getContents(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, WebViewDocumentoActivity.class);
+            intent.putExtra("url",result.getContents() );
+            startActivity(intent);
         } else {
             Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show();
             super.onActivityResult(requestCode, resultCode, data);
