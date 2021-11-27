@@ -65,9 +65,10 @@
         android:id="@+id/xSearchView"
         android:layout_width="374dp"
         android:layout_height="44dp"
-        android:contentDescription="@string/addNovedades"
         android:background="@drawable/new_style"
-        android:onClick="pCreateNovedades"
+        android:clickable="true"
+
+        android:contentDescription="@string/addNovedades"
         app:layout_constraintBottom_toTopOf="@+id/idRVCourses"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"

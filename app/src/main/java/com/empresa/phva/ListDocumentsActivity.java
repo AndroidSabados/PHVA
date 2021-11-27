@@ -68,6 +68,12 @@ public class ListDocumentsActivity extends AppCompatActivity implements SearchVi
         documentRV.setAdapter(documentRVAdapter);
 
         //buuscador del texto
+            searchView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                searchView.setIconified(false);
+            }
+        });
         searchView.setOnQueryTextListener(this);
 
     }
