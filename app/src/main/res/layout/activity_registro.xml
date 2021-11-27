@@ -60,6 +60,7 @@
 
             <EditText
                 android:id="@+id/editTextNombreUsuario"
+                android:paddingHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginStart="24dp"
@@ -76,6 +77,7 @@
 
             <EditText
                 android:id="@+id/editTextNombre"
+                android:paddingHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginStart="24dp"
@@ -93,6 +95,7 @@
 
             <EditText
                 android:id="@+id/editTextApellido"
+                android:paddingHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginStart="24dp"
@@ -109,6 +112,7 @@
 
             <EditText
                 android:id="@+id/editTextCedula"
+                android:paddingHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginStart="24dp"
@@ -118,13 +122,14 @@
                 android:background="@drawable/new_style"
                 android:ems="10"
                 android:hint="@string/registro_cédula"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextApellido" />
 
             <EditText
                 android:id="@+id/editTextTelefono"
+                android:paddingHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginStart="24dp"
@@ -134,13 +139,14 @@
                 android:background="@drawable/new_style"
                 android:ems="10"
                 android:hint="@string/registro_teléfono"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextCedula" />
 
             <EditText
                 android:id="@+id/editCelular"
+                android:paddingHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginStart="24dp"
@@ -150,7 +156,7 @@
                 android:background="@drawable/new_style"
                 android:ems="10"
                 android:hint="@string/registro_celular"
-                android:inputType="textPersonName"
+                android:inputType="number"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextTelefono" />
@@ -159,7 +165,7 @@
                 android:id="@+id/editDireccion"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-
+                android:paddingHorizontal="10dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
@@ -176,7 +182,7 @@
                 android:id="@+id/editContraseña"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
-
+                android:paddingHorizontal="10dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
@@ -190,6 +196,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/editDireccion" />
 
             <TextView
+                android:paddingHorizontal="10dp"
                 android:id="@+id/TxvSelectRole"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
