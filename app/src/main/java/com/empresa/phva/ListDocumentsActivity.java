@@ -78,6 +78,13 @@ public class ListDocumentsActivity extends AppCompatActivity implements SearchVi
 
     }
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(this,AccesoModulos.class);
+        startActivity(intent);
+    }
+
     public void pCreateNovedades (View view) {
         Intent createNovedades = new Intent(this, DocumentActivity.class);
         startActivity(createNovedades);
