@@ -26,8 +26,7 @@
         app:endIconMode="custom"
         app:endIconTint="@color/color_green"
         app:startIconDrawable="@drawable/tarjetaid"
-
-        app:startIconTint="@color/primary">
+        app:startIconTint="#205ECF">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/input_validacion_cedula"
