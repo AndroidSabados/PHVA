@@ -15,7 +15,6 @@ import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
-    Switch swi;
     SharedPreferences preferences;
     SharedPreferences.Editor editor;
     EditText user,password;
@@ -28,8 +27,6 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         inicioUsuario();
-        swi= (Switch) findViewById(R.id.tema);
-        ClaroOscuro();
 
         /*user=(TextView) findViewById(R.id.txtUser);
         password=(TextView) findViewById(R.id.txtPassword);*/
@@ -49,7 +46,7 @@ public class MainActivity extends AppCompatActivity {
         login();
     }
 
-    public void ClaroOscuro(){
+  /*  public void ClaroOscuro(){
         SharedPreferences sp = getSharedPreferences("SP", this.MODE_PRIVATE);
         int theme = sp.getInt("Theme",1);
         if (theme==0){
@@ -62,22 +59,11 @@ public class MainActivity extends AppCompatActivity {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO);
             swi.setChecked(false);
         }
-    }
+    }*/
 
-    public void onClick(View view){
-        SharedPreferences sp = getSharedPreferences("SP", this.MODE_PRIVATE);
-        SharedPreferences.Editor editor = sp.edit();
 
-        if (view.getId()==R.id.tema){
-            if (swi.isChecked()){
-                editor.putInt("Theme",0);
-            } else{
-                editor.putInt("Theme",1);
-            }
-            editor.commit();
-            ClaroOscuro();
-        }
-    }
+            //ClaroOscuro();
+
 
     public void inicioUsuario(){
         preferences=getSharedPreferences("usuarios",MODE_PRIVATE);
@@ -117,6 +103,9 @@ public class MainActivity extends AppCompatActivity {
             startActivity(intent);
 
         }
+        else {
+            Toast.makeText(MainActivity.this, "Usuario o clave incorrecta", Toast.LENGTH_SHORT).show();
+        }
 
         if (user2.equals(user.getText().toString())&&pass.equals(password.getText().toString())){
             //Toast.makeText(MainActivity.this, "empleado", Toast.LENGTH_SHORT).show();
@@ -130,6 +119,9 @@ public class MainActivity extends AppCompatActivity {
 
             Intent intent=new Intent(this,AccesoModulos.class);
             startActivity(intent);
+        }
+        else {
+            Toast.makeText(MainActivity.this, "Usuario o clave incorrecta", Toast.LENGTH_SHORT).show();
         }
 
         //Toast.makeText(MainActivity.this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();

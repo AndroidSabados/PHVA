@@ -4,8 +4,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-
-    android:background="#F1F0EF"
     tools:context=".ListDocumentsActivity">
 
     <ImageView
@@ -65,10 +63,8 @@
         android:id="@+id/xSearchView"
         android:layout_width="374dp"
         android:layout_height="44dp"
-        android:background="@drawable/new_style"
-        android:clickable="true"
-
         android:contentDescription="@string/addNovedades"
+        android:onClick="pCreateNovedades"
         app:layout_constraintBottom_toTopOf="@+id/idRVCourses"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.486"
