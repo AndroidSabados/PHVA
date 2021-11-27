@@ -104,28 +104,26 @@ public class MainActivity extends AppCompatActivity {
 
         }
         else {
-            Toast.makeText(MainActivity.this, "Usuario o clave incorrecta", Toast.LENGTH_SHORT).show();
+
+
+            if (user2.equals(user.getText().toString()) && pass.equals(password.getText().toString())) {
+                //Toast.makeText(MainActivity.this, "empleado", Toast.LENGTH_SHORT).show();
+                preferences = getSharedPreferences("guest", MODE_PRIVATE);
+                editor = preferences.edit();
+
+                editor.putString("Name", "empleado");
+                editor.putString("Pass", "123456789");
+                editor.putString("rol", "8");
+                editor.commit();
+
+                Intent intent = new Intent(this, AccesoModulos.class);
+                startActivity(intent);
+            } else {
+                Toast.makeText(MainActivity.this, "Usuario o clave incorrecta.", Toast.LENGTH_SHORT).show();
+            }
+
+            //Toast.makeText(MainActivity.this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();
         }
-
-        if (user2.equals(user.getText().toString())&&pass.equals(password.getText().toString())){
-            //Toast.makeText(MainActivity.this, "empleado", Toast.LENGTH_SHORT).show();
-            preferences = getSharedPreferences("guest", MODE_PRIVATE);
-            editor = preferences.edit();
-
-            editor.putString("Name","empleado");
-            editor.putString("Pass","123456789");
-            editor.putString("rol","8");
-            editor.commit();
-
-            Intent intent=new Intent(this,AccesoModulos.class);
-            startActivity(intent);
-        }
-        else {
-            Toast.makeText(MainActivity.this, "Usuario o clave incorrecta", Toast.LENGTH_SHORT).show();
-        }
-
-        //Toast.makeText(MainActivity.this, "Usuario o contraseña incorrecta", Toast.LENGTH_SHORT).show();
-
     }
 }
 
