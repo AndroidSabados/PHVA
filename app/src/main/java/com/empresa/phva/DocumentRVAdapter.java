@@ -65,9 +65,9 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         holder.tvDocumentStatus.setText(modal.getEstado());
 
 
-        Log.e("ErrorFG", "onBindViewHolder: " + holder.tvDocumentType.getText().toString() );
+        //Log.e("ErrorFG", "onBindViewHolder: " + holder.tvDocumentType.getText().toString() );
 
-        if (holder.tvDocumentType.getText().toString().equals("Tipo1")  ){
+        if (holder.tvDocumentStatus.getText().toString().equals("en proceso")  ){
             holder.lyPpal.setBackgroundColor(Color.GREEN);
         }else{
             holder.lyPpal.setBackgroundColor(Color.RED);
