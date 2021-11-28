@@ -1,12 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+    <androidx.cardview.widget.CardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:layout_width="match_parent"
-    android:background="@color/fondo_darck"
-    android:layout_height="match_parent">
-
-    <androidx.cardview.widget.CardView
+    android:id="@+id/card_view_rv"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="20dp"
@@ -39,7 +35,7 @@
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text="Document Status"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
 
                 <!--text view for our course duration-->
@@ -50,7 +46,7 @@
                     android:layout_weight="1"
                     android:padding="3dp"
                     android:text="Type"
-                    android:textColor="@color/black" />
+                    android:textColor="@color/white" />
 
             </LinearLayout>
 
@@ -62,25 +58,29 @@
                 android:layout_weight="1"
                 android:padding="3dp"
                 android:text="Description"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
             <TextView
                 android:id="@+id/tvDocumentUrl"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:padding="3dp"
                 android:text="Document URL"
-                android:textColor="@color/black" />
+                android:textColor="@color/white" />
 
             <Button
                 android:id="@+id/btnURL"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
+                android:layout_height="35dp"
+                android:layout_marginTop="10dp"
+                android:background="@drawable/new_button"
+                android:drawableStart="@drawable/ic_eye_24"
+                android:drawablePadding="10dp"
+                android:drawableTint="@color/white"
+                android:elevation="5dp"
+                android:paddingHorizontal="10dp"
                 android:text="Ver Documento"
-                app:icon="@drawable/ic_eye_24"
-                app:cornerRadius="10dp"
-                style="@style/Widget.MaterialComponents.Button.Icon"
-                android:elevation="5dp" />
+                android:textColor="@color/white"
+                app:cornerRadius="10dp" />
         </LinearLayout>
 
     </androidx.cardview.widget.CardView>
-</LinearLayout>

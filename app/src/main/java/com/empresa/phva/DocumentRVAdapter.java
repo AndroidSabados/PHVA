@@ -1,5 +1,7 @@
 package com.empresa.phva;
 
+import static com.empresa.phva.R.color.color_red;
+
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
@@ -14,6 +16,8 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.cardview.widget.CardView;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.empresa.phva.db.Document;
@@ -68,9 +72,9 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         //Log.e("ErrorFG", "onBindViewHolder: " + holder.tvDocumentType.getText().toString() );
 
         if (holder.tvDocumentStatus.getText().toString().equals("aprobado")  ){
-            holder.lyPpal.setBackgroundColor(Color.GREEN);
+             holder.cardViewRv.setCardBackgroundColor(ContextCompat.getColor(holder.cardViewRv.getContext(), R.color.color_green_card_view));
         }else{
-            holder.lyPpal.setBackgroundColor(Color.GRAY);
+         //    holder.cardViewRv.setCardBackgroundColor(ContextCompat.getColor(holder.cardViewRv.getContext(), R.color.white));
         }
 
 
@@ -111,7 +115,7 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         public TextView tvDocumentType, tvDocumentUrl, tvDocumentDescription, tvDocumentStatus;
         public LinearLayout lyPpal;
         public Button btnURL;
-
+        public CardView cardViewRv;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -120,19 +124,11 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
             tvDocumentUrl = itemView.findViewById(R.id.tvDocumentUrl);
             tvDocumentDescription = itemView.findViewById(R.id.tvDocumentDescription);
             tvDocumentStatus = itemView.findViewById(R.id.tvDocumentStatus);
-
             btnURL = itemView.findViewById(R.id.btnURL);
 
-
             lyPpal = itemView.findViewById(R.id.lyPpal);
-
-
+            cardViewRv= itemView.findViewById(R.id.card_view_rv);
         }
-
-
-
-
-
     }
 
     public void filtrado (String txtBuscar){

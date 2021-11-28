@@ -24,7 +24,7 @@
         <entry key="app/src/main/res/layout-night/activity_local_ocr.xml" value="0.2630208333333333" />
         <entry key="app/src/main/res/layout-night/activity_main.xml" value="0.2630208333333333" />
         <entry key="app/src/main/res/layout-night/rv_document_item.xml" value="0.2630208333333333" />
-        <entry key="app/src/main/res/layout/activity_acceso_modulos.xml" value="0.2" />
+        <entry key="app/src/main/res/layout/activity_acceso_modulos.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_document.xml" value="0.2630208333333333" />
         <entry key="app/src/main/res/layout/activity_documentos.xml" value="0.25" />
         <entry key="app/src/main/res/layout/activity_lector_ocr.xml" value="0.1" />
@@ -36,7 +36,7 @@
         <entry key="app/src/main/res/layout/activity_ocr.xml" value="0.2630208333333333" />
         <entry key="app/src/main/res/layout/activity_registro.xml" value="0.33" />
         <entry key="app/src/main/res/layout/activity_web_view_documento.xml" value="0.2630208333333333" />
-        <entry key="app/src/main/res/layout/rv_document_item.xml" value="0.33751425313568983" />
+        <entry key="app/src/main/res/layout/rv_document_item.xml" value="0.5" />
         <entry key="app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml" value="0.15104166666666666" />
       </map>
     </option>
