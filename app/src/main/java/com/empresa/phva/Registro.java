@@ -10,9 +10,22 @@ import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
+import android.widget.EditText;
 import android.widget.TextView;
 
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.firestore.FirebaseFirestore;
+
 public class Registro extends AppCompatActivity {
+
+    private String userId;
+    private FirebaseAuth mAuth;
+    private FirebaseFirestore db;
+
+    private EditText editTextNombreUsuario, editContraseña,editTextNombre, editTextApellido, editTextCedula, editTextTelefono, editCelular, editDireccion;
+    private CheckBox checkBox;
+    private Button btnfinalizar;
     TextView txvRol;
 
     @Override
@@ -20,11 +33,35 @@ public class Registro extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
+        mAuth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+
+        editTextNombreUsuario = findViewById(R.id.editTextNombreUsuario);
+        editContraseña = findViewById(R.id.editContraseña);
+        editTextNombre = findViewById(R.id.editTextNombre);
+        editTextApellido = findViewById(R.id.editTextApellido);
+        editTextCedula = findViewById(R.id.editTextCedula);
+        editTextTelefono = findViewById(R.id.editTextTelefono);
+        editCelular = findViewById(R.id.editCelular);
+        editDireccion = findViewById(R.id.editDireccion);
+        checkBox = findViewById(R.id.checkBox);
+        btnfinalizar = findViewById(R.id.finalizar);
+
         txvRol = (TextView) findViewById(R.id.TxvSelectRole);
         txvRol.setOnClickListener(v -> showAlertDialog());
 
-
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.select_roles, android.R.layout.simple_spinner_item);
+    }
+
+    public void createUser(){
+        String nameUser = editTextNombreUsuario.getText().toString();
+        String password = editContraseña.getText().toString();
+        String name = editTextNombre.getText().toString();
+        String apellido = editTextApellido.getText().toString();
+        String cedula = editTextCedula.getText().toString();
+        String telefono = editTextTelefono.getText().toString();
+        String celular = editCelular.getText().toString();
+        String direccion = editDireccion.getText().toString();
     }
 
     public void modulos (View view){

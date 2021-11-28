@@ -53,8 +53,6 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         // file for our recycler view items.
         view = LayoutInflater.from(parent.getContext()).inflate(R.layout.rv_document_item, parent, false);
 
-
-
         return new ViewHolder(view);
     }
 
@@ -66,12 +64,12 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         holder.tvDocumentType.setText(modal.getTipoDoc());
         holder.tvDocumentUrl.setText(modal.getUrl());
         holder.tvDocumentDescription.setText(modal.getDescription());
-        holder.tvDocumentStatus.setText(modal.getEstado());
+        holder.tvDocumentStatus.setText(modal.getEstado().toUpperCase());
 
 
         //Log.e("ErrorFG", "onBindViewHolder: " + holder.tvDocumentType.getText().toString() );
 
-        if (holder.tvDocumentStatus.getText().toString().equals("aprobado")  ){
+        if (holder.tvDocumentStatus.getText().toString().equals("aprobado") || holder.tvDocumentStatus.getText().toString().equals("APROBADO")   ){
              holder.cardViewRv.setCardBackgroundColor(ContextCompat.getColor(holder.cardViewRv.getContext(), R.color.color_green_card_view));
         }else{
          //    holder.cardViewRv.setCardBackgroundColor(ContextCompat.getColor(holder.cardViewRv.getContext(), R.color.white));
@@ -86,10 +84,6 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
                     Intent intent = new Intent(context, WebViewDocumentoActivity.class);
                     intent.putExtra("url", holder.tvDocumentUrl.getText());
                     context.startActivity(intent);
-
-
-
-
             }
         });
 

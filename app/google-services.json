@@ -1,33 +1,41 @@
 {
   "project_info": {
-    "project_number": "104543178912",
-    "project_id": "reconocer-8daa2",
-    "storage_bucket": "reconocer-8daa2.appspot.com"
+    "project_number": "859331649698",
+    "project_id": "mas-vida-sg-sst",
+    "storage_bucket": "mas-vida-sg-sst.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:104543178912:android:d24c0185e9f9f321ba39c5",
+        "mobilesdk_app_id": "1:859331649698:android:3aaf43b09a87be522737fb",
         "android_client_info": {
           "package_name": "com.empresa.phva"
         }
       },
       "oauth_client": [
         {
-          "client_id": "104543178912-2p3svebhescds20umqejpuv5pevkpibs.apps.googleusercontent.com",
+          "client_id": "859331649698-du6jfsgcebe6bruh2245ei5bpr9npg29.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.empresa.phva",
+            "certificate_hash": "3f387d7ed1153e611e2fda8b1b32d4f691d5d4a0"
+          }
+        },
+        {
+          "client_id": "859331649698-jokf1ag78nbclkriov5eoop16ef87cvu.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyAfR6O34rAdorfTGsFG6P18nQaTBMNQN4I"
+          "current_key": "AIzaSyA-BLS8EG9ItZRLHWB8kD_90q_7JnUV-8k"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "104543178912-2p3svebhescds20umqejpuv5pevkpibs.apps.googleusercontent.com",
+              "client_id": "859331649698-jokf1ag78nbclkriov5eoop16ef87cvu.apps.googleusercontent.com",
               "client_type": 3
             }
           ]
