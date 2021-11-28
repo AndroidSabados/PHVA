@@ -6,6 +6,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -41,6 +42,19 @@ public class Registro extends AppCompatActivity {
             public void onClick(DialogInterface dialog, int which, boolean isChecked) {
                 SharedPreferences preferences = getSharedPreferences("which", MODE_PRIVATE);
                 SharedPreferences.Editor editor = preferences.edit();
+
+                for (int i=0; i < items.length; i++ ) {
+
+                    Log.e("LOG", "booleano : " + checkedItems[i]);
+                    Log.e("LOG", "nombre Item: " + items[i]);
+
+                    if (checkedItems[i]==true){
+                        txvRol.setText(items[i]);
+                        dialog.dismiss();
+                    }
+
+                }
+
                 editor.putBoolean("ischeck", isChecked);
                 editor.putInt("case", which);
                 editor.commit();
