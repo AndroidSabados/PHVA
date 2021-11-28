@@ -471,7 +471,6 @@ public class OcrLocalActivity extends AppCompatActivity {
 //        for(int i=0; i< cedulaCarnetdividida.length ; i++ ){
 //            showToast("prueba "+ cedulaCarnetdividida[i]);
 //        }
-
         //String[] datosCarnet = ConvertirNumCarnet(cedulaCarnetdividida);
         if (datoscedula.equals(datoComparar)) {
             porcentajeValido = 100.0;

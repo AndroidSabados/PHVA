@@ -8,6 +8,7 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
@@ -18,6 +19,13 @@ public class AccesoModulos extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceso_modulos);
 
+    }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        Intent intent=new Intent(this,MainActivity.class);
+        startActivity(intent);
     }
 
     public void pOCR (View view) {
@@ -50,6 +58,9 @@ public class AccesoModulos extends AppCompatActivity {
         IntentResult result = IntentIntegrator.parseActivityResult(requestCode, resultCode, data);
         if (result != null) {
             Toast.makeText(this, "El valor scaneado es:" + result.getContents(), Toast.LENGTH_SHORT).show();
+            Intent intent = new Intent(this, WebViewDocumentoActivity.class);
+            intent.putExtra("url",result.getContents() );
+            startActivity(intent);
         } else {
             Toast.makeText(this, "Cancelado", Toast.LENGTH_SHORT).show();
             super.onActivityResult(requestCode, resultCode, data);

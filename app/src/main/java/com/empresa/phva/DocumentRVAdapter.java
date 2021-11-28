@@ -60,27 +60,27 @@ public class DocumentRVAdapter extends RecyclerView.Adapter<DocumentRVAdapter.Vi
         // to our views of recycler view item.
         Document modal = documentArrayList.get(position);
         holder.tvDocumentType.setText(modal.getTipoDoc());
-        //holder.tvDocumentUrl.setText(modal.getUrl());
+        holder.tvDocumentUrl.setText(modal.getUrl());
         holder.tvDocumentDescription.setText(modal.getDescription());
         holder.tvDocumentStatus.setText(modal.getEstado());
 
 
-        Log.e("ErrorFG", "onBindViewHolder: " + holder.tvDocumentType.getText().toString() );
+        //Log.e("ErrorFG", "onBindViewHolder: " + holder.tvDocumentType.getText().toString() );
 
-        if (holder.tvDocumentType.getText().toString().equals("Tipo1")  ){
+        if (holder.tvDocumentStatus.getText().toString().equals("aprobado")  ){
             holder.lyPpal.setBackgroundColor(Color.GREEN);
         }else{
-            holder.lyPpal.setBackgroundColor(Color.RED);
+            holder.lyPpal.setBackgroundColor(Color.GRAY);
         }
 
 
         holder.btnURL.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(context, "Presiono boton: "+position+" y la url es: "+ holder.tvDocumentUrl, Toast.LENGTH_SHORT).show();
+                Toast.makeText(context, "Presiono boton: "+position+" y la url es: "+ holder.tvDocumentUrl.getText(), Toast.LENGTH_SHORT).show();
 
                     Intent intent = new Intent(context, WebViewDocumentoActivity.class);
-                    intent.putExtra("url", "urlprobando");
+                    intent.putExtra("url", holder.tvDocumentUrl.getText());
                     context.startActivity(intent);
 
 
