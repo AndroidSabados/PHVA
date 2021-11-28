@@ -4,52 +4,46 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/fondo_darck"
     tools:context=".Registro">
+
 
     <ImageView
         android:id="@+id/imageView3"
-        android:layout_width="410dp"
-        android:layout_height="95dp"
-        android:layout_marginBottom="436dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_width="450dp"
+        android:layout_height="269dp"
+        android:layout_marginTop="-140dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/encabezado3" />
+        app:srcCompat="@drawable/medio_circulo" />
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/rNovedades"
         android:layout_gravity="center_horizontal"
+        android:text="@string/rNovedades"
         android:textColor="@color/white"
         android:textSize="20dp"
         app:layout_constraintBottom_toBottomOf="@+id/imageView3"
         app:layout_constraintEnd_toEndOf="@+id/imageView3"
         app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3" />
+        app:layout_constraintTop_toTopOf="@+id/imageView3"
+        app:layout_constraintVertical_bias="0.70" />
 
-
-    <!--
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="800dp"
-            app:layout_constraintTop_toBottomOf="@+id/textView">
-    -->
     <ScrollView
-        android:layout_width="409dp"
+        android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:paddingTop="70dp"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView">
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:orientation="vertical">
 
             <TextView
@@ -58,52 +52,44 @@
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="65dp"
+                android:layout_marginTop="80dp"
                 android:layout_marginEnd="24dp"
                 android:text="Novedades"
                 android:textSize="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView" />
-
+                android:textColor="@color/primary"/>
 
             <Button
                 android:id="@+id/btnTipodoc"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="40dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/new_style"
+                android:hint="Seleccione tipo de Documento"
                 android:textColor="@color/gray"
-                android:textColorHint="@color/gray_light"
-                android:hint="Seleccione tipo de Documento" />
-
+                android:textColorHint="@color/gray_light"/>
 
             <EditText
                 android:id="@+id/etTipodoc"
-                android:paddingHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/new_style"
-                android:textColor="@color/gray"
-                android:textColorHint="@color/gray_light"
                 android:clickable="true"
                 android:contextClickable="true"
                 android:enabled="false"
                 android:focusable="false"
                 android:hint="@string/hintTipoDoc"
                 android:linksClickable="true"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent" />
-
+                android:paddingHorizontal="10dp"
+                android:textColor="@color/gray"
+                android:textColorHint="@color/gray_light"/>
 
             <EditText
                 android:id="@+id/editTextDescripcion"
-                android:paddingHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="100dp"
                 android:layout_marginStart="24dp"
@@ -111,8 +97,6 @@
                 android:layout_marginEnd="24dp"
                 android:layout_weight="9"
                 android:background="@drawable/new_style"
-                android:textColor="@color/gray"
-                android:textColorHint="@color/gray_light"
                 android:ems="10"
                 android:gravity="top|start"
                 android:hint="@string/Description"
@@ -120,39 +104,42 @@
                 android:lines="8"
                 android:maxLines="5"
                 android:minLines="2"
+                android:paddingHorizontal="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
-
+                android:textColor="@color/gray"
+                android:textColorHint="@color/gray_light"
                 app:layout_constraintTop_toBottomOf="@+id/editTextNombreUsuario" />
 
             <EditText
                 android:id="@+id/editTextURL"
-                android:paddingHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="@color/gray"
-                android:textColorHint="@color/gray_light"
                 android:layout_marginStart="24dp"
+
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:layout_weight="9"
                 android:background="@drawable/new_style"
-
                 android:ems="10"
+
                 android:enabled="false"
                 android:gravity="top|start"
                 android:hint="URL"
                 android:inputType="textMultiLine"
                 android:lines="8"
                 android:maxLines="2"
-
                 android:minLines="1"
+
+                android:paddingHorizontal="10dp"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintHorizontal_bias="0.0"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editTextNombreUsuario"
-                tools:visibility="visible" />
+                tools:visibility="visible"
+                android:textColor="@color/gray"
+                android:textColorHint="@color/gray_light"/>
 
             <Button
                 android:id="@+id/btnEstado"
@@ -163,44 +150,42 @@
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/new_style"
-                android:textColor="@color/gray"
-                android:textColorHint="@color/gray_light"
                 android:hint="Seleccione estado del Documento"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"></Button>
+                app:layout_constraintStart_toStartOf="parent"
+
+                android:textColor="@color/gray"
+                android:textColorHint="@color/gray_light"></Button>
 
             <EditText
                 android:id="@+id/etEstado"
-                android:paddingHorizontal="10dp"
                 android:layout_width="match_parent"
                 android:layout_height="35dp"
                 android:layout_marginStart="24dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/new_style"
-                android:textColor="@color/gray"
-                android:textColorHint="@color/gray_light"
                 android:clickable="true"
                 android:enabled="false"
-                android:hint="Estado del Documento"></EditText>
+                android:hint="Estado del Documento"
+                android:paddingHorizontal="10dp"
 
+                android:textColor="@color/gray"
+                android:textColorHint="@color/gray_light"></EditText>
 
             <Button
                 android:id="@+id/btnCrearNovedad"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="50dp"
                 android:layout_marginEnd="24dp"
                 android:background="@drawable/new_button"
                 android:onClick="modulos"
                 android:text="@string/novedad_crear"
-                android:textColor="@color/white"
                 android:textSize="15dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView3" />
+                android:textColor="@color/gray"
+                android:textColorHint="@color/gray_light"/>
 
         </LinearLayout>
 
