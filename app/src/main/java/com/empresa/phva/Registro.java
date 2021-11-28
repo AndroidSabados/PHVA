@@ -28,7 +28,7 @@ public class Registro extends AppCompatActivity {
     }
 
     public void modulos (View view){
-        Intent modulos = new Intent(this, AccesoModulos.class);
+        Intent modulos = new Intent(this, MainActivity.class);
         startActivity(modulos);
     }
 
