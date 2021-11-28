@@ -128,15 +128,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="359dp"
-        android:layout_height="93dp"
+        android:layout_width="353dp"
+        android:layout_height="59dp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.284"
-        app:srcCompat="@drawable/logo_primario" />
+        app:srcCompat="@drawable/sgss" />
 
 
 

@@ -35,38 +35,6 @@
         app:layout_constraintStart_toStartOf="@+id/imageView3"
         app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
-    <Button
-        android:id="@+id/imageButton5"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="104dp"
-        android:background="@drawable/new_button"
-        android:drawableStart="@drawable/file"
-        android:onClick="pNovedades"
-        android:padding="8dp"
-        android:scaleType="fitStart"
-        android:text="Documentos"
-        android:textColor="@color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-
-    <Button
-        android:id="@+id/imageButton4"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="104dp"
-        android:background="@drawable/new_button"
-        android:drawableStart="@drawable/mas"
-        android:onClick="pDocumentos"
-        android:textColor="@color/white"
-        android:padding="8dp"
-        android:scaleType="fitStart"
-        android:text="Ver web"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
 
     <!--<TextView
         android:id="@+id/textView3"
@@ -76,13 +44,29 @@
         android:layout_marginStart="40dp"
         tools:ignore="MissingConstraints" />-->
 
+    <Button
+        android:id="@+id/imageButton5"
+        android:layout_width="150dp"
+        android:layout_height="50dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="192dp"
+        android:background="@drawable/new_button"
+        android:drawableStart="@drawable/file"
+        android:onClick="pNovedades"
+        android:padding="8dp"
+        android:scaleType="fitStart"
+        android:text="Documentos"
+        android:textColor="@color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <TextView
         android:id="@+id/textView4"
-        android:layout_marginTop="20dp"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_gravity="right"
         android:layout_marginStart="40dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="40dp"
         android:text="@string/empleado"
         android:textSize="18dp"
@@ -90,38 +74,38 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView3" />
 
+
     <Button
         android:id="@+id/imageButton2"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="40dp"
         android:background="@drawable/new_button"
-        android:textColor="@color/white"
         android:drawableStart="@drawable/codigo_qr"
+        android:onClick="pQR"
         android:padding="8dp"
         android:scaleType="fitStart"
         android:text="Código QR"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="pQR"/>
-
+        app:layout_constraintEnd_toEndOf="parent" />
 
     <Button
         android:id="@+id/imageButton3"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="116dp"
         android:background="@drawable/new_button"
         android:drawableStart="@drawable/ocr"
         android:onClick="pOCR"
         android:padding="15dp"
         android:scaleType="fitStart"
-        android:textColor="@color/white"
         android:text="OCR"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

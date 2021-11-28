@@ -507,7 +507,7 @@ public class OcrLocalActivity extends AppCompatActivity {
 
         double[] resultado = new double[2];
 
-        showToast("Porcentaje octenido :" + porcentajeValido);
+        showToast("Porcentaje obtenido :" + porcentajeValido);
         if (porcentajeValido >= 80) {
             resultado[0] = 1;
             resultado[1] = porcentajeValido;

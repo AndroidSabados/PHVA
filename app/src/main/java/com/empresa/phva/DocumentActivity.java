@@ -175,10 +175,10 @@ public class DocumentActivity extends AppCompatActivity {
 
 
         alertDialog.setTitle("Seleccione el estado de documento: ");
-        String[]  itemsS = {"votacion", "en revision", "falta por votar", "aprobado", "publicado", "en proceso", "propuesta", "agendacion", "agendado" };
+        String[]  itemsS = {"Votación", "En revisión", "Falta por votar", "Aprobado", "publicado", "En proceso", "Propuesta", "Agendación", "Agendado" };
         boolean[] checkedItemsS = {false, false, false, false, false, false,false, false, false };
 
-        String[] itemsE = { "en revision", "en proceso" };
+        String[] itemsE = { "En revisión", "En proceso" };
         boolean[] checkedItemsE = {false, false};
 
         if (rol.equals("8")){
