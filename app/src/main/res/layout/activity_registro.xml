@@ -189,15 +189,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/editDireccion" />
 
-            <Button
-                android:id="@+id/btnSelectRole"
+            <TextView
+                android:id="@+id/TxvSelectRole"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
                 android:layout_marginStart="24dp"
+                android:layout_marginTop="8dp"
                 android:layout_marginEnd="24dp"
-                android:text="seleccionar rol"
-                android:background="@drawable/new_style"></Button>
+                android:background="@drawable/new_style"
+                android:text="Seleccionar rol"
+                android:textSize="20sp"></TextView>
 
             <CheckBox
                 android:id="@+id/checkBox"

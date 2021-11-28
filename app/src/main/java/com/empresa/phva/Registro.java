@@ -9,17 +9,18 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.TextView;
 
 public class Registro extends AppCompatActivity {
-    Button btnSelectRole;
+    TextView txvRol;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registro);
 
-        btnSelectRole = (Button) findViewById(R.id.btnSelectRole);
-        btnSelectRole.setOnClickListener(v -> showAlertDialog());
+        txvRol = (TextView) findViewById(R.id.TxvSelectRole);
+        txvRol.setOnClickListener(v -> showAlertDialog());
 
 
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this, R.array.select_roles, android.R.layout.simple_spinner_item);
