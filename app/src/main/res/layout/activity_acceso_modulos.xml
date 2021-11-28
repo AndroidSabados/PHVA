@@ -69,22 +69,6 @@
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <Button
-        android:id="@+id/imageButton4"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="104dp"
-        android:background="@drawable/new_button"
-        android:drawableStart="@drawable/mas"
-        android:onClick="pDocumentos"
-        android:textColor="@color/white"
-        android:padding="8dp"
-        android:scaleType="fitStart"
-        android:text="Ver web"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
-
     <!--<TextView
         android:id="@+id/textView3"
         android:layout_width="match_parent"
@@ -107,38 +91,40 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/imageView12" />
 
+
     <Button
         android:id="@+id/imageButton2"
         android:layout_width="150dp"
         android:layout_height="50dp"
+        android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="24dp"
         android:background="@drawable/new_button"
-        android:textColor="@color/white"
         android:drawableStart="@drawable/codigo_qr"
+        android:onClick="pQR"
         android:padding="8dp"
         android:scaleType="fitStart"
         android:text="Código QR"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        android:onClick="pQR"/>
-
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/imageButton3"
         android:layout_width="150dp"
         android:layout_height="50dp"
-        android:layout_marginStart="32dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginEnd="32dp"
+        android:layout_marginBottom="100dp"
         android:background="@drawable/new_button"
         android:drawableStart="@drawable/ocr"
         android:onClick="pOCR"
         android:padding="15dp"
         android:scaleType="fitStart"
-        android:textColor="@color/white"
         android:text="OCR"
+        android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
