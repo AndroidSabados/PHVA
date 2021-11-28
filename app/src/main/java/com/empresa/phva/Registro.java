@@ -32,7 +32,7 @@ public class Registro extends AppCompatActivity {
 
     private void showAlertDialog() {
         AlertDialog.Builder alertDialog = new AlertDialog.Builder(Registro.this);
-        alertDialog.setTitle("Seleccione su perfil");
+        alertDialog.setTitle("Seleccione su perfil.");
         String[] items = {"Administrador", "Empleado", "Supervisor", "Presidente COCOLA", "Presidente BE", "Presidente COPASST"};
         boolean[] checkedItems = {false, false, false, false, false, false};
         alertDialog.setMultiChoiceItems(items, checkedItems, new DialogInterface.OnMultiChoiceClickListener() {
