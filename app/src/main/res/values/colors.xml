@@ -9,8 +9,9 @@
     <color name="white">#FFFFFFFF</color>
 
     <color name="primary">#4889FB</color>
-    <color name="primarydarck">#06378F</color>
-    <color name="fondo_darck">#07091F</color>
+    <color name="primarydarck">#4D4889FB</color>
+    <color name="fondo_darck2">#07091F</color>
+    <color name="fondo_darck">#050612</color>
 
     <color name="secundari">#EA804F</color>
     <color name="secundaridarck">#EF550E</color>

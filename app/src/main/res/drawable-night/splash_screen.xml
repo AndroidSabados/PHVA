@@ -5,6 +5,7 @@
     <item
         android:gravity="center"
         android:width="370dp"
+        android:height="60dp"
         android:drawable="@drawable/ic_logoscren">
 
     </item>

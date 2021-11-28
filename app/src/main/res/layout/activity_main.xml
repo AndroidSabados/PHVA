@@ -114,36 +114,13 @@
 
     <ImageView
         android:id="@+id/imageView12"
-        android:layout_width="427dp"
+        android:layout_width="450dp"
         android:layout_height="269dp"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="-60dp"
-        android:visibility="visible"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.466"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/encabezado3"
-        tools:visibility="visible" />
-
-    <ImageView
-        android:id="@+id/imageView"
-        android:layout_width="359dp"
-        android:layout_height="93dp"
-        android:visibility="visible"
-        app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
+        android:layout_marginTop="-120dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.284"
-        app:srcCompat="@drawable/logo_primario" />
-
-
-
-
-
-
-
+        app:srcCompat="@drawable/titulo_medio_circulo" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

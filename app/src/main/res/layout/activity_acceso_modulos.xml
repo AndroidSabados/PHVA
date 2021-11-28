@@ -7,36 +7,17 @@
     android:background="#F1F0EF"
     tools:context=".AccesoModulos">
 
+
     <ImageView
         android:id="@+id/imageView12"
-        android:layout_width="402dp"
-        android:layout_height="316dp"
-        android:layout_marginStart="-1dp"
-        android:layout_marginTop="-200dp"
-        android:visibility="visible"
+        android:layout_width="450dp"
+        android:layout_height="269dp"
+        android:layout_marginTop="-120dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/encabezado3"
-        tools:context=".AccesoModulos"
-        tools:visibility="visible" />
+        app:srcCompat="@drawable/medio_circulo" />
 
-
-    <ImageView
-        android:id="@+id/imageView3"
-        android:layout_width="476dp"
-        android:layout_height="93dp"
-        android:layout_marginStart="-4dp"
-        android:layout_marginTop="-1dp"
-        android:scaleType="fitXY"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0"
-        app:srcCompat="@drawable/encabezado3" />
 
     <TextView
         android:id="@+id/textView"
@@ -45,18 +26,17 @@
         android:text="@string/modulo"
         android:textColor="@color/white"
         android:textSize="24dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView3"
-        app:layout_constraintEnd_toEndOf="@+id/imageView3"
-        app:layout_constraintHorizontal_bias="0.582"
-        app:layout_constraintStart_toStartOf="@+id/imageView3"
-        app:layout_constraintTop_toTopOf="@+id/imageView3"
-        app:layout_constraintVertical_bias="0.515" />
+        app:layout_constraintBottom_toBottomOf="@+id/imageView12"
+        app:layout_constraintEnd_toEndOf="@+id/imageView12"
+        app:layout_constraintStart_toStartOf="@+id/imageView12"
+        app:layout_constraintTop_toTopOf="@+id/imageView12"
+        app:layout_constraintVertical_bias="0.70" />
 
     <Button
         android:id="@+id/imageButton5"
-        android:layout_width="150dp"
+        android:layout_marginHorizontal="32dp"
+        android:layout_width="match_parent"
         android:layout_height="50dp"
-        android:layout_marginStart="32dp"
         android:layout_marginBottom="104dp"
         android:background="@drawable/new_button"
         android:drawableStart="@drawable/file"
@@ -66,24 +46,25 @@
         android:text="Documentos"
         android:textColor="@color/white"
         app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
 
-    <Button
-        android:id="@+id/imageButton4"
-        android:layout_width="150dp"
-        android:layout_height="50dp"
-        android:layout_marginEnd="32dp"
-        android:layout_marginBottom="104dp"
-        android:background="@drawable/new_button"
-        android:drawableStart="@drawable/mas"
-        android:onClick="pDocumentos"
-        android:textColor="@color/white"
-        android:padding="8dp"
-        android:scaleType="fitStart"
-        android:text="Ver web"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent" />
+<!--    <Button-->
+<!--        android:id="@+id/imageButton4"-->
+<!--        android:layout_width="150dp"-->
+<!--        android:layout_height="50dp"-->
+<!--        android:layout_marginEnd="32dp"-->
+<!--        android:layout_marginBottom="104dp"-->
+<!--        android:background="@drawable/new_button"-->
+<!--        android:drawableStart="@drawable/mas"-->
+<!--        android:onClick="pDocumentos"-->
+<!--        android:textColor="@color/white"-->
+<!--        android:padding="8dp"-->
+<!--        android:scaleType="fitStart"-->
+<!--        android:text="Ver web"-->
+<!--        app:layout_constraintBottom_toBottomOf="parent"-->
+<!--        app:layout_constraintEnd_toEndOf="parent" />-->
 
     <!--<TextView
         android:id="@+id/textView3"
