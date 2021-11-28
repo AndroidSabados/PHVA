@@ -9,21 +9,26 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.zxing.integration.android.IntentIntegrator;
 import com.google.zxing.integration.android.IntentResult;
 
 public class AccesoModulos extends AppCompatActivity {
+
+    private FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_acceso_modulos);
 
+        mAuth = FirebaseAuth.getInstance();
+
     }
 
     @Override
     public void onBackPressed() {
-        super.onBackPressed();
+        mAuth.signOut();
         Intent intent=new Intent(this,MainActivity.class);
         startActivity(intent);
     }
