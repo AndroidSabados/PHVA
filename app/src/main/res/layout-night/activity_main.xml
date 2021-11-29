@@ -135,15 +135,15 @@
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="359dp"
-        android:layout_height="93dp"
+        android:layout_width="360dp"
+        android:layout_height="134dp"
         android:visibility="visible"
         app:layout_constraintBottom_toTopOf="@+id/iniciarSesion"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.284"
-        app:srcCompat="@drawable/logo_primario" />
+        app:srcCompat="@drawable/logo_juan_noche" />
 
 
 
